@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from "./FooterNav.module.sass"
 
-export default function FooterNav() {
+const FooterNav = () => {
   return (
     <nav>
         <ul>
@@ -12,3 +12,4 @@ export default function FooterNav() {
     </nav>
   )
 }
+ export default FooterNav

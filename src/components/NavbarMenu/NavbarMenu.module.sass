@@ -1,0 +1,34 @@
+@import '../../sass/variables'
+
+.menu
+    display: flex
+    justify-content: center
+    align-items: center
+    margin: 0
+    font-family: $secondary-font
+    ul
+        display: flex
+        justify-content: space-between
+        align-items: center
+        list-style: none
+        .search
+            margin-left: 3rem
+        li
+            color: $dark-gray
+            margin: 0 1rem
+            a
+                color: $secondary-color
+                font-family: $main-font
+                font-size: 1.2rem
+                font-weight: 700
+                text-transform: uppercase
+                text-decoration: none
+                &:hover
+                    color: $main-color
+
+    .user
+        display: flex
+        justify-content: space-between
+        align-items: center
+        width: 5rem
+        margin-left: 2rem

@@ -1,4 +1,3 @@
-import React from "react";
 import Logo from "../Logo";
 import NavbarMenu from "../NavbarMenu";
 import styles from "./Navbar.module.sass";

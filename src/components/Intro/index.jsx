@@ -1,12 +1,11 @@
-import React from "react";
-import styles from "./Intro.module.sass"
+import styles from "./Intro.module.sass";
 
 const Intro = () => {
   return (
     <div className={styles.intro}>
       <h2>Como funciona ANIMATCH?</h2>
       <p>
-        Con ANIMATCH podrás encontrar el compañero ideal para tu mascota. Navega por el sitio,<br></br>
+        Con ANIMATCH podrás encontrar el compañero ideal para tu mascota. Navega por el sitio,
         conoce todas las opciones y crea tu lista de candidatos favoritos.
       </p>
       <p>Conoce más de cada mascota visitando su perfil.</p>

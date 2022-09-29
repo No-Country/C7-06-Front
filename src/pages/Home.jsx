@@ -2,7 +2,7 @@ import Navbar from "../components/Navbar";
 import Banner from "../components/Banner";
 import Footer from "../components/Footer";
 import Intro from "../components/Intro";
-import HomeDogs from "../components/HomeDogs";
+import Animals from "../components/Animals";
 
 const Home = () => {
   return (
@@ -10,7 +10,7 @@ const Home = () => {
       <Navbar />
       <Banner />
       <Intro />
-      <HomeDogs />
+      <Animals />
       <Footer />
     </>
   );

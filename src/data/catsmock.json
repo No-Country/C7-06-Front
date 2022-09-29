@@ -1,0 +1,34 @@
+[
+  {
+    "id": "1",
+    "name": "Oscar",
+    "age": "3",
+    "raza": "persa",
+    "sexo": "macho",
+    "picture": "cat1.png"
+  },
+  {
+    "id": "2",
+    "name": "Lali",
+    "age": "2",
+    "raza": "siames",
+    "sexo": "hembra",
+    "picture": "cat2.png"
+  },
+  {
+    "id": "3",
+    "name": "Pipo",
+    "age": "5",
+    "raza": "main",
+    "sexo": "macho",
+    "picture": "cat3.png"
+  },
+  {
+    "id": "4",
+    "name": "Blackie",
+    "age": "2",
+    "raza": "siames",
+    "sexo": "hembra",
+    "picture": "cat4.png"
+  }
+]

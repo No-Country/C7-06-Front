@@ -1,6 +1,5 @@
-import React from 'react'
-import FooterNav from '../FooterNav'
-import styles from './Footer.module.sass'
+import FooterNav from "../FooterNav";
+import styles from "./Footer.module.sass";
 
 const Footer = () => {
   return (
@@ -12,7 +11,7 @@ const Footer = () => {
         <FooterNav />
       </div>
     </footer>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;

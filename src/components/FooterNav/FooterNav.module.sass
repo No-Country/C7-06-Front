@@ -1,6 +1,6 @@
 @import "../../sass/variables"
 
-nav
+.footerNav
     margin-top: 30px
     ul
         display: flex
@@ -8,3 +8,9 @@ nav
         li
             list-style: none
             color: #bcbcbc
+            cursor: pointer
+
+@media screen and (max-width: 500px)     
+    ul
+        flex-direction: column
+        gap: 10px

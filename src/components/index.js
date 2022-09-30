@@ -1,0 +1,9 @@
+export { default as Animals } from "./Animals";
+export { default as Banner } from "./Banner";
+export { default as Card } from "./Card";
+export { default as Footer } from "./Footer";
+export { default as FooterNav } from "./FooterNav";
+export { default as Intro } from "./Intro";
+export { default as Logo } from "./Logo";
+export { default as Navbar } from "./Navbar";
+export { default as NavbarMenu } from "./NavbarMenu";

@@ -1,8 +1,4 @@
-import Navbar from "../components/Navbar";
-import Banner from "../components/Banner";
-import Footer from "../components/Footer";
-import Intro from "../components/Intro";
-import Animals from "../components/Animals";
+import { Navbar, Banner, Intro, Animals, Footer } from "../components";
 
 const Home = () => {
   return (

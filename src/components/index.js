@@ -1,3 +1,4 @@
+export { default as About } from "./About";
 export { default as Animals } from "./Animals";
 export { default as Banner } from "./Banner";
 export { default as Card } from "./Card";

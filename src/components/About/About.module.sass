@@ -1,0 +1,49 @@
+@import "../../sass/variables"
+
+.aboutContainer
+    display: flex
+    flex-direction: column
+    text-align: center
+    justify-content: center
+    padding: 70px
+    background-color: #F5F2FF
+    gap: 45px
+
+    h1
+        color: $secondary-color
+        font-family: $secondary-font
+        font-weight: bold
+        font-size: 40px
+
+    p
+        font-family: $main-font    
+        font-size: 25px
+
+    .button
+        display: flex
+        justify-content: center
+        
+
+        button
+            background-color: $main-color
+            color: white
+            padding: 5px
+            border-radius: 5px
+            cursor: pointer
+            width: 10%
+            border: none
+            font-size: 95%
+            height: 40px
+            font-weight: bold
+            min-width: 100px
+            
+            
+        
+@media screen and (max-width: 600px)
+
+    .aboutContainer
+        h1
+            font-size: 30px
+        p
+            font-size: 17px
+

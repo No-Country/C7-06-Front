@@ -22,6 +22,13 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["react", "testing-library", "jest-dom"],
-  "rules": {}
+  "plugins": ["react", "testing-library", "jest-dom", "prettier"],
+  "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ]
+  }
 }

@@ -1,5 +1,6 @@
 import Logo from "../Logo";
 import NavbarMenu from "../NavbarMenu";
+import IconMenu from "./IconMenu";
 import styles from "./Navbar.module.sass";
 
 const Navbar = () => {
@@ -7,6 +8,7 @@ const Navbar = () => {
     <header className={styles.navbar}>
       <Logo />
       <NavbarMenu />
+      <IconMenu />
     </header>
   );
 };

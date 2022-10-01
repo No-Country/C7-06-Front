@@ -35,3 +35,31 @@
             cursor: pointer
         span
             margin-right: 0.5rem
+
+@media screen and (max-width: 850px)
+    .menu
+        display: none
+        position: absolute
+        top: 50px
+        left: 0
+        width: 100%
+        height: calc(100vh - 50px)
+        background-color: $background-light
+        z-index: 1
+        ul
+            display: flex
+            flex-direction: column
+            align-items: center
+            justify-content: center
+            height: 100%
+            li
+                margin-bottom: 1rem
+                a
+                    color: $main-color
+                    font-size: 1.5rem
+                    font-weight: 600
+                    text-transform: uppercase
+                    letter-spacing: 1px
+                    transition: all 0.3s ease
+                    &:hover
+                        color: $dark-gray

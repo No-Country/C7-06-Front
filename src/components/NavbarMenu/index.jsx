@@ -11,13 +11,13 @@ const NavbarMenu = () => {
           <NavLink to="/">Inicio</NavLink>
         </li>
         <li>
-          <NavLink to="login">Iniciar sesión</NavLink>
+          <NavLink to="/login">Iniciar sesión</NavLink>
         </li>
         <li>
-          <NavLink to="register">Registro</NavLink>
+          <NavLink to="/register">Registro</NavLink>
         </li>
         <li>
-          <NavLink to="">About</NavLink>
+          <NavLink to="/">About</NavLink>
         </li>
         <li>
           <NavLink to="/" className={styles.search}>

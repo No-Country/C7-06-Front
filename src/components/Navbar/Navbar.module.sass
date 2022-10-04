@@ -28,17 +28,17 @@
             background-color: $main-color
             margin-top: 6px
             transition: all 0.3s ease
-            // transform-origin: 0px 100%
-        &:active .line1_bars
+        .line1_bars
             transform: rotate(45deg) translate(3px, 10px)
-        &:active .line2_bars
+        .line2_bars
             opacity: 0
             margin-left: -30px
-        &:active .line3_bars
+        .line3_bars
             transform: rotate(-45deg) translate(3px, -10px)
 
 @media screen and (max-width: 850px)
     .navbar
-        padding: 0 1rem
         .barsMenu
             display: block
+            top: 25px
+            position: fixed

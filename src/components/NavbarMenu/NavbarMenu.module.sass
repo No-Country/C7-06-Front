@@ -6,6 +6,7 @@
     align-items: center
     margin: 0
     font-family: $secondary-font
+
     ul
         display: flex
         justify-content: space-between
@@ -13,6 +14,13 @@
         list-style: none
         .search
             margin-left: 3rem
+            padding: 5px 7px
+            width: 20px
+            height: 20px
+            border-radius: 50%
+            &:hover
+                background-color: #e7e0ff
+
         li
             margin: 0 1rem
             a
@@ -39,13 +47,19 @@
 @media screen and (max-width: 850px)
     .menu
         display: none
-        position: absolute
-        top: 50px
-        left: 0
-        width: 100%
-        height: calc(100vh - 50px)
-        background-color: $background-light
+        flex-flow: column-reverse nowrap
+        padding-top: 4rem
+        position: fixed
+        align-items: center
+        justify-content: flex-end
+        top: 0px
+        height: 100%
+        box-shadow: -1px 0px 5px grey
+        right: 0
+        width: 360px
+        background-color: #f5f2ff
         z-index: 1
+        transition: all 0.3s ease
         ul
             display: flex
             flex-direction: column
@@ -55,11 +69,9 @@
             li
                 margin-bottom: 1rem
                 a
-                    color: $main-color
-                    font-size: 1.5rem
-                    font-weight: 600
-                    text-transform: uppercase
                     letter-spacing: 1px
                     transition: all 0.3s ease
                     &:hover
-                        color: $dark-gray
+                        color: $main-color
+        & .active
+            display: flex

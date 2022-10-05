@@ -40,9 +40,13 @@ Puedes encontrar nuestro sitio en el siguiente link: [click aquí](https://)
 
 </br>
 ## Team Leader 🚀
+
 ### Romina Bello :  [LinkedIn]() [GitHub]()  [Portfolio]()
+
 </br>
+
 ## UX Designer 🎨
+
 ### Josefina Córdoba : [LinkedIn]() [Portfolio]()
 
 <br/>

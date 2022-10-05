@@ -37,6 +37,8 @@
         min-width: 5rem
         margin-left: 2rem
         padding: 0.5rem
+        text-decoration: none
+        color: $dark-gray
         &:hover
             background-color: #e7e0ff
             border-radius: 5px
@@ -48,15 +50,15 @@
     .menu
         display: none
         flex-flow: column-reverse nowrap
-        padding-top: 4rem
-        position: fixed
-        align-items: center
         justify-content: flex-end
+        align-items: center
+        position: fixed
+        padding-top: 4rem
         top: 0px
+        right: 0px
         height: 100%
         box-shadow: -1px 0px 5px grey
-        right: 0
-        width: 360px
+        width: 0
         background-color: #f5f2ff
         z-index: 1
         transition: all 0.3s ease
@@ -73,5 +75,3 @@
                     transition: all 0.3s ease
                     &:hover
                         color: $main-color
-        & .active
-            display: flex

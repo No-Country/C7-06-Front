@@ -1,31 +1,41 @@
-import { useContext } from "react";
-import { NavLink } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import { NavLink, Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleUser, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { NavbarContext } from "../../contexts/NavbarContext";
 import styles from "./NavbarMenu.module.sass";
 
 const NavbarMenu = () => {
-  const { isMenuOpen, setIsMenuOpen } = useContext(NavbarContext);
+  // Estado del contexto global del header
+  const [isMenuOpen, setIsMenuOpen] = useContext(NavbarContext);
 
-  const handleClick = e => {
-    setIsMenuOpen(!isMenuOpen);
+  // Función para cerrar el menú
+  const handleLinkClick = e => {
+    setIsMenuOpen(false);
   };
 
-  // useEffect(() => {
-  //   const handleResize = () => {
-  //     if (window.innerWidth > 768) {
-  //       setIsMenuOpen(false);
-  //     }
-  //   };
+  // Renderizado condicional del menú
+  const renderMenu = {
+    display: isMenuOpen && "flex",
+    width: isMenuOpen && "100%"
+  };
 
-  //   window.addEventListener("resize", handleResize);
-  //   return () => window.removeEventListener("resize", handleResize);
-  // }, []);
+  useEffect(() => {
+    // Si la pantalla es mayor a 850px, el menú se cierra
+    const handleResize = () => {
+      if (window.innerWidth > 850) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    // Evento para cerrar el menú al hacer resize
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
-    <nav className={styles.menu} style={isMenuOpen && { display: "flex" }}>
-      <ul onClick={handleClick}>
+    <nav className={styles.menu} style={renderMenu}>
+      <ul onClick={handleLinkClick}>
         <li>
           <NavLink to="/">Inicio</NavLink>
         </li>
@@ -39,15 +49,15 @@ const NavbarMenu = () => {
           <NavLink to="/">About</NavLink>
         </li>
         <li>
-          <NavLink to="/" className={styles.search}>
+          <NavLink to="/search" className={styles.search}>
             <FontAwesomeIcon icon={faMagnifyingGlass} />
           </NavLink>
         </li>
       </ul>
-      <div className={styles.user}>
+      <Link to="/user" className={styles.user}>
         <span>User</span>
         <FontAwesomeIcon icon={faCircleUser} />
-      </div>
+      </Link>
     </nav>
   );
 };

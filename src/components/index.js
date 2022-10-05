@@ -8,3 +8,5 @@ export { default as Intro } from "./Intro";
 export { default as Logo } from "./Logo";
 export { default as Navbar } from "./Navbar";
 export { default as NavbarMenu } from "./NavbarMenu";
+export { default as RegisterForm } from "./RegisterForm";
+export { default as LoginForm } from "./LoginForm";

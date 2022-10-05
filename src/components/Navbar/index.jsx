@@ -6,10 +6,12 @@ import styles from "./Navbar.module.sass";
 
 const Navbar = () => {
   return (
+    // Contexto global del header
     <NavbarProvider>
       <header className={styles.navbar}>
         <Logo />
         <NavbarMenu />
+        {/* // Menu de hamburguesa */}
         <IconMenu />
       </header>
     </NavbarProvider>

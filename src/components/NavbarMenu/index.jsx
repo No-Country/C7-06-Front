@@ -54,7 +54,7 @@ const NavbarMenu = () => {
           </NavLink>
         </li>
       </ul>
-      <Link to="/user" className={styles.user}>
+      <Link to="/user" className={styles.user} onClick={handleLinkClick}>
         <span>User</span>
         <FontAwesomeIcon icon={faCircleUser} />
       </Link>

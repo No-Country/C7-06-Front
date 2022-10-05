@@ -39,6 +39,7 @@ Puedes encontrar nuestro sitio en el siguiente link: [click aquí](https://)
 # Equipo
 
 </br>
+
 ## Team Leader 🚀
 
 ### Romina Bello :  [LinkedIn]() [GitHub]()  [Portfolio]()

@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Filter from "./components/Filter";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 
@@ -14,6 +15,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />
+  },
+  {
+    path: "/buscar",
+    element: <Filter />
   }
 ]);
 

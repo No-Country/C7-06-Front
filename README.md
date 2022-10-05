@@ -35,7 +35,9 @@ _4 -
 ## Deploy
 
 Puedes encontrar nuestro sitio en el siguiente link: [click aquí](https://)
+
 <br/><br/>
+
 # Equipo
 
 </br>
@@ -68,6 +70,6 @@ Puedes encontrar nuestro sitio en el siguiente link: [click aquí](https://)
 
 ### Cristian Aguirre :  [LinkedIn]() [GitHub]() [Portfolio]()
 
-### Cesar Galeano : Karen Huaman  [LinkedIn]() [GitHub]() [Portfolio]()
+### Karen Huaman  [LinkedIn]() [GitHub]() [Portfolio]()
 
 

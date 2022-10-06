@@ -1,31 +1,35 @@
 [
   {
-    "id": "1",
+    "id": "5",
     "name": "John",
+    "type": "dog",
     "age": "3",
     "raza": "caniche",
     "sexo": "macho",
     "picture": "dog1.png"
   },
   {
-    "id": "2",
+    "id": "6",
     "name": "Mary",
+    "type": "dog",
     "age": "2",
     "raza": "caniche",
     "sexo": "hembra",
     "picture": "dog2.png"
   },
   {
-    "id": "3",
+    "id": "7",
     "name": "Peter",
+    "type": "dog",
     "age": "5",
     "raza": "caniche",
     "sexo": "macho",
     "picture": "dog3.png"
   },
   {
-    "id": "4",
+    "id": "8",
     "name": "Julie",
+    "type": "dog",
     "age": "2",
     "raza": "caniche",
     "sexo": "hembra",

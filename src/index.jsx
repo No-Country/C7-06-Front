@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import PetProfile from "./pages/PetProfile";
 // import UserProfile from "./pages/UserProfile";
 
 import reportWebVitals from "./reportWebVitals";
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
   {
     path: "/search",
     element: <Login />
+  },
+  {
+    path: "/pet/:id",
+    element: <PetProfile />
   }
   //,
   // {

@@ -10,3 +10,6 @@ export { default as Navbar } from "./Navbar";
 export { default as NavbarMenu } from "./NavbarMenu";
 export { default as RegisterForm } from "./RegisterForm";
 export { default as LoginForm } from "./LoginForm";
+export { default as PetInfoCard } from "./PetInfoCard";
+export { default as CommentsPetsList } from "./CommentsPetsList";
+export { default as PetCategoryBanner } from "./PetCategoryBanner";

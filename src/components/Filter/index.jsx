@@ -21,34 +21,38 @@ const Filter = () => {
       </div>
       <div className={styles.containerLeftRight}>
         <div className={styles.rightSide}>
-          <h3>Posibles animatch</h3>
-          {cats &&
-            cats.map((cat, index) => {
-              return (
-                <div className={styles.card} key={index}>
-                  <div className={styles.card__img}>
-                    <img src={`/animals/${cat?.picture}`} alt={cat?.name} />
-                  </div>
-                  <div className={styles.card__content}>
-                    <h3 className={styles.card__title}>{cat?.name}</h3>
-                    <div className={styles.card__text}>
-                      <ul>
-                        <li>
-                          <span>Raza:</span> {cat?.raza}
-                        </li>
-                        <li>
-                          <span>Sexo:</span> {cat?.sexo}
-                        </li>
-                        <li>
-                          <span>Edad:</span> {cat?.age}
-                        </li>
-                      </ul>
+          <div className={styles.containerTitle}>
+            <h3 className={styles.title}>Posibles animatch</h3>
+          </div>
+          <div className={styles.renderAnimals}>
+            {cats &&
+              cats.map((cat, index) => {
+                return (
+                  <div className={styles.card} key={index}>
+                    <div className={styles.card__img}>
+                      <img src={`/animals/${cat?.picture}`} alt={cat?.name} />
                     </div>
-                    {/* <button className={styles.card__btn}>Ver más</button> */}
+                    <div className={styles.card__content}>
+                      <h3 className={styles.card__title}>{cat?.name}</h3>
+                      <div className={styles.card__text}>
+                        <ul>
+                          <li>
+                            <span>Raza:</span> {cat?.raza}
+                          </li>
+                          <li>
+                            <span>Sexo:</span> {cat?.sexo}
+                          </li>
+                          <li>
+                            <span>Edad:</span> {cat?.age}
+                          </li>
+                        </ul>
+                      </div>
+                      {/* <button className={styles.card__btn}>Ver más</button> */}
+                    </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
+          </div>
         </div>
         <div className={styles.leftSide}>
           <h2 style={{ padding: "10px" }}>Mascota</h2>

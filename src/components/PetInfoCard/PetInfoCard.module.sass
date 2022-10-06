@@ -1,7 +1,7 @@
 @import "../../sass/variables"
   
 .card
-  padding: 1em
+  padding: 1em 0
   max-width: 80%
   margin: 0 auto
 
@@ -14,34 +14,50 @@
 
   &_wrapper
     display: flex
-    flex-flow: row nowrap
+    flex-flow: row wrap
     
   &_gallery
     display: flex
     flex-direction: row nowrap
+    flex-grow: 1
+    @include mq(large)
+      flex-grow: 0
+
    
     &_wrapper 
       display: flex
-      flex-direction: row-reverse
-
+      flex-direction: column
+      flex-grow: 1
+      @include mq(xlarge)
+        flex-direction: row-reverse
+        flex-grow: 0
     &_image 
-      flex-grow: 2
-      padding: 1em
+      flex-grow: 1
 
       img 
         height: 100%
         width: 100%
         border-radius: 10px
         object-fit: cover
+        min-width: 125px
+        @include mq(medium)
+          min-width: 440px
+          max-height: 460px
+
     
     &_thumbnail 
       display: flex 
-      flex-flow: column nowrap
+      flex-flow: row nowrap
+      justify-content: space-evenly
+      @include mq(xlarge)
+        flex-flow: column nowrap
+
+      
 
       img
         height: 110px
         width: 95px 
-        margin: 1em
+        margin: 20px
         object-fit: cover
         border-radius: 10px
 
@@ -49,14 +65,15 @@
     display: flex
     flex-direction: column
     flex: 1 0
-    
+    padding: 0px 20px 20px 20px 
+
     &_header
+      margin-bottom: 1em
       h3
         font-family: $secondary-font
         font-weight: 700
         font-size: 2em
         color: $main-color
-        margin: 1em 0
 
     &_body
       p
@@ -64,22 +81,25 @@
         font-weight: 500
         font-size: 1.3em
         color: black
-        span, .description 
-          font-weight: 300
-  &_footer
-    padding: 1em
 
-    button
-      padding: 1em
-      border: none
-      border-radius: 3px
-      min-width: 300px
+        span
+          font-weight: 300
+
+      .description
+        margin: 2em 0
+        font-weight: 300
+
+  &_footer
+    button 
       display: block
       margin: 1em auto
 
-.favourite 
-  color: white
-  background-color: $main-color
-.contact
-  color: balck
-  background-color: $secondary-color
+    .favourite
+      @include buttonsAnimatch ($color: #fff, $background: $main-color )
+      height: 40px
+      line-height: 1em
+
+    .contact
+      @include buttonsAnimatch ($color: #000, $background: $secondary-color )
+      height: 40px
+      line-height: 1em

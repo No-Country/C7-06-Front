@@ -214,6 +214,7 @@ const RegisterForm = () => {
                       onBlur={handleBlur}
                       onChange={handleChange}
                       value={form.pwd}
+                      placeholder="Contraseña"
                       required
                     />
                     {seePass ? (

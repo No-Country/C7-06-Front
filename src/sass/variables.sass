@@ -19,7 +19,7 @@ $secondary-font: "Raleway", sans-serif
 
 // MEDIA QUERIES
 
-    /* Breakpoints */
+/* Breakpoints */
 
 $breakpoints: ("small": 390px, "medium": 768px, "large": 992px,"xlarge": 1440px)
 
@@ -32,17 +32,16 @@ $breakpoints: ("small": 390px, "medium": 768px, "large": 992px,"xlarge": 1440px)
   @media screen and (min-width: #{$mq-breakpoint}) 
     @content
   
+// CSS BUTTONS 
 
-// MIXINS
-
-@mixin principalButton($color, $background)
- button 
+@mixin buttonsAnimatch ($color: white, $background: $main-color)  
   width: auto
   min-width: 305px
   padding: 0.5rem 2.5rem
   cursor: pointer
   font-size: 1em
-  color: $color
+  line-height: 2em
+  color: $color !important
   background-color: $background
   transition: background-color 500ms ease-in-out
   min-height: 40px
@@ -50,7 +49,5 @@ $breakpoints: ("small": 390px, "medium": 768px, "large": 992px,"xlarge": 1440px)
   border: none
   text-decoration: none
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25)
-  
-  button:hover 
-    background-color: lighten($background, 5)
-  
+  &:hover
+      background-color: lighten($background, 5)

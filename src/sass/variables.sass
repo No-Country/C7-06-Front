@@ -6,6 +6,7 @@ $main-color: #6342e8
 $secondary-color: #e8d641
 $background-light: #f5f2ff
 $dark-gray: #272727
+$light-gray: #D9D9D9
 $main-font: "Roboto", sans-serif
 $secondary-font: "Raleway", sans-serif
 
@@ -14,3 +15,20 @@ $secondary-font: "Raleway", sans-serif
     padding: 0px
     margin: 0px
     box-sizing: border-box
+
+
+// MEDIA QUERIES
+
+    /* Breakpoints */
+
+$breakpoints: ("small": 390px, "medium": 768px, "large": 992px,"xlarge": 1440px)
+
+/* Break Points */
+
+@mixin mq($mq-breakpoint, $mq-breakpoints: $breakpoints) 
+  @if map-has-key($mq-breakpoints, $mq-breakpoint) 
+    $mq-breakpoint: map-get($mq-breakpoints, $mq-breakpoint)
+  
+  @media screen and (min-width: #{$mq-breakpoint}) 
+    @content
+  

@@ -4,6 +4,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Filter from "./components/Filter";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
+import Register from "./pages/Register";
+// import UserProfile from "./pages/UserProfile";
 
 import reportWebVitals from "./reportWebVitals";
 
@@ -17,9 +19,26 @@ const router = createBrowserRouter([
     element: <Login />
   },
   {
+    path: "/register",
+    element: <Register />
+  },
+  {
+    path: "/about",
+    element: <Login />
+  },
+  {
+    path: "/search",
+    element: <Login />
+  },
+  {
     path: "/buscar",
     element: <Filter />
   }
+  //,
+  // {
+  //   path: "/user",
+  //   element: <UserProfile />
+  // }
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

@@ -10,7 +10,10 @@ const IconMenu = () => {
   };
 
   return (
-    <div className={styles.barsMenu} onClick={handleClick}>
+    <div
+      className={styles.barsMenu}
+      onClick={handleClick}
+      style={{ position: isMenuOpen && "fixed" }}>
       <span className={`${isMenuOpen && styles.line1_bars}`}></span>
       <span className={`${isMenuOpen && styles.line2_bars}`}></span>
       <span className={`${isMenuOpen && styles.line3_bars}`}></span>

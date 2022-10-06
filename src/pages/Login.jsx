@@ -1,4 +1,12 @@
+import { Navbar, LoginForm, Footer } from "../components";
+
 const Login = () => {
-  return <div>Login</div>;
+  return (
+    <>
+      <Navbar />
+      <LoginForm />
+      <Footer />
+    </>
+  );
 };
 export default Login;

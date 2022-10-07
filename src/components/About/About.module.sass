@@ -1,4 +1,4 @@
-@import "../../sass/variables"
+@use "../../sass/variables" as *
 
 .aboutContainer
     display: flex
@@ -16,13 +16,12 @@
         font-size: 40px
 
     p
-        font-family: $main-font    
+        font-family: $main-font
         font-size: 25px
 
     .button
         display: flex
         justify-content: center
-        
 
         button
             background-color: $main-color
@@ -36,9 +35,7 @@
             height: 40px
             font-weight: bold
             min-width: 100px
-            
-            
-        
+
 @media screen and (max-width: 600px)
 
     .aboutContainer
@@ -46,4 +43,3 @@
             font-size: 30px
         p
             font-size: 17px
-

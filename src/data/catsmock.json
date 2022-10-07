@@ -1,6 +1,6 @@
 [
   {
-    "id": "1",
+    "id": 8,
     "name": "Oscar",
     "age": "3",
     "raza": "persa",
@@ -8,7 +8,7 @@
     "picture": "cat1.png"
   },
   {
-    "id": "2",
+    "id": 9,
     "name": "Lali",
     "age": "2",
     "raza": "siames",
@@ -16,7 +16,7 @@
     "picture": "cat2.png"
   },
   {
-    "id": "3",
+    "id": 6,
     "name": "Pipo",
     "age": "5",
     "raza": "main",
@@ -24,7 +24,7 @@
     "picture": "cat3.png"
   },
   {
-    "id": "4",
+    "id": 7,
     "name": "Blackie",
     "age": "2",
     "raza": "siames",

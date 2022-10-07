@@ -1,32 +1,52 @@
-@import '../../sass/variables'
+@use '../../sass/variables' as *
 
 .card
     display: flex
-    flex-direction: column
-    align-items: center
-    justify-content: center
-    width: clamp(325px, 22%, 50%)
+    width: 100%
+    margin-bottom: 20px
+    height: 140px
     background-color: $background-light
     border-radius: 8px
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2)
     transition: all 0.3s ease
+    flex-grow: 1
     &:hover
         transform: scale(1.02)
-    .card__img
-        width: 100%
-        height: 200px
-        object-fit: cover
-        border-radius: 8px 8px 0 0
+    @include mq("medium")
+        height: 250px
+        flex-direction: column
+        align-items: center
+        justify-content: center
+    @include mq("large")
+        width: clamp(260px, 22%, 50%)
+    &__img
+        width: 60%
+        min-width: 140px
         overflow: hidden
-        img
+        border-radius: 8px 0 0 8px
+        @include mq("medium")
             width: 100%
             height: 100%
             object-fit: cover
-    .card__content
+            border-radius: 8px 8px 0 0
+            overflow: hidden
+        img
+            position: relative
+            left: -50%
+            object-fit: cover
+            border-radius: 8px 0 0 8px
+            @include mq("medium")
+                left: 0
+                border-radius: 8px 8px 0 0
+                width: 100%
+                height: 100%
+                object-fit: cover
+    &__content
         width: 100%
         position: relative
         padding: 0px 14px
         .favorite
+            bottom: 5px
             position: absolute
             display: flex
             justify-content: center
@@ -48,48 +68,19 @@
             font-size: 18px
             font-weight: 600
             margin: 10px 0
+
         .card__text
-            font-family: $main-font
+            position: relative
             width: 100%
             font-size: 14px
             font-weight: 400
-            margin: 10px 0
+            padding: 10px 0
             color: #666
+            font-family: $main-font
             ul
-                li
-                    list-style: none
+                list-style: none
 
-@media screen and (max-width: 600px)
-    .card
-        width: 100%
-        margin-bottom: 20px
-        display: flex
-        flex-direction: row
-        height: auto
-        .card__img
-            width: 40%
-            min-width: 140px
-            height: 136px
-            overflow: hidden
-            border-radius: 8px 0 0 8px
-            object-position: center center
-            img
-                object-fit: cover
-                border-radius: 8px 0 0 8px
-        .card__content
-            width: 100%
-            padding: 0px 14px
-            .favorite
-                bottom: 5px
-            .card__title
-                font-family: $secondary-font
-                font-size: 18px
-                font-weight: 600
-                margin: 10px 0
-            .card__text
-                position: relative
-                width: 100%
-                font-size: 14px
-                font-weight: 400
-                padding: 10px 0
-                color: #666
+.cardLink
+    text-decoration: none
+    color: $main-color
+    width: clamp(260px, 22%, 50%)

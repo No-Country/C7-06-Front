@@ -1,0 +1,39 @@
+@use '../../sass/variables' as *
+
+.userBanner
+    position: relative
+    overflow: hidden
+    height: 200px
+    @include mq('medium')
+        height: 300px
+    &_overlay
+        position: absolute
+        top: 0
+        left: 0
+        width: 100%
+        height: 100%
+        background: rgba(217,217,217, .5)
+        z-index: 1
+    .image
+        width: 100%
+        height: 100%
+        object-fit: cover
+        img
+            width: 100%
+            height: 100%
+            object-fit: cover
+            object-position: center
+    &_title
+        position: absolute
+        top: 50%
+        left: 3rem
+        transform: translate(0%, -50%)
+        z-index: 2
+        color: $background-light
+        font-family: $secondary-font
+        font-size: 2.5rem
+        font-weight: 600
+        letter-spacing: 1px
+        @include mq('medium')
+            font-size: 5rem
+            left: 5rem

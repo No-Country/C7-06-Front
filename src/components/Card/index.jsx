@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import PropTypes from "prop-types";
 import styles from "./Card.module.sass";
+import { Link } from "react-router-dom";
 
 // Boton de favorito
 const Favorite = ({ isFavorite, handleClick }) => {
@@ -27,28 +28,30 @@ const Card = ({ animal }) => {
   };
 
   return (
-    <div className={styles.card}>
-      <div className={styles.card__img}>
-        <img src={`/animals/${animal.picture}`} alt={animal.name} />
-      </div>
-      <div className={styles.card__content}>
-        <h3 className={styles.card__title}>{animal.name}</h3>
-        <div className={styles.card__text}>
-          <ul>
-            <li>
-              <span>Raza:</span> {animal.raza}
-            </li>
-            <li>
-              <span>Sexo:</span> {animal.sexo}
-            </li>
-            <li>
-              <span>Edad:</span> {animal.age}
-            </li>
-          </ul>
+    <Link to={`/pet/${animal.id}`} className={styles.cardLink}>
+      <div className={styles.card}>
+        <div className={styles.card__img}>
+          <img src={`/animals/${animal.picture}`} alt={animal.name} />
         </div>
-        <Favorite isFavorite={animal.isFavorite} handleClick={handleClick} />
+        <div className={styles.card__content}>
+          <h3 className={styles.card__title}>{animal.name}</h3>
+          <div className={styles.card__text}>
+            <ul>
+              <li>
+                <span>Raza:</span> {animal.raza}
+              </li>
+              <li>
+                <span>Sexo:</span> {animal.sexo}
+              </li>
+              <li>
+                <span>Edad:</span> {animal.age}
+              </li>
+            </ul>
+          </div>
+          <Favorite isFavorite={animal.isFavorite} handleClick={handleClick} />
+        </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

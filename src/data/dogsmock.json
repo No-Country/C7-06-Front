@@ -1,6 +1,6 @@
 [
   {
-    "id": "1",
+    "id": 1,
     "name": "John",
     "age": "3",
     "raza": "caniche",
@@ -8,7 +8,7 @@
     "picture": "dog1.png"
   },
   {
-    "id": "2",
+    "id": 2,
     "name": "Mary",
     "age": "2",
     "raza": "caniche",
@@ -16,7 +16,7 @@
     "picture": "dog2.png"
   },
   {
-    "id": "3",
+    "id": 3,
     "name": "Peter",
     "age": "5",
     "raza": "caniche",
@@ -24,7 +24,7 @@
     "picture": "dog3.png"
   },
   {
-    "id": "4",
+    "id": 4,
     "name": "Julie",
     "age": "2",
     "raza": "caniche",

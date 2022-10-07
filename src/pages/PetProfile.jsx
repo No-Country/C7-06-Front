@@ -1,8 +1,7 @@
 import { Navbar, PetInfoCard, Footer, PetCategoryBanner, CommentsPetsList } from "../components";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import dogsMock from "../data/dogsmock.json";
-import catsMock from "../data/catsmock.json";
+import petMock from "../data/petprofilemock.json";
 import classes from "./PetProfile.module.sass";
 // import { useState } from "react";
 
@@ -12,14 +11,14 @@ const PetProfile = () => {
 
   // Determinate Profile Pet Id
   const params = useParams();
-  const petId = params.id;
+  const petId = parseInt(params.id);
   const [pet, setPet] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   // const [notMyPet, setNotMyProfile] = useState(auth.user.id !== profileId.user.id);
 
   // Load Pet by Id
   useEffect(() => {
-    const animals = [...dogsMock, ...catsMock];
+    const animals = [...petMock];
     const petObj = animals.filter(animals => animals.id === petId)[0];
     if (petObj) {
       setPet(petObj);
@@ -38,7 +37,7 @@ const PetProfile = () => {
           <Navbar />
           <PetCategoryBanner category={pet.type} />
           <section className={classes.infoPet}>
-            <PetInfoCard />
+            <PetInfoCard pet={pet} />
           </section>
           <section className={classes.comments}>
             <CommentsPetsList />

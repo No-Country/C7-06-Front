@@ -1,0 +1,56 @@
+@import "../../sass/variables"
+
+.card
+  width: 100%
+  color: black
+  display: flex
+  flex-flow: row nowrap
+  font-family: $main-font
+  margin: 0 auto
+
+  &_avatar
+    width: 50px
+    height: 50px
+    
+    img, div
+      width: 100%
+      height: 100%
+      border-radius: 50%
+      object-fit: cover
+      background-color: $light-gray
+  
+  &_wrapper
+    display: flex
+    flex-flow: column nowrap
+
+  &_header
+    display: flex
+    flex-flow: row nowrap
+    align-items: center
+    height: 50px
+    font-size: 14px
+
+    &_user
+      display: flex
+      flex-flow: row nowrap
+      justify-content: flex-start
+      align-items: baseline
+      padding: 1em
+
+      span
+        padding: 0 0.5em
+
+      &_name
+        font-family: $secondary-font
+        font-weight: 700
+        font-size: 1.3em
+        color: $main-color
+    &_buttons
+      color: #696565
+      font-size: 20px
+      
+      svg 
+        padding: 5px
+
+  &_text
+    padding: 0.5em 1em

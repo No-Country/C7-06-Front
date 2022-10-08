@@ -8,7 +8,8 @@
     "sexo": "macho",
     "place": "Madrid",
     "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi non quis exercitationem culpa nesciunt nihil aut nostrum explicabo reprehenderit optio amet ab temporibus asperiores quasi cupiditate. Voluptatum ducimus voluptates voluptas?",
-    "pictures": ["cat1.png"]
+    "pictures": ["cat1.png"],
+    "userId": 1
   },
   {
     "id": 2,
@@ -19,7 +20,8 @@
     "sexo": "hembra",
     "place": "Madrid",
     "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi non quis exercitationem culpa nesciunt nihil aut nostrum explicabo reprehenderit optio amet ab temporibus asperiores quasi cupiditate. Voluptatum ducimus voluptates voluptas?",
-    "pictures": ["cat2.png", "cat2b.webp"]
+    "pictures": ["cat2.png", "cat2b.webp"],
+    "userId": 1
   },
   {
     "id": 3,
@@ -29,7 +31,8 @@
     "raza": "main",
     "sexo": "macho",
     "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi non quis exercitationem culpa nesciunt nihil aut nostrum explicabo reprehenderit optio amet ab temporibus asperiores quasi cupiditate. Voluptatum ducimus voluptates voluptas?",
-    "pictures": ["cat3.png", "cat3b.webp", "cat3c.webp"]
+    "pictures": ["cat3.png", "cat3b.webp", "cat3c.webp"],
+    "userId": 2
   },
   {
     "id": 4,
@@ -39,7 +42,8 @@
     "raza": "siames",
     "sexo": "hembra",
     "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi non quis exercitationem culpa nesciunt nihil aut nostrum explicabo reprehenderit optio amet ab temporibus asperiores quasi cupiditate. Voluptatum ducimus voluptates voluptas?",
-    "pictures": ["cat4.png", "cat4b.webp", "cat4c.webp", "cat4d.webp"]
+    "pictures": ["cat4.png", "cat4b.webp", "cat4c.webp", "cat4d.webp"],
+    "userId": 3
   },
   {
     "id": 5,
@@ -48,7 +52,8 @@
     "age": "3",
     "raza": "caniche",
     "sexo": "macho",
-    "pictures": ["dog1.png"]
+    "pictures": ["dog1.png"],
+    "userId": 3
   },
   {
     "id": 6,
@@ -57,7 +62,8 @@
     "age": "2",
     "raza": "caniche",
     "sexo": "hembra",
-    "pictures": ["dog2.png"]
+    "pictures": ["dog2.png"],
+    "userId": 4
   },
   {
     "id": 7,
@@ -66,7 +72,8 @@
     "age": "5",
     "raza": "caniche",
     "sexo": "macho",
-    "pictures": ["dog3.png"]
+    "pictures": ["dog3.png"],
+    "userId": 5
   },
   {
     "id": 8,
@@ -75,6 +82,7 @@
     "age": "2",
     "raza": "caniche",
     "sexo": "hembra",
-    "pictures": ["dog4.png"]
+    "pictures": ["dog4.png"],
+    "userId": 6
   }
 ]

@@ -1,10 +1,13 @@
 import classes from "./PetInfoCard.module.sass";
 import PropTypes from "prop-types";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function PetInfoCard({ pet }) {
+  // States
   const quantityPhotos = pet.pictures.length;
   const [images, setImages] = useState(pet.pictures);
+  const [isFavourite, setIsFavourite] = useState(false);
 
   // Create array Thumbnail Views
   const addImages = () => {
@@ -16,12 +19,23 @@ function PetInfoCard({ pet }) {
   };
 
   // Function rotate photo image
-  const changePhoto = e => {
+  const changePhotoHandler = e => {
     const fileName = e.target.src.split("/");
     const index = images.indexOf(fileName[fileName.length - 1]);
     const newMainImage = images[index];
     const newThumbnail = images.filter(val => val !== newMainImage);
     setImages([newMainImage, ...newThumbnail]);
+  };
+
+  // AddFavouriteHanlder
+
+  const favouriteHandler = () => {
+    if (isFavourite) {
+      // Llamada API quitar de favoritos
+    } else {
+      // Llamada API agregar a favoritos
+    }
+    setIsFavourite(!isFavourite);
   };
 
   return (
@@ -44,7 +58,7 @@ function PetInfoCard({ pet }) {
                     src={`/animals/${photo}`}
                     alt={`Foto de ${pet.name}`}
                     key={photo}
-                    onClick={changePhoto}
+                    onClick={changePhotoHandler}
                   />
                 ))}
             </div>
@@ -71,8 +85,12 @@ function PetInfoCard({ pet }) {
             <p className={classes.description}>{pet.description}</p>
           </div>
           <div className={classes.card_footer}>
-            <button className={classes.favourite}> Añadir a Favoritos </button>
-            <button className={classes.contact}> Contactar a su dueño </button>
+            <button className={classes.favourite} onClick={favouriteHandler}>
+              {isFavourite ? "Quitar de Favoritos" : "Añadir a Favoritos"}
+            </button>
+            <Link to={`/user/${pet.userId}`} className={classes.contact}>
+              Contactar a su dueño
+            </Link>
           </div>
         </div>
       </div>

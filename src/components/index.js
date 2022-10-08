@@ -13,3 +13,4 @@ export { default as LoginForm } from "./LoginForm";
 export { default as PetInfoCard } from "./PetInfoCard";
 export { default as CommentsPetsList } from "./CommentsPetsList";
 export { default as PetCategoryBanner } from "./PetCategoryBanner";
+export { default as CommentPet } from "./CommentPet";

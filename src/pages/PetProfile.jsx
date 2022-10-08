@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import petMock from "../data/petprofilemock.json";
 import classes from "./PetProfile.module.sass";
+import cat from "../assets/cat.jpg";
+import dog from "../assets/dog.jpg";
 // import { useState } from "react";
 
 const PetProfile = () => {
@@ -35,12 +37,16 @@ const PetProfile = () => {
       ) : (
         <>
           <Navbar />
-          <PetCategoryBanner category={pet.type} />
+          <PetCategoryBanner
+            text={pet.type === "cat" ? "Gato" : "Perro"}
+            image={pet.type === "cat" ? cat : dog}
+            className={classes.overlay}
+          />
           <section className={classes.infoPet}>
             <PetInfoCard pet={pet} />
           </section>
           <section className={classes.comments}>
-            <CommentsPetsList />
+            <CommentsPetsList petId={pet.id} />
           </section>
           <Footer />
         </>

@@ -66,9 +66,24 @@ function CommentsPetsList({ petId }) {
   };
 
   // Handle form submit
-  const submitHandler = e => {
+  const submitHandler = async e => {
     e.preventDefault();
-    console.log(e.target.userId.value);
+    try {
+      const response = await api.post(`/pets/${petId}/comments`, {
+        userId: userLogged.userId,
+        message: text
+      });
+      if (!response) {
+        console.log("No answer");
+        return;
+      } else {
+        setText("");
+        setIsLoading(true);
+        console.log("publicado!");
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -81,7 +96,12 @@ function CommentsPetsList({ petId }) {
           {comments && comments.length !== 0 ? (
             comments.map(comment => {
               return (
-                <CommentPet key={comment.commentId} comment={comment} setIsLoading={setIsLoading} />
+                <CommentPet
+                  key={comment.commentId}
+                  comment={comment}
+                  setIsLoading={setIsLoading}
+                  pet={petId}
+                />
               );
             })
           ) : (

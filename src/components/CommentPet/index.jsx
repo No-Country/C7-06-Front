@@ -6,7 +6,7 @@ import TextareaRezise from "../TextAreaRezise";
 import { useState, useRef } from "react";
 import api from "../../helpers/axios";
 
-function CommentPet({ comment, setIsLoading }) {
+function CommentPet({ comment, setIsLoading, pet }) {
   // States
   const [text, setText] = useState(comment.message);
   const [onEdit, setOnEdit] = useState(false);
@@ -39,8 +39,20 @@ function CommentPet({ comment, setIsLoading }) {
   };
 
   // On Delete Handler
-  const onDelete = () => {
-    setIsLoading(true);
+  const onDelete = async () => {
+    try {
+      const response = await api.delete(`/pets/${pet}/comments/${comment.commentId}`);
+      if (!response) {
+        console.log("No answer");
+        return;
+      } else {
+        console.log("Eliminado!");
+        setOnEdit(false);
+        setIsLoading(true);
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
   // Modify Text
   const submitHandler = async e => {
@@ -119,5 +131,6 @@ export default CommentPet;
 
 CommentPet.propTypes = {
   comment: PropTypes.object.isRequired,
-  setIsLoading: PropTypes.func
+  setIsLoading: PropTypes.func,
+  pet: PropTypes.number
 };

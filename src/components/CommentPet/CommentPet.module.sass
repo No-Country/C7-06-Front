@@ -51,6 +51,29 @@
       
       svg 
         padding: 5px
+    
+    &_onEditButtons
+      display: flex
+      gap: 1em
+      justify-content: center
+      margin-bottom: 1em
 
+      .cancel 
+        @include  buttonsAnimatch ($color: white, $background: red)
+        height: 30px
+        min-width: auto
+
+      .submit
+        @include buttonsAnimatch ($color: white, $background: $main-color)
+        height: 30px  
+        min-width: auto
+    
+         
   &_text
     padding: 0.5em 1em
+    border: none
+    width: 100%
+    resize: none
+    margin-left: 1em
+    outline: none
+  

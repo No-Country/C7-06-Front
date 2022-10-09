@@ -1,6 +1,24 @@
 @import "../../sass/variables"
 
 .comments 
+
+  &_pagination
+    display: flex
+    justify-content: center
+    font-family: $main-font
+    font-size: 1em
+
+    li
+      list-style: none
+      padding: 0.5em
+      background: $secondary-color
+      color: black
+      border: 1px solid white
+
+    .active
+      background: $main-color
+      color: white
+
   &_list
     width: 80%
     font-family: $main-font
@@ -13,7 +31,7 @@
 
     &_noComments
       margin: 1em
-      font-size: 2em
+      font-size: 1em
 
   &_form
     padding: 1em calc(50px + 1em)

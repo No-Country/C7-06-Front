@@ -8,8 +8,13 @@ function CommentsPetsList({ petId }) {
   const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [text, setText] = useState("");
-  const [onEdit, setOnEdit] = useState(false);
-  const userLogged = { userId: 1 };
+  const [totalPages, setTotalPages] = useState([]);
+  const [currentPage, setCurrentPage] = useState(0);
+
+  const [onEdit] = useState(false);
+
+  // TODO: getting userLogged Data from Store
+  const userLogged = { userId: 1, role: "user" };
 
   // Get comments of pet
   useEffect(() => {
@@ -18,11 +23,21 @@ function CommentsPetsList({ petId }) {
 
     const getComments = async () => {
       try {
-        const response = await api.get(`/pets/${petId}/comments`, { signal: controller.signal });
+        const response = await api.get(`/pets/${petId}/comments?pageNumber=${currentPage}`, {
+          signal: controller.signal
+        });
 
         if (isMounted) {
           // Stock data
+          console.log(response.data);
           setComments(response.data.content);
+          setTotalPages(() => {
+            const pag = [];
+            for (let i = 1; i <= response.data.totalPages; i++) {
+              pag.push(i);
+            }
+            return pag;
+          });
           setIsLoading(false);
         }
       } catch (err) {
@@ -37,20 +52,23 @@ function CommentsPetsList({ petId }) {
     };
   }, [isLoading]);
 
+  // Cambiar pagina en paginacion
+  const changeCurrentPage = e => {
+    const page = e.target.getAttribute("data-page");
+    if (currentPage !== page - 1) {
+      setCurrentPage(page - 1);
+      setIsLoading(true);
+    }
+  };
   // Handle Change of Message Input
   const handleCommentMessageChange = e => {
     setText(e.target.value);
   };
 
-  // Handle for erase comment
-
-  // Handle for modifying comment
-
   // Handle form submit
   const submitHandler = e => {
     e.preventDefault();
     console.log(e.target.userId.value);
-    console.log(text);
   };
 
   return (
@@ -59,10 +77,12 @@ function CommentsPetsList({ petId }) {
         <div> Loading... </div>
       ) : (
         <div className={classes.comments_list}>
-          <h2>Commentarios</h2>
+          <h2>Comentarios</h2>
           {comments && comments.length !== 0 ? (
             comments.map(comment => {
-              return <CommentPet key={comment.commentId} comment={comment} setOnEdit={setOnEdit} />;
+              return (
+                <CommentPet key={comment.commentId} comment={comment} setIsLoading={setIsLoading} />
+              );
             })
           ) : (
             <div className={classes.comments_list_noComments}>
@@ -71,10 +91,22 @@ function CommentsPetsList({ petId }) {
           )}
         </div>
       )}
-
+      <div className={classes.comments_pagination}>
+        {totalPages.map(pag => {
+          return (
+            <li
+              key={`pag${pag}`}
+              className={currentPage + 1 === pag ? classes.active : ""}
+              data-page={pag}
+              onClick={changeCurrentPage}>
+              {pag}
+            </li>
+          );
+        })}
+      </div>
       <form className={classes.comments_form} onSubmit={submitHandler}>
         <h2>Deja tu comentario</h2>
-        <input type="text" name="userId" value={onEdit ? userLogged.userId : null} hidden />
+        <input type="text" name="userId" defaultValue={!onEdit ? userLogged.userId : null} hidden />
         <textarea
           className={classes.comments_form_commentInput}
           name="message"

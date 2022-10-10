@@ -28,6 +28,10 @@ const router = createBrowserRouter([
     element: <Login />
   },
   {
+    path: "/pet/:id",
+    element: <PetProfile />
+  },
+  {
     path: "/user",
     element: <UserProfile />
   }

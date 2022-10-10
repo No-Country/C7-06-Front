@@ -1,0 +1,88 @@
+[
+  {
+    "id": 1,
+    "name": "Oscar",
+    "type": "cat",
+    "age": "3",
+    "raza": "persa",
+    "sexo": "macho",
+    "place": "Madrid",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi non quis exercitationem culpa nesciunt nihil aut nostrum explicabo reprehenderit optio amet ab temporibus asperiores quasi cupiditate. Voluptatum ducimus voluptates voluptas?",
+    "pictures": ["cat1.png"],
+    "userId": 1
+  },
+  {
+    "id": 2,
+    "name": "Lali",
+    "type": "cat",
+    "age": "2",
+    "raza": "siames",
+    "sexo": "hembra",
+    "place": "Madrid",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi non quis exercitationem culpa nesciunt nihil aut nostrum explicabo reprehenderit optio amet ab temporibus asperiores quasi cupiditate. Voluptatum ducimus voluptates voluptas?",
+    "pictures": ["cat2.png", "cat2b.webp"],
+    "userId": 1
+  },
+  {
+    "id": 3,
+    "name": "Pipo",
+    "type": "cat",
+    "age": "5",
+    "raza": "main",
+    "sexo": "macho",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi non quis exercitationem culpa nesciunt nihil aut nostrum explicabo reprehenderit optio amet ab temporibus asperiores quasi cupiditate. Voluptatum ducimus voluptates voluptas?",
+    "pictures": ["cat3.png", "cat3b.webp", "cat3c.webp"],
+    "userId": 2
+  },
+  {
+    "id": 4,
+    "name": "Blackie",
+    "type": "cat",
+    "age": "2",
+    "raza": "siames",
+    "sexo": "hembra",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi non quis exercitationem culpa nesciunt nihil aut nostrum explicabo reprehenderit optio amet ab temporibus asperiores quasi cupiditate. Voluptatum ducimus voluptates voluptas?",
+    "pictures": ["cat4.png", "cat4b.webp", "cat4c.webp", "cat4d.webp"],
+    "userId": 3
+  },
+  {
+    "id": 5,
+    "name": "John",
+    "type": "dog",
+    "age": "3",
+    "raza": "caniche",
+    "sexo": "macho",
+    "pictures": ["dog1.png"],
+    "userId": 3
+  },
+  {
+    "id": 6,
+    "name": "Mary",
+    "type": "dog",
+    "age": "2",
+    "raza": "caniche",
+    "sexo": "hembra",
+    "pictures": ["dog2.png"],
+    "userId": 4
+  },
+  {
+    "id": 7,
+    "name": "Peter",
+    "type": "dog",
+    "age": "5",
+    "raza": "caniche",
+    "sexo": "macho",
+    "pictures": ["dog3.png"],
+    "userId": 5
+  },
+  {
+    "id": 8,
+    "name": "Julie",
+    "type": "dog",
+    "age": "2",
+    "raza": "caniche",
+    "sexo": "hembra",
+    "pictures": ["dog4.png"],
+    "userId": 6
+  }
+]

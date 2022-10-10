@@ -1,0 +1,104 @@
+@import "../../sass/variables"
+
+.card
+  width: 100%
+  color: black
+  display: flex
+  flex-flow: row nowrap
+  font-family: $main-font
+  margin: 1em auto
+
+  &_avatar
+    width: 50px
+    height: 50px
+    flex-shrink: 0
+    
+    img, div
+      width: 100%
+      height: 100%
+      border-radius: 50%
+      object-fit: cover
+      background-color: $light-gray
+  
+  &_wrapper
+    display: flex
+    flex-direction: column
+    border-radius: 1em
+    box-sizing: content-box
+    font-size: 1em
+    padding: 0
+    position: relative
+    flex-grow: 1
+    margin: 0
+
+    @include mq(medium) 
+      margin: 0 1em
+      padding: 0.5em 1em
+
+  &_header
+    display: flex
+    flex-flow: row nowrap
+    align-items: center
+    height: 50px
+    font-size: 14px
+
+    &_user
+      display: flex
+      flex-flow: column nowrap
+      justify-content: flex-start
+      align-items: baseline
+      padding: 1em
+      flex-grow: 1
+      
+      @include mq(medium) 
+        flex-flow: row nowrap
+        flex-grow: 0
+
+      span
+        padding: 0
+        
+        @include mq(medium)
+          &:first-child::after
+            content:" · "
+            padding: 0 0.5em
+
+      &_name
+        font-family: $secondary-font
+        font-weight: 700
+        font-size: 1.3em
+        color: $main-color
+   
+    &_buttons
+      color: #696565
+      font-size: 20px
+      flex-shrink: 0
+      
+      svg 
+        padding: 5px
+    
+    &_onEditButtons
+      display: flex
+      gap: 1em
+      justify-content: center
+      margin-bottom: 1em
+
+      .cancel 
+        @include  buttonsAnimatch ($color: white, $background: red)
+        height: 30px
+        min-width: auto
+
+      .submit
+        @include buttonsAnimatch ($color: white, $background: $main-color)
+        height: 30px  
+        min-width: auto
+    
+         
+  &_text
+    padding: 0.5em 1em
+    border: none
+    resize: none
+    margin-left: 1em
+    outline: none
+    width: auto
+    font-family: $main-font
+    font-size: 1em

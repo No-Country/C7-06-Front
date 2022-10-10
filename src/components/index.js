@@ -12,3 +12,8 @@ export { default as NavbarMenu } from "./NavbarMenu";
 export { default as RegisterForm } from "./RegisterForm";
 export { default as UserBanner } from "./UserBanner";
 export { default as UserInfo } from "./UserInfo";
+export { default as PetInfoCard } from "./PetInfoCard";
+export { default as CommentsPetsList } from "./CommentsPetsList";
+export { default as PetBanner } from "./PetBanner";
+export { default as CommentPet } from "./CommentPet";
+export { default as TextareaResize } from "./TextareaRezise";

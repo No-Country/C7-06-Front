@@ -10,13 +10,6 @@ $light-gray: #D9D9D9
 $main-font: "Roboto", sans-serif
 $secondary-font: "Raleway", sans-serif
 
-//RESET
-*
-    padding: 0px
-    margin: 0px
-    box-sizing: border-box
-
-
 // MEDIA QUERIES
 
 /* Breakpoints */
@@ -33,6 +26,54 @@ $breakpoints: ("small": 390px, "medium": 768px, "large": 992px,"xlarge": 1440px)
     @content
   
 // CSS BUTTONS 
+// CSS BUTTONS 
+
+@mixin buttonsAnimatch ($color: white, $background: $main-color)  
+  font-family: $main-font
+  font-size: 1em
+  line-height: 1.5em
+  text-align: center
+  color: $color !important
+  background-color: $background
+  width: fit-content
+  min-width: 305px
+  min-height: 40px
+  border-radius: 8px
+  border: none
+  padding: 0.5rem 2.5rem
+  cursor: pointer
+  transition: background-color 500ms ease-in-out
+  text-decoration: none
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25)
+ 
+  &:hover
+      background-color: lighten($background, 5)
+
+
+// Overlay Layer
+@mixin overlay ()  
+  &::before
+    content: ""
+    position: absolute
+    top: 0
+    left: 0
+    height: 100%
+    width: 100%
+    background: rgba(217,217,217,0.6)
+
+// reset
+
+// * 
+//   padding: 0px
+//   margin: 0px
+//   box-sizing: border-box
+
+
+
+// /* Eliminate scrollbar */
+// ::-webkit-scrollbar 
+//   display: none
+
 
 @mixin buttonsAnimatch ($color: white, $background: $main-color)  
   width: auto

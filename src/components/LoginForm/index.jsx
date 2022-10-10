@@ -173,7 +173,7 @@ const LoginForm = () => {
                     onBlur={handleBlur}
                     onChange={handleChange}
                     value={form.pwd}
-                    placeholder="Contraseña (mas de 8 caracteres)"
+                    placeholder="Contraseña"
                     required
                   />
                   {seePass ? (

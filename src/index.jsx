@@ -1,8 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-
-import { Home, Login, Register, UserProfile } from "./pages";
+import { Home, Login, Register, PetProfile, UserProfile } from "./pages";
 
 import reportWebVitals from "./reportWebVitals";
 

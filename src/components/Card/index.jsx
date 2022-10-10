@@ -31,24 +31,24 @@ const Card = ({ animal }) => {
     <Link to={`/pet/${animal.id}`} className={styles.cardLink}>
       <div className={styles.card}>
         <div className={styles.card__img}>
-          <img src={`/animals/${animal.picture}`} alt={animal.name} />
+          <img src={`/animals/${animal?.picture}`} alt={animal?.name} />
         </div>
         <div className={styles.card__content}>
-          <h3 className={styles.card__title}>{animal.name}</h3>
+          <h3 className={styles.card__title}>{animal?.name}</h3>
           <div className={styles.card__text}>
             <ul>
               <li>
-                <span>Raza:</span> {animal.raza}
+                <span>Raza:</span> {animal?.raza}
               </li>
               <li>
-                <span>Sexo:</span> {animal.sexo}
+                <span>Sexo:</span> {animal?.sexo}
               </li>
               <li>
-                <span>Edad:</span> {animal.age}
+                <span>Edad:</span> {animal?.age}
               </li>
             </ul>
           </div>
-          <Favorite isFavorite={animal.isFavorite} handleClick={handleClick} />
+          <Favorite isFavorite={animal?.isFavorite} handleClick={handleClick} />
         </div>
       </div>
     </Link>

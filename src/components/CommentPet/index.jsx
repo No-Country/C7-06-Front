@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencil, faTrash } from "@fortawesome/free-solid-svg-icons";
-import TextareaRezise from "../TextareaRezise";
+import TextareaRezise from "../TextAreaRezise";
 import api from "../../helpers/axios";
 import { getDateFormatted } from "../../helpers/dateFormat";
 

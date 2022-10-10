@@ -14,10 +14,18 @@
       background: $secondary-color
       color: black
       border: 1px solid white
+      cursor: pointer
+      
+      &:hover 
+        background: darken($secondary-color, 20)
+        
 
     .active
       background: $main-color
       color: white
+      &:hover 
+        background: darken($main-color, 20)
+        
 
   &_list
     width: 80%

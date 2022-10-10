@@ -16,13 +16,14 @@ function PetInfoCard({ pet }) {
     const AnimalPhotos = [];
     for (let i = 1; i <= quantityPhotos - 1; i++) {
       AnimalPhotos.push(images[i]);
+      console.dir(AnimalPhotos);
     }
     return AnimalPhotos;
   };
 
   // Function rotate photo image
   const changePhotoHandler = e => {
-    const fileName = e.target.src.split("/");
+    const fileName = e.target.src;
     const index = images.indexOf(fileName[fileName.length - 1]);
     const newMainImage = images[index];
     const newThumbnail = images.filter(val => val !== newMainImage);
@@ -48,8 +49,8 @@ function PetInfoCard({ pet }) {
         <div className={classes.card_gallery}>
           <div className={classes.card_gallery_wrapper}>
             <div className={classes.card_gallery_image}>
-              {pet.profiles ? (
-                <img src={images[0]} className={classes.active} alt={`Foto de ${pet.name}`} />
+              {images[0] ? (
+                <img src={images[0].path} className={classes.active} alt={`Foto de ${pet.name}`} />
               ) : pet.type === "cat" ? (
                 <img src={cat} className={classes.active} alt={`Foto de ${pet.name}`} />
               ) : (
@@ -60,9 +61,9 @@ function PetInfoCard({ pet }) {
               {quantityPhotos > 1 &&
                 addImages().map(photo => (
                   <img
-                    src={`/animals/${photo}`}
+                    src={photo.path}
                     alt={`Foto de ${pet.name}`}
-                    key={photo}
+                    key={photo.id}
                     onClick={changePhotoHandler}
                   />
                 ))}

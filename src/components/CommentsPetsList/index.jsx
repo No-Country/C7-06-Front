@@ -81,6 +81,7 @@ function CommentsPetsList({ petId }) {
         return;
       } else {
         setText("");
+        setCurrentPage(0);
         setIsLoading(true);
         console.log("publicado!");
       }

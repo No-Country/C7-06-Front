@@ -119,8 +119,9 @@ const RegisterForm = () => {
   }
 
   useEffect(() => {
+    const widthView = window.innerWidth <= 360 ? 200 : 305;
+    const sizes = window.innerWidth <= 360 ? "medium" : "large";
     /* global google */
-
     google.accounts.id.initialize({
       client_id: "416379331606-68jrqo6sg4mdv0q7g4l7mj2msvc4q628.apps.googleusercontent.com",
       callback: handleCallbackResponse
@@ -128,8 +129,9 @@ const RegisterForm = () => {
 
     google.accounts.id.renderButton(document.getElementById("signInDiv"), {
       theme: "outline",
-      size: "large",
-      width: 300
+      size: sizes,
+      width: widthView,
+      height: 40
     });
   }, []);
 

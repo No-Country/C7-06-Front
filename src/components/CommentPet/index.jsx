@@ -1,10 +1,12 @@
 import classes from "./CommentPet.module.sass";
+import { useState, useRef } from "react";
+import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencil, faTrash } from "@fortawesome/free-solid-svg-icons";
-import PropTypes from "prop-types";
-import TextareaRezise from "../TextAreaRezise";
-import { useState, useRef } from "react";
+import TextareaRezise from "../TextareaRezise";
 import api from "../../helpers/axios";
+import { getDateFormatted } from "../../helpers/dateFormat";
 
 function CommentPet({ comment, setIsLoading, pet }) {
   // States
@@ -12,7 +14,7 @@ function CommentPet({ comment, setIsLoading, pet }) {
   const [onEdit, setOnEdit] = useState(false);
 
   // TODO: Get user Logged from store
-  const userLogged = { userId: 1, role: "user" };
+  const userLogged = { userId: 2, role: "user" };
 
   const allowEdition = userLogged.userId === comment.userId || userLogged.role === "admin";
 
@@ -41,7 +43,7 @@ function CommentPet({ comment, setIsLoading, pet }) {
   // On Delete Handler
   const onDelete = async () => {
     try {
-      const response = await api.delete(`/pets/${pet}/comments/${comment.commentId}`);
+      const response = await api.delete(`/pets/comments/${comment.commentId}`);
       if (!response) {
         console.log("No answer");
         return;
@@ -54,6 +56,7 @@ function CommentPet({ comment, setIsLoading, pet }) {
       console.log(err);
     }
   };
+
   // Modify Text
   const submitHandler = async e => {
     e.preventDefault();
@@ -74,22 +77,25 @@ function CommentPet({ comment, setIsLoading, pet }) {
     }
   };
 
-  // Delete comment handler
-
+  // Format Date Manager
   return (
     <div className={classes.card}>
       <div className={classes.card_avatar}>
         {comment.avatar ? (
-          <img src={`/persons/${comment.avatar}`} alt={comment.fullName} />
+          <Link to={`/user/${comment.userId}`}>
+            <img src={`/persons/${comment.avatar}`} alt={comment.fullName} />
+          </Link>
         ) : (
-          <div></div>
+          <Link to={`/user/${comment.userId}`}>
+            <div></div>
+          </Link>
         )}
       </div>
-      <div className="classes.card_wrapper">
+      <div className={classes.card_wrapper}>
         <div className={classes.card_header}>
           <div className={classes.card_header_user}>
-            <span className={classes.card_header_user_name}>{comment.fullName}</span>·
-            <span>{comment.updatedDate}</span>
+            <span className={classes.card_header_user_name}>{comment.fullName}</span>
+            <span>{getDateFormatted(comment.updatedDate)}</span>
           </div>
           {allowEdition ? (
             <div className={classes.card_header_buttons}>

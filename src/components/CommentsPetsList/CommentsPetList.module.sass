@@ -22,6 +22,7 @@
   &_list
     width: 80%
     font-family: $main-font
+    margin: 0 auto
 
     h2
       font-family: $secondary-font
@@ -34,9 +35,11 @@
       font-size: 1em
 
   &_form
-    padding: 1em calc(50px + 1em)
+    padding: 1em
     padding-right: 0
     margin-bottom: 3em
+    @include mq(medium)
+    padding: 1em calc(50px + 1em)
     
     h2
       font-family: $secondary-font

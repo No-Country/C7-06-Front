@@ -14,7 +14,7 @@ function CommentsPetsList({ petId }) {
   const [onEdit] = useState(false);
 
   // TODO: getting userLogged Data from Store
-  const userLogged = { userId: 1, role: "user" };
+  const userLogged = { userId: 2, role: "user" };
 
   // Get comments of pet
   useEffect(() => {
@@ -23,9 +23,12 @@ function CommentsPetsList({ petId }) {
 
     const getComments = async () => {
       try {
-        const response = await api.get(`/pets/${petId}/comments?pageNumber=${currentPage}`, {
-          signal: controller.signal
-        });
+        const response = await api.get(
+          `/pets/${petId}/comments?pageNumber=${currentPage}&pageSize=5`,
+          {
+            signal: controller.signal
+          }
+        );
 
         if (isMounted) {
           // Stock data
@@ -112,17 +115,18 @@ function CommentsPetsList({ petId }) {
         </div>
       )}
       <div className={classes.comments_pagination}>
-        {totalPages.map(pag => {
-          return (
-            <li
-              key={`pag${pag}`}
-              className={currentPage + 1 === pag ? classes.active : ""}
-              data-page={pag}
-              onClick={changeCurrentPage}>
-              {pag}
-            </li>
-          );
-        })}
+        {totalPages.length > 1 &&
+          totalPages.map(pag => {
+            return (
+              <li
+                key={`pag${pag}`}
+                className={currentPage + 1 === pag ? classes.active : ""}
+                data-page={pag}
+                onClick={changeCurrentPage}>
+                {pag}
+              </li>
+            );
+          })}
       </div>
       <form className={classes.comments_form} onSubmit={submitHandler}>
         <h2>Deja tu comentario</h2>

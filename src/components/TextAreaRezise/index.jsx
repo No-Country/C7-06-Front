@@ -1,16 +1,9 @@
 import PropTypes from "prop-types";
+import { useEffect } from "react";
+
 // Textarea elements that change height when inserting data.
 
-export default function TextareaRezise({
-  placeHolder,
-  id,
-  text,
-  onChange,
-  name,
-  className,
-  innerRef,
-  readOnly
-}) {
+function TextareaRezise({ placeHolder, text, onChange, name, className, innerRef, readOnly }) {
   /**
    * @EventHandler
    * @name textAreaReziser
@@ -30,11 +23,13 @@ export default function TextareaRezise({
   }
   // e.target.style.height = `${Math.min(e.target.scrollHeight, limit)}px`
 
+  useEffect(() => {
+    innerRef.current.style.height = `${innerRef.current.scrollHeight}px`;
+  }, []);
   return (
     <textarea
       name={name}
       ref={innerRef}
-      id={id}
       rows="1"
       onChange={onChange}
       onKeyDown={textAreaReziser}
@@ -56,3 +51,5 @@ TextareaRezise.propTypes = {
   innerRef: PropTypes.object,
   readOnly: PropTypes.bool
 };
+
+export default TextareaRezise;

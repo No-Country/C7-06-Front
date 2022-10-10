@@ -1,0 +1,124 @@
+export const getDateFormatted = (date, format) => {    /* getDateFormated(new Date(), "dd/MM/yyyy") */
+  let year;
+  let month;
+  let day;
+  let dateFormatted;
+  if (date instanceof Date) {
+    if (format === "dd/MM/yyyy") {
+      day = date.getDate();
+      month = date.getMonth() + 1;
+      year = date.getFullYear();
+      dateFormatted =
+        (day > 9 ? day : "0" + day) +
+        "/" +
+        (month > 9 ? month : "0" + month) +
+        "/" +
+        year;
+      return dateFormatted;
+    } else {
+      return "invalid format";
+    }
+  }
+  return "invalid date";
+};
+
+export const getDayName = (dayNumber) => {
+  switch (parseInt(dayNumber)) {
+    case 0:
+      return "Dom";
+      break;
+    case 1:
+      return "Lun";
+      break;
+    case 2:
+      return "Mar";
+      break;
+    case 3:
+      return "Mie";
+      break;
+    case 4:
+      return "Jue";
+      break;
+    case 5:
+      return "Vie";
+      break;
+    case 6:
+      return "Sab";
+      break;
+    default:
+      return "Incorrecto";
+      break;
+  }
+};
+
+export const getCompleteDayName = (dayNumber) => {
+  switch (parseInt(dayNumber)) {
+    case 0:
+      return "Domingo";
+      break;
+    case 1:
+      return "Lunes";
+      break;
+    case 2:
+      return "Martes";
+      break;
+    case 3:
+      return "Miércoles";
+      break;
+    case 4:
+      return "Jueves";
+      break;
+    case 5:
+      return "Viernes";
+      break;
+    case 6:
+      return "Sábado";
+      break;
+    default:
+      return "Incorrecto";
+      break;
+  }
+};
+
+export const getMonthName = (monthNumber) => {
+  switch (monthNumber) {
+    case 0:
+      return "Enero";
+    case 1:
+      return "Febrero";
+    case 2:
+      return "Marzo";
+    case 3:
+      return "Abril";
+    case 4:
+      return "Mayo";
+    case 5:
+      return "Junio";
+    case 6:
+      return "Julio";
+    case 7:
+      return "Agosto";
+    case 8:
+      return "Septiembre";
+    case 9:
+      return "Octubre";
+    case 10:
+      return "Noviembre";
+    case 11:
+      return "Diciembre";
+    default:
+      return "Invalid month number";
+  }
+};
+
+export const getFirstDayInMonth = (month, year) => {
+  return new Date(year, month, 1).getDay() + 1;
+};
+
+export const getDaysInMonth = (month, year) => {
+  return new Date(year, month, 0).getDate();
+};
+
+export const getLastDayOfMonth = (year, month) => {
+  return new Date(year, month, 0).getDate();
+};

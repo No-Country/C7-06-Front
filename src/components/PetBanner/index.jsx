@@ -1,7 +1,7 @@
-import classes from "./PetCategoryBanner.module.sass";
+import classes from "./PetBanner.module.sass";
 import PropTypes from "prop-types";
 
-function PetCategoryBanner({ className, text, image }) {
+function PetBanner({ className, text, image }) {
   return (
     <div className={`${classes.container} ${className}`}>
       <img src={image} alt={text} className={classes.img} />
@@ -10,9 +10,9 @@ function PetCategoryBanner({ className, text, image }) {
   );
 }
 
-export default PetCategoryBanner;
+export default PetBanner;
 
-PetCategoryBanner.propTypes = {
+PetBanner.propTypes = {
   className: PropTypes.string,
   text: PropTypes.string,
   image: PropTypes.string

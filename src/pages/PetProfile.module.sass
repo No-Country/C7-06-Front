@@ -1,8 +1,12 @@
 @import "../sass/variables"
+@import "../sass/reset"
 
 .infoPet 
   background-color: #f5f5f5
 
 .overlay
-  height: 400px
+  height: 250px
   @include overlay()
+
+  @include mq(medium)
+    height: 400px

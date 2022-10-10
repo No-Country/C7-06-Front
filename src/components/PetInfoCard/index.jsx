@@ -1,5 +1,7 @@
 import classes from "./PetInfoCard.module.sass";
 import PropTypes from "prop-types";
+import cat from "../../assets/genericCat.jpg";
+import dog from "../../assets/genericDog.jpg";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -26,7 +28,6 @@ function PetInfoCard({ pet }) {
     const newThumbnail = images.filter(val => val !== newMainImage);
     setImages([newMainImage, ...newThumbnail]);
   };
-
   // AddFavouriteHanlder
 
   const favouriteHandler = () => {
@@ -40,16 +41,20 @@ function PetInfoCard({ pet }) {
 
   return (
     <div className={classes.card}>
-      <h2> Caniche Macho </h2>
+      <h2>
+        {pet.race} {pet.gender}
+      </h2>
       <div className={classes.card_wrapper}>
         <div className={classes.card_gallery}>
           <div className={classes.card_gallery_wrapper}>
             <div className={classes.card_gallery_image}>
-              <img
-                src={`/animals/${images[0]}`}
-                className={classes.active}
-                alt={`Foto de ${pet.name}`}
-              />
+              {pet.profiles ? (
+                <img src={images[0]} className={classes.active} alt={`Foto de ${pet.name}`} />
+              ) : pet.type === "cat" ? (
+                <img src={cat} className={classes.active} alt={`Foto de ${pet.name}`} />
+              ) : (
+                <img src={dog} className={classes.active} alt={`Foto de ${pet.name}`} />
+              )}
             </div>
             <div className={classes.card_gallery_thumbnail}>
               {quantityPhotos > 1 &&
@@ -71,18 +76,32 @@ function PetInfoCard({ pet }) {
           </div>
           <div className={classes.card_info_body}>
             <p>
-              Raza: <span>{pet.raza}</span>
+              Raza: <span>{pet.race.toLowerCase()}</span>
             </p>
             <p>
-              Sexo: <span>{pet.sexo}</span>
+              Sexo: <span>{pet.gender.toLowerCase() === "female" ? "Hembra" : "Macho"}</span>
             </p>
             <p>
-              Edad: <span>{pet.age}</span> años
+              Edad: <span>{pet.age} años</span>
             </p>
             <p>
-              Ubicación: <span>{pet.place}</span>
+              Ubicación: <span>{pet.location}</span>
             </p>
-            <p className={classes.description}>{pet.description}</p>
+            <p>
+              Peso: <span>{pet.weight} kg</span>
+            </p>
+            <p>
+              Tamaño: <span>{pet.size.toLowerCase()}</span>
+            </p>
+            <p>
+              Certificado pura raza? <span>{pet.pureRace ? "si" : "no"}</span>
+            </p>
+            <p>
+              Vacunas al día? <span>{pet.vaccinationsUpToDate ? "si" : "no"}</span>
+            </p>
+            <p className={classes.description}>
+              Sobre mi: <span>{pet.description}</span>
+            </p>
           </div>
           <div className={classes.card_footer}>
             <button className={classes.favourite} onClick={favouriteHandler}>

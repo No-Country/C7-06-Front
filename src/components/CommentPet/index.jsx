@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencil, faTrash } from "@fortawesome/free-solid-svg-icons";
-import TextareaRezise from "../TextAreaRezise";
-import api from "../../helpers/axios";
+import TextareaRezise from "../TextareaRezise";
+import { apiPub } from "../../helpers/axios";
 import { getDateFormatted } from "../../helpers/dateFormat";
 
 function CommentPet({ comment, setIsLoading, pet }) {
@@ -43,7 +43,7 @@ function CommentPet({ comment, setIsLoading, pet }) {
   // On Delete Handler
   const onDelete = async () => {
     try {
-      const response = await api.delete(`/pets/comments/${comment.commentId}`);
+      const response = await apiPub.delete(`/pets/comments/${comment.commentId}`);
       if (!response) {
         console.log("No answer");
         return;
@@ -61,7 +61,7 @@ function CommentPet({ comment, setIsLoading, pet }) {
   const submitHandler = async e => {
     e.preventDefault();
     try {
-      const response = await api.put(`/pets/comments/${comment.commentId}`, {
+      const response = await apiPub.put(`/pets/comments/${comment.commentId}`, {
         userId: userLogged.userId,
         message: text
       });

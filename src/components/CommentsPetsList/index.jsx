@@ -2,7 +2,7 @@ import classes from "./CommentsPetList.module.sass";
 import CommentPet from "../CommentPet";
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import api from "../../helpers/axios";
+import { apiPub } from "../../helpers/axios";
 
 function CommentsPetsList({ petId }) {
   const [comments, setComments] = useState([]);
@@ -23,7 +23,7 @@ function CommentsPetsList({ petId }) {
 
     const getComments = async () => {
       try {
-        const response = await api.get(
+        const response = await apiPub.get(
           `/pets/${petId}/comments?pageNumber=${currentPage}&pageSize=5`,
           {
             signal: controller.signal
@@ -72,7 +72,7 @@ function CommentsPetsList({ petId }) {
   const submitHandler = async e => {
     e.preventDefault();
     try {
-      const response = await api.post(`/pets/${petId}/comments`, {
+      const response = await apiPub.post(`/pets/${petId}/comments`, {
         userId: userLogged.userId,
         message: text
       });

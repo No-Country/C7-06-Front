@@ -108,7 +108,7 @@ function PetInfoCard({ pet }) {
             <button className={classes.favourite} onClick={favouriteHandler}>
               {isFavourite ? "Quitar de Favoritos" : "Añadir a Favoritos"}
             </button>
-            <Link to={`/user/${pet.userId}`} className={classes.contact}>
+            <Link to={`/user/${pet.user_id}`} className={classes.contact}>
               Contactar a su dueño
             </Link>
           </div>

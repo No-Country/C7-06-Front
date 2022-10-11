@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import classes from "./PetProfile.module.sass";
 import cat from "../assets/cat.jpg";
 import dog from "../assets/dog.jpg";
-import api from "../helpers/axios";
+import { apiPub } from "../helpers/axios";
 // import { useState } from "react";
 
 const PetProfile = () => {
@@ -35,7 +35,7 @@ const PetProfile = () => {
 
     const getPet = async () => {
       try {
-        const response = await api.get(`/users/pets/${petId}`, {
+        const response = await apiPub.get(`/users/pets/${petId}`, {
           signal: controller.signal
         });
 

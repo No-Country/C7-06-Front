@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Filter from "./components/Filter";
-import { Home, Login, Register, PetProfile, UserProfile } from "./pages";
+import { Home, Login, Register, PetProfile, UserProfile, UserAccount } from "./pages";
 
 import reportWebVitals from "./reportWebVitals";
 
@@ -34,6 +34,10 @@ const router = createBrowserRouter([
   {
     path: "/user",
     element: <UserProfile />
+  },
+  {
+    path: "/account",
+    element: <UserAccount />
   }
 ]);
 

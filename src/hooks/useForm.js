@@ -23,6 +23,35 @@ export const useForm = (initForm, validateForm, onSuccess = () => {}, onError = 
     setErrors(Object.assign(errors, { [champ]: validateForm(form, champ) }));
   };
 
+  // Validation Files
+  const handleFiles = e => {
+    const file = e.target.files[0];
+    const champ = e.target.name;
+    const oldUrl = form[champ];
+    if (file) {
+      setForm({
+        ...form,
+        [champ]: file.name
+      });
+      setErrors(Object.assign(errors, { [champ]: validateForm(form, champ, file) }));
+      if (errors[champ]) {
+        setForm({
+          ...form,
+          [champ]: oldUrl
+        });
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        setForm({
+          ...form,
+          file: e.target.result
+        });
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   // Submit validation
   const handleSubmit = e => {
     e.preventDefault();
@@ -57,6 +86,7 @@ export const useForm = (initForm, validateForm, onSuccess = () => {}, onError = 
     loading,
     response,
     handleChange,
+    handleFiles,
     handleBlur,
     handleSubmit
   };

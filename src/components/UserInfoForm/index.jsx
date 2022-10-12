@@ -3,9 +3,6 @@ import { useState } from "react";
 import { useForm } from "../../hooks/useForm";
 
 const UserInfoForm = () => {
-  const [urlImageLoaded, setUrlImageLoaded] = useState("/persons/user1.jpg"); // if url exists will storage url file
-  const [file, setFile] = useState(); // if file is charged it will storage the file to send
-
   const [user] = useState({
     avatar: "/persons/user1.jpg",
     name: "Jane",
@@ -13,8 +10,7 @@ const UserInfoForm = () => {
     email: "janedoe@gmail.com",
     phone: "+33 565458111",
     place: "Paris",
-    userId: 1,
-    file
+    userId: 1
   });
 
   // Form values on init
@@ -29,7 +25,7 @@ const UserInfoForm = () => {
   };
 
   // Form validation function
-  const validationsForm = (form, name) => {
+  const validationsForm = (form, name, val) => {
     const validationTypes = {
       avatar: "path",
       email: "email",
@@ -43,7 +39,9 @@ const UserInfoForm = () => {
     let error;
     const REGNAME = /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/;
     const REGEMAIL = /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/;
-    const REGPHONE = /[0-9]/;
+    const REGPHONE = /^(\+\d{1,3}( )?)?((\(\d{1,3}\))|\d{1,3})[- .]?\d{3,4}[- .]?\d{4}$/;
+    const REGPATH = /^[A-Za-z0-9.:/]+[(".jpg")(".png")("webp")]$/;
+    const REGADDRES = /[\w',-\\/.\s]/;
 
     // If no info
     if (!form[name]?.trim()) {
@@ -76,9 +74,19 @@ const UserInfoForm = () => {
         }
         return error;
 
+      case "place":
+        if (!REGADDRES.test(form[name].trim())) {
+          error = "Debes introducir una dirección válida";
+        } else {
+          error = false;
+        }
+        return error;
+
       case "path":
-        if (!form[name].trim()) {
-          error = "Solo se admiten los formatos jpg, png y webp de no mas de 1mb";
+        if (!REGPATH.test(val.name.trim())) {
+          error = "Solo se admiten los formatos jpg, png y webp";
+        } else if (val.size > 5000000) {
+          error = "El archivo no puede ser de mas de 5mb";
         } else {
           error = false;
         }
@@ -91,24 +99,19 @@ const UserInfoForm = () => {
   };
 
   // Form handler
-  const { form, errors, handleChange, handleBlur, handleSubmit } = useForm(
+  const { form, errors, handleChange, handleBlur, handleFiles, handleSubmit } = useForm(
     initForm,
-    validationsForm
+    validationsForm,
+    apicall,
+    onSuccess,
+    onError
   );
 
-  // Event Handler for Preview Image
-  const changeAvatarHandler = e => {
-    if (e.target.files && e.target.files[0]) {
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        setUrlImageLoaded(e.target.result);
-      };
-      reader.readAsDataURL(e.target.files[0]);
-      setFile(e.target.files[0]);
-    } else {
-      setUrlImageLoaded(false);
-    }
-  };
+  // Apicall
+    const apicall = apiPriv.put{`/api/users/$userId/update'`, form};
+  // On success
+
+  // On Error
 
   return (
     <div className={classes.form}>
@@ -117,11 +120,11 @@ const UserInfoForm = () => {
         <div className={classes.form_wrapper}>
           <div className={classes.form_avatar}>
             <div className={classes.form_avatar_image}>
-              <img src={urlImageLoaded} alt={"nombre persona"} />
+              <img src={form.file || form.avatar} alt={"nombre persona"} />
             </div>
             <div className={classes.form_avatar_editButton}>
               <label htmlFor="avatar">Editar</label>
-              <input id="avatar" name="avatar" onChange={changeAvatarHandler} type="file" hidden />
+              <input id="avatar" name="avatar" onChange={handleFiles} type="file" hidden />
               {errors?.avatar && <p className={classes.instructions}>{errors.avatar}</p>}
             </div>
           </div>

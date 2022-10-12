@@ -1,6 +1,12 @@
 import { useState } from "react";
 
-export const useForm = (initForm, validateForm, onSuccess = () => {}, onError = () => {}) => {
+export const useForm = (
+  initForm,
+  validateForm,
+  apicall,
+  onSuccess = () => {},
+  onError = () => {}
+) => {
   // States
   const [form, setForm] = useState(initForm);
   const [errors, setErrors] = useState({});
@@ -53,7 +59,7 @@ export const useForm = (initForm, validateForm, onSuccess = () => {}, onError = 
   };
 
   // Submit validation
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
 
     // Checking validation of all champs
@@ -63,14 +69,13 @@ export const useForm = (initForm, validateForm, onSuccess = () => {}, onError = 
 
     // Checking if errors has all false values
     if (Object.values(errors).filter(val => val === true).length === 0) {
-      alert("Enviando formulario");
       setLoading(true);
       // Cleaning form
       e.target.reset();
       setForm(initForm);
       setErrors({});
       try {
-        // here function to call API and get response.
+        setResponse(await apicall());
         onSuccess(response);
         setLoading(false);
       } catch (err) {

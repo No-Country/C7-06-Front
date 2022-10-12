@@ -1,10 +1,11 @@
 import classes from "./LoginForm.module.sass";
+import jwtDecode from "jwt-decode";
 import { useRef, useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useForm } from "../../hooks/useForm";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEyeSlash, faEye, faLock, faEnvelope } from "@fortawesome/free-solid-svg-icons";
-import jwtDecode from "jwt-decode";
+import { apiAuth } from "../../helpers/axios";
 
 const LoginForm = () => {
   // User from context
@@ -76,14 +77,22 @@ const LoginForm = () => {
     return error;
   };
 
+  // Api Call Function
+  const apicall = () => {
+    return apiAuth.post("/api/auth/login", {
+      email: form.email,
+      password: form.pwd
+    });
+  };
+
   // On success of submit
   const onSuccess = response => {
+    console.log(response);
     // Setting auth value to context or redux
-    const accessToken = response?.data?.accessToken;
-    const userId = response?.data?.userId;
-    const roles = response?.data?.userRole;
-    setAuth({ user: { id: userId, roles }, accessToken });
-
+    const token = response?.data?.accessToken;
+    const id = response?.data?.id;
+    const role = response?.data?.role;
+    setAuth({ user: { id, role }, token });
     // Redirection
     emailRef.current.focus();
     navigate(from, { replace: true }); // redirect to last location
@@ -109,6 +118,7 @@ const LoginForm = () => {
   const { form, errors, handleChange, handleBlur, handleSubmit } = useForm(
     initForm,
     validationsForm,
+    apicall,
     onSuccess,
     onError
   );
@@ -121,7 +131,6 @@ const LoginForm = () => {
 
   useEffect(() => {
     const widthView = window.innerWidth <= 360 ? 200 : 305;
-    console.log(widthView);
     const sizes = window.innerWidth <= 360 ? "medium" : "large";
     /* global google */
     google.accounts.id.initialize({

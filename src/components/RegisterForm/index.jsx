@@ -1,10 +1,11 @@
 import classes from "./RegisterForm.module.sass";
+import jwtDecode from "jwt-decode";
 import { useRef, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "../../hooks/useForm";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEyeSlash, faEye, faUser, faLock, faEnvelope } from "@fortawesome/free-solid-svg-icons";
-import jwtDecode from "jwt-decode";
+import { apiAuth } from "../../helpers/axios";
 
 const RegisterForm = () => {
   // States
@@ -17,13 +18,6 @@ const RegisterForm = () => {
 
   // Referencies
   const emailRegRef = useRef();
-
-  // focus on user input on init
-  useEffect(() => {
-    emailRegRef.current.focus();
-  }, []);
-
-  // FORM LOGIC
 
   // Form values on init
   const initForm = {
@@ -93,6 +87,16 @@ const RegisterForm = () => {
     return error;
   };
 
+  // Api Call Function
+  const apicall = () => {
+    return apiAuth.post("/api/auth/signup", {
+      name: form.name,
+      surname: form.lastName,
+      email: form.email,
+      password: form.pwd
+    });
+  };
+
   // Function on Success of Response
   const onSuccess = async () => {
     emailRegRef.current.focus();
@@ -108,6 +112,7 @@ const RegisterForm = () => {
   const { form, errors, handleChange, handleBlur, handleSubmit } = useForm(
     initForm,
     validationsForm,
+    apicall,
     onSuccess,
     onError
   );
@@ -115,7 +120,14 @@ const RegisterForm = () => {
   // GOOGLE LOGIN
   function handleCallbackResponse(response) {
     const userObject = jwtDecode(response.credential);
-    setUser(userObject);
+    console.log(response);
+    const userData = {
+      email: userObject.email,
+      name: userObject.given_name,
+      surname: userObject.family_name
+    };
+    setUser(userData);
+    console.log(userData);
   }
 
   useEffect(() => {
@@ -133,6 +145,9 @@ const RegisterForm = () => {
       width: widthView,
       height: 40
     });
+
+    // Focus on email
+    emailRegRef.current.focus();
   }, []);
 
   return (

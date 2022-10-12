@@ -1,6 +1,7 @@
 import classes from "./UserInfoForm.module.sass";
 import { useState } from "react";
 import { useForm } from "../../hooks/useForm";
+import { apiUser } from "../../helpers/axios";
 
 const UserInfoForm = () => {
   const [user] = useState({
@@ -98,17 +99,18 @@ const UserInfoForm = () => {
     }
   };
 
+  // Api Call Function
+  const apicall = () => {
+    return apiUser.put(`/api/users/$userId/update'`, form);
+  };
+
   // Form handler
   const { form, errors, handleChange, handleBlur, handleFiles, handleSubmit } = useForm(
     initForm,
     validationsForm,
-    apicall,
-    onSuccess,
-    onError
+    apicall
   );
 
-  // Apicall
-    const apicall = apiPriv.put{`/api/users/$userId/update'`, form};
   // On success
 
   // On Error

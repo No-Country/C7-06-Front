@@ -5,7 +5,8 @@ import Filter from "./components/Filter";
 import { Home, Login, Register, PetProfile, UserProfile } from "./pages";
 
 import reportWebVitals from "./reportWebVitals";
-
+import store from "./Redux/store"; // Configuracion redux toolkit
+import { Provider } from "react-redux"; // Configuracion redux toolkit
 const router = createBrowserRouter([
   {
     path: "/",
@@ -39,9 +40,11 @@ const router = createBrowserRouter([
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
+  <Provider store={store}>
+    <React.StrictMode>
+      <RouterProvider router={router} />
+    </React.StrictMode>
+  </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function

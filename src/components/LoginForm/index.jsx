@@ -5,10 +5,15 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useForm } from "../../hooks/useForm";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEyeSlash, faEye, faLock, faEnvelope } from "@fortawesome/free-solid-svg-icons";
+// import { getUserLogin } from "../../Redux/slices/auth";
+import { useDispatch } from "react-redux";
+
 import { apiAuth } from "../../helpers/axios";
 
 const LoginForm = () => {
   // User from context
+  // eslint-disable-next-line no-unused-vars
+  const dispatch = useDispatch();
   // eslint-disable-next-line no-unused-vars
   const [user, setUser] = useState();
   // eslint-disable-next-line no-unused-vars

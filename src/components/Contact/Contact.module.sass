@@ -1,0 +1,92 @@
+@import "../../sass/variables"
+
+.container
+    display: flex
+    flex-direction: column
+    align-items: center
+    text-align: center
+    height: 850px
+
+    .title
+        background-color: $main-color
+        font-family: $secondary-font
+        width: 100%
+        color: white
+        padding: 65px
+        font-size: 28px
+    .contact
+        margin-top: 50px
+        margin-bottom: 25px
+        display: flex
+        flex-direction: column
+        gap: 35px
+        h3
+            font-family: $secondary-font
+            font-weight: bold
+            font-size: 15px
+
+        p
+            max-width: 675px
+    .inputs
+        margin-top: 25px
+        display: flex
+        flex-direction: column
+        width: 600px
+        gap: 21px
+        margin-bottom: 25px
+        input
+            background-color: #EEEBEB
+            border: none
+            border-radius: 10px
+            font-size: 21px
+            outline: none
+            height: 45px
+        input::placeholder
+            font-family: $secondary-font
+            color: black
+            font-size: 18px
+            text-align: center
+        textarea
+            background-color: #EEEBEB
+            border: none
+            border-radius: 10px
+            font-size: 21px
+            outline: none
+            overflow: scroll
+            resize: vertical
+            height: 100px
+        textarea::placeholder
+            font-family: $secondary-font
+            color: black
+            display: flex
+            align-items: flex-start
+            font-size: 18px
+            text-align: center
+    .conditions
+        display: flex
+        gap: 25px
+        margin-bottom: 25px
+    button
+        width: 170px
+        height: 40px
+        background-color: #E8D641
+        cursor: pointer
+        color: black
+        font-family: $secondary-font
+        font-weight: bold
+        border: none
+        border-radius: 12px
+
+@media screen and (max-width: 650px)    
+    .container
+        height: 930px
+        .title
+            font-size: 21px
+        .inputs
+            width: 300px
+            input::placeholder
+                font-size: 15px
+            textarea::placeholder
+                font-size: 15px    
+        .conditions
+            font-size: 10px    

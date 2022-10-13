@@ -17,3 +17,4 @@ export { default as CommentsPetsList } from "./CommentsPetsList";
 export { default as PetBanner } from "./PetBanner";
 export { default as CommentPet } from "./CommentPet";
 export { default as TextareaResize } from "./TextareaRezise";
+export { default as Contact } from "./Contact";

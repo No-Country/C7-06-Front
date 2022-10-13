@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styles from "./About.module.sass";
 
 const About = () => {
@@ -12,7 +13,9 @@ const About = () => {
         voluptate aliquam nihil, eveniet aliquid culpa officia aut!
       </p>
       <div className={styles.button}>
-        <button>Contacto</button>
+        <Link to="/contact">
+          <button>Contacto</button>
+        </Link>
       </div>
     </div>
   );

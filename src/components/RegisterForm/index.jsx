@@ -66,10 +66,9 @@ const RegisterForm = () => {
       },
       conditions: {
         initVal: false,
-        required: true,
         validation: [
           {
-            condition: val => val === true,
+            condition: val => val !== true,
             error: "Debes aceptar los términos y condiciones"
           }
         ]
@@ -78,7 +77,7 @@ const RegisterForm = () => {
     callapi: () => {
       return apiAuth.post("/api/auth/signup", {
         name: form.name,
-        surname: form.lastName,
+        surname: form.surname,
         email: form.email,
         password: form.pwd
       });
@@ -93,7 +92,7 @@ const RegisterForm = () => {
   };
 
   // Form Handler
-  const { form, errors, handleChange, handleBlur, handleSubmit } = useForm(initForm);
+  const { form, errors, handleChange, handleCheck, handleBlur, handleSubmit } = useForm(initForm);
 
   // GOOGLE LOGIN
   function handleCallbackResponse(response) {
@@ -236,7 +235,7 @@ const RegisterForm = () => {
                 id="conditions"
                 name="conditions"
                 type="checkbox"
-                onChange={handleChange}
+                onChange={handleCheck}
                 value={form.conditions}
                 required
               />

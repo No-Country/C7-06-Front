@@ -2,118 +2,99 @@ import classes from "./UserInfoForm.module.sass";
 import { useState } from "react";
 import { useForm } from "../../hooks/useForm";
 import { apiUser } from "../../helpers/axios";
+import { regexConditions } from "../../helpers/regexs";
 
 const UserInfoForm = () => {
   const [user] = useState({
     avatar: "/persons/user1.jpg",
     name: "Jane",
-    lastname: "Doe",
+    surname: "Doe",
     email: "janedoe@gmail.com",
     phone: "+33 565458111",
-    place: "Paris",
+    address: "Paris",
     userId: 1
   });
 
-  // Form values on init
   const initForm = {
-    file: null,
-    avatar: user.avatar,
-    name: user.name,
-    lastName: user.lastname,
-    email: user.email,
-    phone: user.phone,
-    place: user.place
-  };
-
-  // Form validation function
-  const validationsForm = (form, name, val) => {
-    const validationTypes = {
-      avatar: "path",
-      email: "email",
-      name: "name",
-      lastname: "name",
-      phone: "phone",
-      place: "name"
-    };
-
-    const type = validationTypes[name];
-    let error;
-    const REGNAME = /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/;
-    const REGEMAIL = /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/;
-    const REGPHONE = /^(\+\d{1,3}( )?)?((\(\d{1,3}\))|\d{1,3})[- .]?\d{3,4}[- .]?\d{4}$/;
-    const REGPATH = /^[A-Za-z0-9.:/]+[(".jpg")(".png")("webp")]$/;
-    const REGADDRES = /[\w',-\\/.\s]/;
-
-    // If no info
-    if (!form[name]?.trim()) {
-      error = "El campo es requerido.";
-      return error;
-    }
-
-    switch (type) {
-      case "name":
-        if (!REGNAME.test(form[name].trim())) {
-          error = "Sólo se admiten caracteres";
-        } else {
-          error = false;
-        }
-        return error;
-
-      case "email":
-        if (!REGEMAIL.test(form[name].trim())) {
-          error = "Debes introducir un email. Ejemplo: joedoe@email.com";
-        } else {
-          error = false;
-        }
-        return error;
-
-      case "phone":
-        if (!REGPHONE.test(form[name].trim())) {
-          error = "Debes introducir un teléfono";
-        } else {
-          error = false;
-        }
-        return error;
-
-      case "place":
-        if (!REGADDRES.test(form[name].trim())) {
-          error = "Debes introducir una dirección válida";
-        } else {
-          error = false;
-        }
-        return error;
-
-      case "path":
-        if (!REGPATH.test(val.name.trim())) {
-          error = "Solo se admiten los formatos jpg, png y webp";
-        } else if (val.size > 5000000) {
-          error = "El archivo no puede ser de mas de 5mb";
-        } else {
-          error = false;
-        }
-        return error;
-
-      default:
-        console.log("Validación no prevista para el campo ", name, "del tipo ", type);
-        return error;
-    }
+    data: {
+      file: {
+        initVal: null
+      },
+      avatar: {
+        initVal: user.avatar,
+        validation: [
+          {
+            condition: val => regexConditions("path").test(val.name),
+            error: "Sólo acepta formatos jpg, png, y webp."
+          },
+          {
+            condition: val => val.size <= 5000000,
+            error: "Sólo acepta archivos de menos de 5GB"
+          }
+        ]
+      },
+      name: {
+        initVal: user.name,
+        validation: [
+          {
+            condition: val => regexConditions("name").test(val),
+            error: "No se aceptan caracteres numéricos"
+          }
+        ]
+      },
+      surname: {
+        initVal: user.surname,
+        validation: [
+          {
+            condition: val => regexConditions("name").test(val),
+            error: "No se aceptan caracteres numéricos"
+          }
+        ]
+      },
+      email: {
+        initVal: user.email,
+        required: true,
+        validation: [
+          {
+            condition: val => regexConditions("email").test(val),
+            error: "Usar un formato de email válido. Ej: joedoe@mail.com"
+          }
+        ]
+      },
+      phone: {
+        initVal: user.phone,
+        validation: [
+          {
+            condition: val => regexConditions("phone").test(val),
+            error: "Usar un formato de número de teléfono"
+          }
+        ]
+      },
+      address: {
+        initVal: user.address,
+        validation: [
+          {
+            condition: val => regexConditions("address").test(val),
+            error: "Escribe una dirección válida"
+          }
+        ]
+      }
+    },
+    apicall: () => {
+      return apiUser.put(`/api/users/$userId/update'`, form);
+    },
+    onSuccess: () => {},
+    onError: () => {}
   };
 
   // Api Call Function
-  const apicall = () => {
-    return apiUser.put(`/api/users/$userId/update'`, form);
-  };
+  const apicall = () => {};
 
   // Form handler
   const { form, errors, handleChange, handleBlur, handleFiles, handleSubmit } = useForm(
     initForm,
-    validationsForm,
     apicall
   );
-
-  // On success
-
-  // On Error
 
   return (
     <div className={classes.form}>
@@ -144,13 +125,13 @@ const UserInfoForm = () => {
               </div>
               <div>
                 <input
-                  name="lastname"
+                  name="surname"
                   placeholder="Apellido"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={form.lastname}
+                  value={form.surname}
                 />
-                {errors?.lastname && <p className={classes.instructions}>{errors.lastname}</p>}
+                {errors?.surname && <p className={classes.instructions}>{errors.surname}</p>}
               </div>
             </div>
             <div>
@@ -175,13 +156,13 @@ const UserInfoForm = () => {
             </div>
             <div>
               <input
-                name="place"
+                name="address"
                 placeholder="Lugar de residencia"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={form.place}
+                value={form.address}
               />
-              {errors?.place && <p className={classes.instructions}>{errors.place}</p>}
+              {errors?.address && <p className={classes.instructions}>{errors.address}</p>}
             </div>
           </div>
         </div>

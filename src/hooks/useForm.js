@@ -1,14 +1,10 @@
 import { useState } from "react";
 
-export const useForm = (
-  initForm,
-  validateForm,
-  apicall,
-  onSuccess = () => {},
-  onError = () => {}
-) => {
+export const useForm = initForm => {
+  const formStructure = {};
+  Object.keys(initForm.data).forEach(el => (formStructure[el] = initForm.data[el].initVal));
   // States
-  const [form, setForm] = useState(initForm);
+  const [form, setForm] = useState(formStructure);
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const [response, setResponse] = useState(null);
@@ -26,7 +22,17 @@ export const useForm = (
   const handleBlur = e => {
     const champ = e.target.name;
     handleChange(e);
-    setErrors(Object.assign(errors, { [champ]: validateForm(form, champ) }));
+    setErrors(
+      Object.assign(errors, { [champ]: validate(initForm.data[champ], form[champ]) } || false)
+    );
+  };
+
+  // Validation Form
+
+  const validate = (champ, val) => {
+    if (champ?.required && !val) return "Este campo es requerido";
+    const result = champ.validation?.find(el => !el.condition(val));
+    return result?.error || false;
   };
 
   // Validation Files
@@ -39,7 +45,7 @@ export const useForm = (
         ...form,
         [champ]: file.name
       });
-      setErrors(Object.assign(errors, { [champ]: validateForm(form, champ, file) }));
+      setErrors(Object.assign(errors, { [champ]: validate(initForm.data[champ], file) }));
       if (errors[champ]) {
         setForm({
           ...form,
@@ -64,7 +70,7 @@ export const useForm = (
 
     // Checking validation of all champs
     Object.entries(form).forEach(([key]) => {
-      setErrors(validateForm(Object.assign(errors, { [key]: validateForm(form, [key]) })));
+      Object.assign(errors, { [key]: validate(initForm.data[key], form[key]) } || false);
     });
 
     // Checking if errors has all false values
@@ -75,11 +81,15 @@ export const useForm = (
       setForm(initForm);
       setErrors({});
       try {
-        setResponse(await apicall());
-        onSuccess(response);
+        setResponse(await initForm.apicall());
+        if (initForm?.onSuccess) {
+          initForm.onSuccess(response);
+        }
         setLoading(false);
       } catch (err) {
-        onerror(err);
+        if (initForm?.onError) {
+          initForm.onError(err);
+        }
         setResponse(false);
       }
     }

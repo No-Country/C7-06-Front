@@ -6,6 +6,7 @@ import { useForm } from "../../hooks/useForm";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEyeSlash, faEye, faLock, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { apiAuth } from "../../helpers/axios";
+import { regexConditions } from "../../helpers/regexs";
 
 const LoginForm = () => {
   // User from context
@@ -34,94 +35,46 @@ const LoginForm = () => {
 
   // Form values on init
   const initForm = {
-    email: "",
-    pwd: ""
-  };
-
-  // Validation function
-  const validationsForm = (form, name) => {
-    const validationTypes = {
-      email: "email",
-      pwd: "password"
-    };
-    const type = validationTypes[name];
-    let error;
-    const REGEMAIL = /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/;
-    const REGPWD = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!$%@.]).{8,24}$/;
-
-    // If no info
-    if (!form[name]?.trim()) {
-      error = "El campo es requerido.";
-      return error;
+    data: {
+      email: {
+        initVal: "",
+        validation: [
+          {
+            condition: val => regexConditions("email").test(val),
+            error: "Debe tener un formato email válido. Ejemplo: joeDoe@mail.com"
+          }
+        ],
+        required: true
+      },
+      pwd: {
+        initVal: "",
+        validation: [
+          {
+            condition: val => regexConditions("passwordHard").test(val),
+            error:
+              "La contraseña debe tener de 8 a 28 caracteres, al menos 1 mayúsucla, 1 minúsucla, un número y un signo ./*-"
+          }
+        ],
+        required: true
+      }
+    },
+    apicall: () => {
+      return apiAuth.post("/api/auth/login", {
+        email: form.email,
+        password: form.password
+      });
+    },
+    onSuccess: () => {
+      emailRef.current.focus();
+      navigate(from, { replace: true }); // redirect to last location
+    },
+    onError: err => {
+      console.log(err);
     }
-
-    switch (type) {
-      case "email":
-        if (!REGEMAIL.test(form[name].trim())) {
-          error = "Debes introducir un email. Ejemplo: joedoe@email.com";
-        } else {
-          error = false;
-        }
-        break;
-      case "password":
-        if (!REGPWD.test(form[name].trim())) {
-          error =
-            "La contraseña debe tener entre 8 a 28 caracteres y al menos una letra minúscula, una mayúscula, una cifra y alguno de estos caracteres: ! $ % @ .";
-        } else {
-          error = false;
-        }
-        break;
-      default:
-        console.log("Validación no prevista para el campo ", name, "del tipo ", type);
-    }
-    return error;
-  };
-
-  // Api Call Function
-  const apicall = () => {
-    return apiAuth.post("/api/auth/login", {
-      email: form.email,
-      password: form.pwd
-    });
-  };
-
-  // On success of submit
-  const onSuccess = response => {
-    console.log(response);
-    // Setting auth value to context or redux
-    const token = response?.data?.accessToken;
-    const id = response?.data?.id;
-    const role = response?.data?.role;
-    setAuth({ user: { id, role }, token });
-    // Redirection
-    emailRef.current.focus();
-    navigate(from, { replace: true }); // redirect to last location
-  };
-
-  // On error of submit form
-  const onError = error => {
-    let errMsg;
-    switch (error) {
-      case 400:
-        errMsg = "Falta indicar el email o el password.";
-        break;
-      case 401:
-        errMsg = "El email o el password no son correctos";
-        break;
-      default:
-        errMsg = "Se ha producido un error. Inténtelo de nuevo o contacte con administración";
-    }
-    return errMsg;
   };
 
   // Form handler
-  const { form, errors, handleChange, handleBlur, handleSubmit } = useForm(
-    initForm,
-    validationsForm,
-    apicall,
-    onSuccess,
-    onError
-  );
+  const { form, errors, handleChange, handleBlur, handleSubmit } = useForm(initForm);
 
   // GOOGLE LOGIN
   function handleCallbackResponse(response) {

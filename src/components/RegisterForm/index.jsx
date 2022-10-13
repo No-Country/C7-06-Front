@@ -6,6 +6,7 @@ import { useForm } from "../../hooks/useForm";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEyeSlash, faEye, faUser, faLock, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { apiAuth } from "../../helpers/axios";
+import { regexConditions } from "../../helpers/regexs";
 
 const RegisterForm = () => {
   // States
@@ -21,101 +22,78 @@ const RegisterForm = () => {
 
   // Form values on init
   const initForm = {
-    email: "",
-    name: "",
-    lastName: "",
-    pwd: "",
-    conditions: false
-  };
-
-  // Form validation function
-  const validationsForm = (form, name) => {
-    const validationTypes = {
-      email: "email",
-      name: "name",
-      lastName: "name",
-      pwd: "password",
-      conditions: "conditions"
-    };
-    const type = validationTypes[name];
-    let error;
-    const REGNAME = /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/;
-    const REGEMAIL = /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/;
-    const REGPWD = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!$%@.]).{8,24}$/;
-
-    // If no info
-    if (!form[name]?.trim()) {
-      error = "El campo es requerido.";
-      return error;
+    data: {
+      email: {
+        initVal: "",
+        required: true,
+        validation: [
+          {
+            condition: val => regexConditions("email").test(val),
+            error: "Usar un formato de email válido. Ej: joedoe@mail.com"
+          }
+        ]
+      },
+      name: {
+        initVal: "",
+        required: true,
+        validation: [
+          {
+            condition: val => regexConditions("name").test(val),
+            error: "No se aceptan caracteres numéricos"
+          }
+        ]
+      },
+      surname: {
+        initVal: "",
+        required: true,
+        validation: [
+          {
+            condition: val => regexConditions("name").test(val),
+            error: "No se aceptan caracteres numéricos"
+          }
+        ]
+      },
+      pwd: {
+        initVal: "",
+        required: true,
+        validation: [
+          {
+            condition: val => regexConditions("passwordHard").test(val),
+            error:
+              "La contraseña debe tener de 8 a 28 caracteres, al menos 1 mayúsucla, 1 minúsucla, un número y un signo ./*-"
+          }
+        ]
+      },
+      conditions: {
+        initVal: false,
+        required: true,
+        validation: [
+          {
+            condition: val => val === true,
+            error: "Debes aceptar los términos y condiciones"
+          }
+        ]
+      }
+    },
+    callapi: () => {
+      return apiAuth.post("/api/auth/signup", {
+        name: form.name,
+        surname: form.lastName,
+        email: form.email,
+        password: form.pwd
+      });
+    },
+    onSuccess: () => {
+      emailRegRef.current.focus();
+      navigate("/login");
+    },
+    onError: error => {
+      return `Se ha producido un error. Inténtelo de nuevo o contacte con administración: ${error}`;
     }
-
-    switch (type) {
-      case "name":
-        if (!REGNAME.test(form[name].trim())) {
-          error = "Solo se aceptan letras y espacios en blanco.";
-        } else {
-          error = false;
-        }
-        break;
-      case "email":
-        if (!REGEMAIL.test(form[name].trim())) {
-          error = "Debes introducir un email. Ejemplo: joedoe@email.com";
-        } else {
-          error = false;
-        }
-        break;
-      case "password":
-        if (!REGPWD.test(form[name].trim())) {
-          error =
-            "La contraseña debe tener entre 8 a 28 caracteres y al menos una letra minúscula, una mayúscula, una cifra y alguno de estos caracteres: ! $ % @ .";
-        } else {
-          error = false;
-        }
-        break;
-
-      case "conditions":
-        if (!form[name]) {
-          error = "Debes aceptar los términos y condiciones";
-        } else {
-          error = false;
-        }
-        break;
-
-      default:
-        console.log("Validación no prevista para el campo ", name, "del tipo ", type);
-    }
-    return error;
-  };
-
-  // Api Call Function
-  const apicall = () => {
-    return apiAuth.post("/api/auth/signup", {
-      name: form.name,
-      surname: form.lastName,
-      email: form.email,
-      password: form.pwd
-    });
-  };
-
-  // Function on Success of Response
-  const onSuccess = async () => {
-    emailRegRef.current.focus();
-    navigate("/login");
-  };
-
-  // On error of submit form
-  const onError = error => {
-    return `Se ha producido un error. Inténtelo de nuevo o contacte con administración: ${error}`;
   };
 
   // Form Handler
-  const { form, errors, handleChange, handleBlur, handleSubmit } = useForm(
-    initForm,
-    validationsForm,
-    apicall,
-    onSuccess,
-    onError
-  );
+  const { form, errors, handleChange, handleBlur, handleSubmit } = useForm(initForm);
 
   // GOOGLE LOGIN
   function handleCallbackResponse(response) {
@@ -200,22 +178,22 @@ const RegisterForm = () => {
 
               <div className={classes.myForm_control}>
                 <div className={classes.myForm_control_group}>
-                  <label htmlFor="lastName">
+                  <label htmlFor="surname">
                     <FontAwesomeIcon icon={faUser} />
                   </label>
                   <input
-                    id="lastName"
-                    name="lastName"
+                    id="surname"
+                    name="surname"
                     type="text"
                     onBlur={handleBlur}
                     onChange={handleChange}
-                    value={form.lastName}
+                    value={form.surname}
                     placeholder="Apellido"
                     autoComplete="off"
                     required
                   />
                 </div>
-                {errors?.lastName && <p className={classes.instructions}>{errors.lastName}</p>}
+                {errors?.surname && <p className={classes.instructions}>{errors.surname}</p>}
               </div>
 
               <div className={classes.myForm_control}>

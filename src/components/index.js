@@ -16,4 +16,5 @@ export { default as PetInfoCard } from "./PetInfoCard";
 export { default as CommentsPetsList } from "./CommentsPetsList";
 export { default as PetBanner } from "./PetBanner";
 export { default as CommentPet } from "./CommentPet";
-export { default as TextareaResize } from "./TextareaRezise";
+export { default as TextAreaResize } from "./TextAreaRezise";
+export { default as UserInfoForm } from "./UserInfoForm";

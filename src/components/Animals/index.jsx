@@ -3,7 +3,6 @@ import Card from "../Card";
 import dogsMock from "../../data/dogsmock.json";
 import catsMock from "../../data/catsmock.json";
 import styles from "./Animals.module.sass";
-console.log(dogsMock);
 
 const Animals = () => {
   const [dogs, setDogs] = useState([]);

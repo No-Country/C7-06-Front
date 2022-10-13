@@ -3,7 +3,7 @@ import { useEffect } from "react";
 
 // Textarea elements that change height when inserting data.
 
-function TextareaRezise({ placeHolder, text, onChange, name, className, innerRef, readOnly }) {
+function TextAreaRezise({ placeHolder, text, onChange, name, className, innerRef, readOnly }) {
   /**
    * @EventHandler
    * @name textAreaReziser
@@ -41,7 +41,7 @@ function TextareaRezise({ placeHolder, text, onChange, name, className, innerRef
   );
 }
 
-TextareaRezise.propTypes = {
+TextAreaRezise.propTypes = {
   placeHolder: PropTypes.string,
   id: PropTypes.number,
   text: PropTypes.string.isRequired,
@@ -52,4 +52,4 @@ TextareaRezise.propTypes = {
   readOnly: PropTypes.bool
 };
 
-export default TextareaRezise;
+export default TextAreaRezise;

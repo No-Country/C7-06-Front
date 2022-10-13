@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencil, faTrash } from "@fortawesome/free-solid-svg-icons";
-import TextareaRezise from "../TextareaRezise";
+import TextAreaRezise from "../TextAreaRezise";
 import { apiPub } from "../../helpers/axios";
 import { getDateFormatted } from "../../helpers/dateFormat";
 
@@ -106,7 +106,7 @@ function CommentPet({ comment, setIsLoading, pet }) {
             <></>
           )}
         </div>
-        <TextareaRezise
+        <TextAreaRezise
           className={classes.card_text}
           name="message"
           id={comment.commentId}

@@ -5,17 +5,28 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "../../hooks/useForm";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEyeSlash, faEye, faUser, faLock, faEnvelope } from "@fortawesome/free-solid-svg-icons";
-import { apiAuth } from "../../helpers/axios";
 import { regexConditions } from "../../helpers/regexs";
+import { useDispatch, useSelector } from "react-redux";
+import { registerUser } from "../../Redux/slices/auth/authAction";
 
 const RegisterForm = () => {
   // States
   const [seePass, setSeePass] = useState(false);
-  // eslint-disable-next-line no-unused-vars
-  const [user, setUser] = useState();
 
-  // Navigation
+  const { userInfo, success } = useSelector(state => state.auth);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // redirect user to login page if registration was successful
+    if (success) {
+      navigate("/login");
+    }
+    // redirect authenticated user to profile screen
+    if (userInfo) {
+      navigate("/account");
+    }
+  }, [userInfo, success]);
 
   // Referencies
   const emailRegRef = useRef();
@@ -68,26 +79,21 @@ const RegisterForm = () => {
         initVal: false,
         validation: [
           {
-            condition: val => val !== true,
+            condition: val => val === false,
             error: "Debes aceptar los términos y condiciones"
           }
         ]
       }
     },
-    callapi: () => {
-      return apiAuth.post("/api/auth/signup", {
-        name: form.name,
-        surname: form.surname,
-        email: form.email,
-        password: form.pwd
-      });
-    },
-    onSuccess: () => {
-      emailRegRef.current.focus();
-      navigate("/login");
-    },
-    onError: error => {
-      return `Se ha producido un error. Inténtelo de nuevo o contacte con administración: ${error}`;
+    apicall: () => {
+      return dispatch(
+        registerUser({
+          name: form.name,
+          surname: form.surname,
+          email: form.email,
+          password: form.pwd
+        })
+      );
     }
   };
 
@@ -103,7 +109,6 @@ const RegisterForm = () => {
       name: userObject.given_name,
       surname: userObject.family_name
     };
-    setUser(userData);
     console.log(userData);
   }
 

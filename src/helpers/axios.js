@@ -14,10 +14,10 @@ export const apiPrivate = axios.create({
   }
 });
 export const apiUser = axios.create({
-  baseURL: "https://c7-06-authentication.up.railway.app",
+  // baseURL: "https://c7-06-authentication.up.railway.app",
+  baseURL: "http://localhost:5000",
   headers: {
-    "Content-Type": "application/json",
-    withCredentials: true
+    "Content-Type": "application/json"
   }
 });
 

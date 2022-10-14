@@ -1,11 +1,9 @@
-import { Navbar, RegisterForm, Footer } from "../components";
+import { RegisterForm } from "../components";
 
 const Register = () => {
   return (
     <>
-      <Navbar />
       <RegisterForm />
-      <Footer />
     </>
   );
 };

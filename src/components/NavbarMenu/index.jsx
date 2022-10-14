@@ -1,11 +1,13 @@
 import { useContext, useEffect } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleUser, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
 import { NavbarContext } from "../../contexts/NavbarContext";
+import { useSelector } from "react-redux";
 import styles from "./NavbarMenu.module.sass";
 
 const NavbarMenu = () => {
+  const { userInfo } = useSelector(state => state.auth);
   // Estado del contexto global del header
   const [isMenuOpen, setIsMenuOpen] = useContext(NavbarContext);
 
@@ -40,24 +42,28 @@ const NavbarMenu = () => {
           <NavLink to="/">Inicio</NavLink>
         </li>
         <li>
-          <NavLink to="/login">Iniciar sesión</NavLink>
+          <NavLink to="/search">Nuestras mascotas</NavLink>
         </li>
         <li>
-          <NavLink to="/register">Registro</NavLink>
+          <NavLink to="/">Acerca de Animatch</NavLink>
         </li>
-        <li>
-          <NavLink to="/">About</NavLink>
-        </li>
-        <li>
+        {!userInfo ? (
+          <li>
+            <NavLink to="/login">Iniciar Sesión</NavLink>
+          </li>
+        ) : null}
+        {/* <li>
           <NavLink to="/search" className={styles.search}>
             <FontAwesomeIcon icon={faMagnifyingGlass} />
           </NavLink>
-        </li>
+        </li> */}
       </ul>
-      <Link to="/user" className={styles.user} onClick={handleLinkClick}>
-        <span>User</span>
-        <FontAwesomeIcon icon={faCircleUser} />
-      </Link>
+      {userInfo ? (
+        <Link to="/user" className={styles.user} onClick={handleLinkClick}>
+          <span>User</span>
+          <FontAwesomeIcon icon={faCircleUser} />
+        </Link>
+      ) : null}
     </nav>
   );
 };

@@ -1,11 +1,9 @@
-import { Navbar, LoginForm, Footer } from "../components";
+import { LoginForm } from "../components";
 
 const Login = () => {
   return (
     <>
-      <Navbar />
       <LoginForm />
-      <Footer />
     </>
   );
 };

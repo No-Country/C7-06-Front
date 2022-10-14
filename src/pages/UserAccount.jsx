@@ -1,10 +1,8 @@
-import { Navbar, UserInfoForm, Footer } from "../components";
+import { UserInfoForm } from "../components";
 const UserAccount = () => {
   return (
     <div>
-      <Navbar />
       <UserInfoForm />
-      <Footer />
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import { Navbar, PetInfoCard, Footer, PetBanner, CommentsPetsList } from "../components";
+import { PetInfoCard, PetBanner, CommentsPetsList } from "../components";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 // import petMock from "../data/petprofilemock.json";
@@ -66,7 +66,6 @@ const PetProfile = () => {
         <div>Loading...</div>
       ) : (
         <>
-          <Navbar />
           <PetBanner
             text={pet.type === "cat" ? "Gato" : "Perro"}
             image={pet.type === "cat" ? cat : dog}
@@ -78,7 +77,6 @@ const PetProfile = () => {
           <section className={classes.comments}>
             <CommentsPetsList petId={pet.id} />
           </section>
-          <Footer />
         </>
       )}
     </>

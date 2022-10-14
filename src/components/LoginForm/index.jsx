@@ -6,24 +6,30 @@ import { useForm } from "../../hooks/useForm";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEyeSlash, faEye, faLock, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 // import { getUserLogin } from "../../Redux/slices/auth";
-import { useDispatch } from "react-redux";
-
-import { apiAuth } from "../../helpers/axios";
+import { useDispatch, useSelector } from "react-redux";
+import { userLogin } from "../../Redux/slices/auth/authAction";
 import { regexConditions } from "../../helpers/regexs";
 
 const LoginForm = () => {
   // User from context
-  // eslint-disable-next-line no-unused-vars
-  const dispatch = useDispatch();
-  // eslint-disable-next-line no-unused-vars
-  const [user, setUser] = useState();
-  // eslint-disable-next-line no-unused-vars
-  const [auth, setAuth] = useState(); // When ready change to auth from context or redux.
+  const { userToken, success } = useSelector(state => state.auth); // leer los datos de la store
+  const dispatch = useDispatch(); // llamar funcion para actualizar estado
 
   // Navigate handler
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/"; // Get where user came from
+
+  useEffect(() => {
+    if (success) {
+      // extraer datos de usuario
+      navigate("/account");
+    } else if (userToken) {
+      // extraer datos de usuario
+      emailRef.current.focus();
+      navigate(from, { replace: true });
+    }
+  }, [success, userToken]);
 
   // Referencies
   const emailRef = useRef();
@@ -64,17 +70,7 @@ const LoginForm = () => {
       }
     },
     apicall: () => {
-      return apiAuth.post("/api/auth/login", {
-        email: form.email,
-        password: form.password
-      });
-    },
-    onSuccess: () => {
-      emailRef.current.focus();
-      navigate(from, { replace: true }); // redirect to last location
-    },
-    onError: err => {
-      console.log(err);
+      return dispatch(userLogin({ email: form.email, password: form.pwd }));
     }
   };
 
@@ -84,7 +80,7 @@ const LoginForm = () => {
   // GOOGLE LOGIN
   function handleCallbackResponse(response) {
     const userObject = jwtDecode(response.credential);
-    setUser(userObject);
+    console.log(userObject);
   }
 
   useEffect(() => {
@@ -125,6 +121,7 @@ const LoginForm = () => {
                   value={form.email}
                   placeholder="Correo Electrónico"
                   required
+                  autoComplete="email"
                 />
               </div>
               {errors?.email && <p className={classes.instructions}>{errors.email}</p>}
@@ -145,6 +142,7 @@ const LoginForm = () => {
                     value={form.pwd}
                     placeholder="Contraseña"
                     required
+                    autoComplete="password"
                   />
                   {seePass ? (
                     <FontAwesomeIcon

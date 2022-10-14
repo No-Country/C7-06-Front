@@ -30,14 +30,12 @@ export const useForm = initForm => {
   // Validation for check champs
   const handleCheck = e => {
     const champ = e.target.name;
+    const value = !e.target.value;
     setForm({
       ...form,
-      [champ]: !form[champ]
+      [champ]: value
     });
-    console.log(form[champ]);
-    setErrors(
-      Object.assign(errors, { [champ]: validate(initForm.data[champ], form[champ]) } || false)
-    );
+    setErrors(Object.assign(errors, { [champ]: validate(initForm.data[champ], value) } || false));
   };
 
   // Validation Form
@@ -80,6 +78,7 @@ export const useForm = initForm => {
   // Submit validation
   const handleSubmit = async e => {
     e.preventDefault();
+    console.log("submit");
 
     // Checking validation of all champs
     Object.entries(form).forEach(([key]) => {
@@ -96,16 +95,15 @@ export const useForm = initForm => {
       setErrors({});
       try {
         setResponse(await initForm.apicall());
-        if (initForm?.onSuccess) {
-          initForm.onSuccess(response);
-        }
+        console.log(response);
         setLoading(false);
       } catch (err) {
-        if (initForm?.onError) {
-          initForm.onError(err);
-        }
+        console.log(err);
         setResponse(false);
       }
+    } else {
+      console.log(Object.values(errors).filter(val => val !== false).length);
+      console.log(errors);
     }
   };
 

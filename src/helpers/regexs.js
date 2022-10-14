@@ -3,7 +3,7 @@ export const regexConditions = type => {
     case "email":
       return /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/;
     case "passwordHard":
-      return /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!$%@.]).{8,24}$/;
+      return /[a-zA-Z0-9]+/; // /^(?=.*[a-zA-Z])(?=.*[0-9])/;
     case "name":
       return /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/;
     case "address":

@@ -3,11 +3,11 @@ import { registerUser, userLogin } from "./authAction";
 
 const local = JSON.parse(localStorage.getItem("userToken"));
 const userToken = local && local.token ? local.token : null;
-const userInfo = local && local.id && local.role ? { id: local.id, role: local.role } : false;
+const userLogged = local && local.id && local.role ? { id: local.id, role: local.role } : false;
 
 const initialState = {
   loading: false,
-  userInfo,
+  userLogged,
   userToken,
   error: null,
   success: false
@@ -39,7 +39,7 @@ const authSlice = createSlice({
     [userLogin.fulfilled]: (state, { payload }) => {
       state.loading = false;
       state.success = true; // login succefull
-      state.userInfo = { id: payload.id, role: payload.role };
+      state.userLogged = { id: payload.id, role: payload.role };
       state.userToken = payload.token;
     },
     [userLogin.rejected]: (state, { payload }) => {

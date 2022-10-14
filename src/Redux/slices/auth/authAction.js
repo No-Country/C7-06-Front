@@ -3,7 +3,7 @@ import { apiUser } from "../../../helpers/axios";
 
 // REGISTER USER
 export const registerUser = createAsyncThunk(
-  "/api/auth/signup",
+  "authSlice/registerUser",
   async ({ email, password }, { rejectWithValue }) => {
     try {
       const config = { headers: { "Content-Type": "aplication/json" } };

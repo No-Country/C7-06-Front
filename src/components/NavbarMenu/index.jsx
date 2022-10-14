@@ -3,11 +3,15 @@ import { NavLink, Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
 import { NavbarContext } from "../../contexts/NavbarContext";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./NavbarMenu.module.sass";
+import { getUserLogged } from "../../Redux/slices/user/userAction";
 
 const NavbarMenu = () => {
-  const { userInfo } = useSelector(state => state.auth);
+  const { userLogged } = useSelector(state => state.auth);
+  const { userInfo, loading } = useSelector(state => state.user);
+
+  const dispatch = useDispatch();
   // Estado del contexto global del header
   const [isMenuOpen, setIsMenuOpen] = useContext(NavbarContext);
 
@@ -21,6 +25,13 @@ const NavbarMenu = () => {
     display: isMenuOpen && "flex",
     width: isMenuOpen && "100%"
   };
+
+  useEffect(() => {
+    if (userLogged && !userInfo) {
+      const id = userLogged.id;
+      dispatch(getUserLogged({ id }));
+    }
+  }, [userLogged, dispatch]);
 
   useEffect(() => {
     // Si la pantalla es mayor a 850px, el menú se cierra
@@ -47,7 +58,7 @@ const NavbarMenu = () => {
         <li>
           <NavLink to="/">Acerca de Animatch</NavLink>
         </li>
-        {!userInfo ? (
+        {!userLogged ? (
           <li>
             <NavLink to="/login">Iniciar Sesión</NavLink>
           </li>
@@ -58,9 +69,17 @@ const NavbarMenu = () => {
           </NavLink>
         </li> */}
       </ul>
-      {userInfo ? (
+      {userLogged ? (
         <Link to="/user" className={styles.user} onClick={handleLinkClick}>
-          <span>User</span>
+          <span>
+            {loading ? (
+              <>User</>
+            ) : (
+              <>
+                {userInfo.name} {userInfo.surname}{" "}
+              </>
+            )}
+          </span>
           <FontAwesomeIcon icon={faCircleUser} />
         </Link>
       ) : null}

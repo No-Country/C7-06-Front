@@ -6,7 +6,7 @@
     "age": "3",
     "raza": "persa",
     "sexo": "macho",
-    "picture": "cat1.png"
+    "pictureResponse": "cat1.png"
   },
   {
     "id": 9,
@@ -15,7 +15,7 @@
     "age": "2",
     "raza": "siames",
     "sexo": "hembra",
-    "picture": "cat2.png"
+    "pictureResponse": "cat2.png"
   },
   {
     "id": 6,
@@ -24,15 +24,15 @@
     "age": "5",
     "raza": "main",
     "sexo": "macho",
-    "picture": "cat3.png"
+    "pictureResponse": "cat3.png"
   },
   {
     "id": 7,
     "name": "Blackie",
     "type": "cat",
     "age": "2",
-    "raza": "siames",
-    "sexo": "hembra",
-    "picture": "cat4.png"
+    "race": "siames",
+    "gender": "hembra",
+    "pictureResponse": "cat4.png"
   }
 ]

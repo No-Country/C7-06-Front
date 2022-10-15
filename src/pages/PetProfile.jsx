@@ -35,7 +35,7 @@ const PetProfile = () => {
 
     const getPet = async () => {
       try {
-        const response = await apiPub.get(`/users/pets/${petId}`, {
+        const response = await apiPub.get(`/pets/${petId}`, {
           signal: controller.signal
         });
 

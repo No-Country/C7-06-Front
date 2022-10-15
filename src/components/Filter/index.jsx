@@ -1,6 +1,5 @@
 import styles from "./Filter.module.sass";
 import bannerFilter from "../../assets/gatoFilter.png";
-import PropTypes from "prop-types";
 import catsMock from "../../data/catsmock.json";
 import { useEffect, useState } from "react";
 import Card from "../Card";
@@ -97,10 +96,6 @@ const Filter = () => {
       </div>
     </div>
   );
-};
-
-Filter.propTypes = {
-  animal: PropTypes.object.isRequired
 };
 
 export default Filter;

@@ -3,6 +3,8 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 import PropTypes from "prop-types";
 import styles from "./Card.module.sass";
 import { Link } from "react-router-dom";
+import cat from "../../assets/genericCat.jpg";
+import dog from "../../assets/genericDog.jpg";
 
 // Boton de favorito
 const Favorite = ({ isFavorite, handleClick }) => {
@@ -22,7 +24,7 @@ Favorite.propTypes = {
 };
 
 // Tarjeta de mascota
-const Card = ({ animal }) => {
+const Card = ({ animal, isFavorite }) => {
   const handleClick = e => {
     console.log("click");
   };
@@ -31,24 +33,28 @@ const Card = ({ animal }) => {
     <Link to={`/pet/${animal.id}`} className={styles.cardLink}>
       <div className={styles.card}>
         <div className={styles.card__img}>
-          <img src={`/animals/${animal?.picture}`} alt={animal?.name} />
+          {animal.pictureResponse ? (
+            <img src={`/animals/${animal.pictureResponse}`} alt={animal?.name} />
+          ) : (
+            <img src={animal.type === "cat" ? cat : dog} alt={animal?.name} />
+          )}
         </div>
         <div className={styles.card__content}>
           <h3 className={styles.card__title}>{animal?.name}</h3>
           <div className={styles.card__text}>
             <ul>
               <li>
-                <span>Raza:</span> {animal?.raza}
+                <span>Raza:</span> {animal?.race}
               </li>
               <li>
-                <span>Sexo:</span> {animal?.sexo}
+                <span>Sexo:</span> {animal?.gender}
               </li>
               <li>
                 <span>Edad:</span> {animal?.age}
               </li>
             </ul>
           </div>
-          <Favorite isFavorite={animal?.isFavorite} handleClick={handleClick} />
+          <Favorite isFavorite={isFavorite || false} handleClick={handleClick} />
         </div>
       </div>
     </Link>
@@ -57,7 +63,8 @@ const Card = ({ animal }) => {
 
 // Validación de props de la tarjeta de mascota
 Card.propTypes = {
-  animal: PropTypes.object.isRequired
+  animal: PropTypes.object.isRequired,
+  isFavorite: PropTypes.bool
 };
 
 export default Card;

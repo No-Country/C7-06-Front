@@ -2,8 +2,7 @@ import axios from "axios";
 
 export const apiPub = axios.create({
   baseURL: "https://animatch-test.herokuapp.com",
-  headers: { "Content-Type": "application/json" }
-  // withCredentials: true
+  headers: { "Content-Type": "application/json", withCredentials: true }
 });
 
 export const apiPrivate = axios.create({

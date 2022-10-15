@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { apiUser } from "../../../helpers/axios";
+import { apiUser, apiPub } from "../../../helpers/axios";
 
 // GET USER LOGGED
 export const getUserLogged = createAsyncThunk(
@@ -19,6 +19,60 @@ export const getUserLogged = createAsyncThunk(
         role: response.data.user.role
       };
       return userData;
+    } catch (error) {
+      console.log("error: ", error);
+      if (error.response && error.response.data.message) {
+        return rejectWithValue(error.response.data.message);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
+
+// GET USER PETS
+export const getUserLoggedPets = createAsyncThunk(
+  "userSlice.getUserLoggedPets",
+  async ({ id, pages }, { rejectWithValue }) => {
+    try {
+      const config = { headers: { "Content-Type": "aplication/json" } };
+      const response = await apiPub.get(`/users/${id}/pets`, config);
+      const usersPetsData = {
+        id: response.data.user.petId,
+        pictureResponse: response.data.pictureResponse,
+        name: response.data.name,
+        age: response.data.age,
+        gender: response.data.gender,
+        race: response.data.race
+      };
+      return usersPetsData;
+    } catch (error) {
+      console.log("error: ", error);
+      if (error.response && error.response.data.message) {
+        return rejectWithValue(error.response.data.message);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
+
+// GET USER PETS
+export const getUserLoggedFavPets = createAsyncThunk(
+  "userSlice.getUserLoggedFavPets",
+  async ({ userId, pages = 0 }, { rejectWithValue }) => {
+    try {
+      const config = { headers: { "Content-Type": "aplication/json" } };
+      const response = await apiPub.get(`/users/${userId}/favourites?pages=${pages}`, config);
+      const usersFavPetsData = {
+        id: response.data.user.petId,
+        pictureResponse: response.data.pictureResponse,
+        name: response.data.name,
+        age: response.data.age,
+        gender: response.data.gender,
+        race: response.data.race
+      };
+      return usersFavPetsData;
     } catch (error) {
       console.log("error: ", error);
       if (error.response && error.response.data.message) {

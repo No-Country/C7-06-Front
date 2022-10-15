@@ -1,5 +1,5 @@
-import styles from "./About.module.sass";
 import { Link } from "react-router-dom";
+import styles from "./About.module.sass";
 
 const About = () => {
   return (
@@ -13,7 +13,7 @@ const About = () => {
         voluptate aliquam nihil, eveniet aliquid culpa officia aut!
       </p>
       <div className={styles.button}>
-        <Link to="/">Contacto</Link>
+        <Link to="/contact">Contacto </Link>
       </div>
     </div>
   );

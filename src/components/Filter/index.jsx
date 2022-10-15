@@ -1,8 +1,9 @@
 import styles from "./Filter.module.sass";
-import bannerFilter from "../../assets/gatoFilter.png";
+import desktopBanner from "../../assets/buscador_desktop.webp";
+import mobileBanner from "../../assets/buscador_mobile.webp";
 import catsMock from "../../data/catsmock.json";
 import { useEffect, useState } from "react";
-import Card from "../Card";
+import { Card, PetBanner } from "../../components";
 
 const Filter = () => {
   const [cats, setCats] = useState([]);
@@ -14,9 +15,14 @@ const Filter = () => {
 
   return (
     <div>
-      <div className={styles.container}>
-        <img src={bannerFilter} />
-      </div>
+      <PetBanner
+        className={styles.banner}
+        text="Buscador de Parejas"
+        images={{
+          mobile: { src: mobileBanner, size: 2207 },
+          desktop: { src: desktopBanner, size: 3310 }
+        }}
+      />
       {/* Container GENERAL, LADO IZQUIERDP Y DERECHO */}
       <div className={styles.containerLeftRight}>
         {/* Container lado derecho */}

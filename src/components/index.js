@@ -1,6 +1,5 @@
 export { default as About } from "./About";
 export { default as Animals } from "./Animals";
-export { default as Banner } from "./Banner";
 export { default as Card } from "./Card";
 export { default as Footer } from "./Footer";
 export { default as FooterNav } from "./FooterNav";
@@ -10,7 +9,6 @@ export { default as Logo } from "./Logo";
 export { default as Navbar } from "./Navbar";
 export { default as NavbarMenu } from "./NavbarMenu";
 export { default as RegisterForm } from "./RegisterForm";
-export { default as UserBanner } from "./UserBanner";
 export { default as UserInfo } from "./UserInfo";
 export { default as PetInfoCard } from "./PetInfoCard";
 export { default as CommentsPetsList } from "./CommentsPetsList";

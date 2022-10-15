@@ -1,7 +1,7 @@
 import classes from "./PetInfoCard.module.sass";
 import PropTypes from "prop-types";
-import cat from "../../assets/genericCat.jpg";
-import dog from "../../assets/genericDog.jpg";
+import cat from "../../assets/catDefault.png";
+import dog from "../../assets/dogDefault.png";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 

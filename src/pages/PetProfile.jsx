@@ -3,10 +3,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 // import petMock from "../data/petprofilemock.json";
 import classes from "./PetProfile.module.sass";
-import cat from "../assets/cat.jpg";
-import dog from "../assets/dog.jpg";
+import catMobile from "../assets/perfil_mascotas_gato_mobile.webp";
+import catDesktop from "../assets/perfil_mascotas_gato_desktop.webp";
+import dogMobile from "../assets/perfil_mascotas_perro_mobile.webp";
+import dogDesktop from "../assets/perfil_mascotas_perro_desktop.webp";
 import { apiPub } from "../helpers/axios";
-// import { useState } from "react";
 
 const PetProfile = () => {
   // User Logged
@@ -66,11 +67,25 @@ const PetProfile = () => {
         <div>Loading...</div>
       ) : (
         <>
-          <PetBanner
-            text={pet.type === "cat" ? "Gato" : "Perro"}
-            image={pet.type === "cat" ? cat : dog}
-            className={classes.overlay}
-          />
+          {pet.type === "cat" ? (
+            <PetBanner
+              text="Gato"
+              images={{
+                mobile: { src: catMobile, size: 500 },
+                desktop: { src: catDesktop, size: 1920 }
+              }}
+              className={classes.overlay}
+            />
+          ) : (
+            <PetBanner
+              text={"Perro"}
+              image={{
+                mobile: { src: dogMobile, size: 2412 },
+                desktop: { src: dogDesktop, size: 3013 }
+              }}
+              className={classes.overlay}
+            />
+          )}
           <section className={classes.infoPet}>
             <PetInfoCard pet={pet} />
           </section>

@@ -13,6 +13,7 @@ import PropTypes from "prop-types";
 import dogsMock from "../../data/dogsmock.json";
 import catsMock from "../../data/catsmock.json";
 import { Link } from "react-router-dom";
+import userDefault from "../../assets/userDefault.png";
 
 const allPets = [...dogsMock, ...catsMock];
 
@@ -63,7 +64,7 @@ const UserInfo = () => {
   return (
     <>
       <div className={styles.userInfo}>
-        <UserPicture image={user.image} name={user.name} />
+        <UserPicture image={user.picture ? user.picture : userDefault} name={user.name} />
         <div className={styles.userInfo_data}>
           <h2>{user.name}</h2>
           <ul>

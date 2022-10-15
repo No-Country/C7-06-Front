@@ -1,9 +1,19 @@
-import { UserBanner } from "../components";
+import { PetBanner } from "../components";
 import UserInfo from "../components/UserInfo";
+import mobileBanner from "../assets/perfil_usuarios_mobile.webp";
+import desktopBanner from "../assets/perfil_usuarios_desktop.webp";
+import classes from "./UserProfile.module.sass";
 const UserProfile = () => {
   return (
     <div>
-      <UserBanner />
+      <PetBanner
+        className={classes.banner}
+        text="Usuarios"
+        images={{
+          mobile: { src: mobileBanner, size: 3082 },
+          desktop: { src: desktopBanner, size: 3232 }
+        }}
+      />
       <UserInfo />
     </div>
   );

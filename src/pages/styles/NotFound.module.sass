@@ -1,0 +1,39 @@
+@use "../../sass/variables" as *
+.container
+    display: flex
+    flex-direction: column
+    align-items: center
+    justify-content: center
+    flex-grow: 1
+    background-color: $background-light
+    width: 100%
+    padding: 2rem
+    .image
+        width: 100%
+        max-width: 350px
+        height: 100%
+        margin-top: 1em
+        margin-bottom: 1em
+        img
+            width: 100%
+            object-fit: cover
+            object-position: center
+    p
+        font-size: 1.2em
+        color: #848484
+        text-align: center
+        margin-bottom: 5em
+    .button
+        @include buttonsAnimatch($color: $dark-gray, $background: $secondary-color)
+        margin-bottom: 1em
+        @include mq("medium")
+            margin-bottom: 0
+        @include mq("large")
+            margin-bottom: 1em
+    .login
+        @include buttonsAnimatch()
+        margin-bottom: 1em
+        @include mq("medium")
+            margin-bottom: 0
+        @include mq("large")
+            margin-bottom: 1em

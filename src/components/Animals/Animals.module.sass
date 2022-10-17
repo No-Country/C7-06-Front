@@ -23,7 +23,9 @@
         display: flex
         flex-wrap: wrap
         gap: 20px
-        justify-content: flex-start
+        justify-content: center
+        @include mq(medium)
+            justify-content: flex-start
 
 
 @media screen and (max-width: 850px)

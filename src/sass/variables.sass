@@ -18,17 +18,17 @@ $breakpoints: ("small": 390px, "medium": 768px, "large": 992px,"xlarge": 1440px)
 
 /* Break Points */
 
-@mixin mq($mq-breakpoint, $mq-breakpoints: $breakpoints) 
-  @if map-has-key($mq-breakpoints, $mq-breakpoint) 
+@mixin mq($mq-breakpoint, $mq-breakpoints: $breakpoints)
+  @if map-has-key($mq-breakpoints, $mq-breakpoint)
     $mq-breakpoint: map-get($mq-breakpoints, $mq-breakpoint)
-  
-  @media screen and (min-width: #{$mq-breakpoint}) 
+
+  @media screen and (min-width: #{$mq-breakpoint})
     @content
-  
+
 // CSS BUTTONS 
 // CSS BUTTONS 
 
-@mixin buttonsAnimatch ($color: white, $background: $main-color)  
+@mixin buttonsAnimatch ($color: white, $background: $main-color)
   font-family: $main-font
   font-size: 1em
   line-height: 1.5em
@@ -47,13 +47,12 @@ $breakpoints: ("small": 390px, "medium": 768px, "large": 992px,"xlarge": 1440px)
 
   @include mq(medium)
     min-width: 305px
- 
-  &:hover
-      background-color: lighten($background, 5)
 
+  &:hover
+    background-color: lighten($background, 5)
 
 // Overlay Layer
-@mixin overlay ()  
+@mixin overlay ()
   &::before
     content: ""
     position: absolute
@@ -63,9 +62,11 @@ $breakpoints: ("small": 390px, "medium": 768px, "large": 992px,"xlarge": 1440px)
     width: 100%
     background: rgba(217,217,217,0.6)
 
-@mixin buttonsAnimatch ($color: white, $background: $main-color)  
+@mixin buttonsAnimatch ($color: white, $background: $main-color)
   width: auto
-  padding: 0.5rem 2.5rem
+  display: flex
+  align-items: center
+  justify-content: center
   cursor: pointer
   font-size: 1em
   line-height: 1em
@@ -82,6 +83,4 @@ $breakpoints: ("small": 390px, "medium": 768px, "large": 992px,"xlarge": 1440px)
     min-width: 305px
 
   &:hover
-      background-color: lighten($background, 5)
-
-
+    background-color: lighten($background, 5)

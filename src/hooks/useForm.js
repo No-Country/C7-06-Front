@@ -12,6 +12,9 @@ export const useForm = initForm => {
   // Handle changing values of inputs
   const handleChange = e => {
     const { name, value } = e.target;
+    if (!initForm.data[name]?.required && !value) {
+      setErrors({ ...errors, [name]: false });
+    }
     setForm({
       ...form,
       [name]: value
@@ -20,11 +23,16 @@ export const useForm = initForm => {
 
   // Validation when focus is gone
   const handleBlur = e => {
-    console.log(e);
     const champ = e.target.name;
     handleChange(e);
+    if (!initForm.data[champ].required && !form[champ]) {
+      return;
+    }
     setErrors(
-      Object.assign(errors, { [champ]: _validate(initForm.data[champ], form[champ]) } || false)
+      Object.assign(
+        errors,
+        { [champ]: _validate(initForm.data[champ], form[champ], champ) } || false
+      )
     );
   };
 
@@ -80,30 +88,28 @@ export const useForm = initForm => {
   const handleSubmit = async e => {
     e.preventDefault();
     console.log("submit");
-
     // Checking validation of all champs
     Object.entries(form).forEach(([key]) => {
       setErrors(Object.assign(errors, { [key]: _validate(initForm.data[key], form[key]) }));
     });
-
     // Checking if errors has all false values
     if (Object.values(errors).filter(val => val !== false).length === 0) {
       console.log("no hay errores");
       setLoading(true);
-      // Cleaning form
-      e.target.reset();
-      setForm(formStructure);
-      setErrors({});
       try {
         setResponse(await initForm.apicall());
         console.log(response);
         setLoading(false);
+        if (!form.notreset) {
+          e.target.reset();
+          setForm(formStructure);
+          setErrors({});
+        }
       } catch (err) {
         console.log(err);
         setResponse(false);
       }
     } else {
-      console.log(Object.values(errors).filter(val => val !== false).length);
       console.log(errors);
     }
   };

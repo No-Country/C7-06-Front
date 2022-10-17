@@ -18,3 +18,4 @@ export { default as TextAreaResize } from "./TextAreaRezise";
 export { default as UserInfoForm } from "./UserInfoForm";
 export { default as Spinner } from "./Spinner";
 export { default as Contact } from "./Contact";
+export { default as UserDescriptionForm } from "./UserDescriptionForm";

@@ -1,5 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getUserLogged, getUserLoggedPets, getUserLoggedFavPets } from "./userAction";
+import {
+  getUserLogged,
+  getUserLoggedPets,
+  getUserLoggedFavPets,
+  modifyUserInfo
+} from "./userAction";
 
 const initialState = {
   loading: false,
@@ -18,22 +23,26 @@ const userSlice = createSlice({
     // get user logged info
     [getUserLogged.pending]: state => {
       state.loading = true;
+      state.success = false;
       state.error = null;
     },
     [getUserLogged.fulfilled]: (state, { payload }) => {
       state.loading = false;
       state.success = true;
+      state.error = null;
       state.userInfo = payload;
     },
     [getUserLogged.rejected]: (state, { payload }) => {
       state.loading = false;
       state.error = payload;
+      state.success = false;
     },
 
     // get pets of user logged
     [getUserLoggedPets.pending]: state => {
       state.loading = true;
       state.error = null;
+      state.success = false;
     },
     [getUserLoggedPets.fulfilled]: (state, { payload }) => {
       state.loading = false;
@@ -43,6 +52,7 @@ const userSlice = createSlice({
     [getUserLoggedPets.rejected]: (state, { payload }) => {
       state.loading = false;
       state.error = payload;
+      state.success = false;
     },
 
     // get favourites pets of user logged
@@ -58,6 +68,23 @@ const userSlice = createSlice({
     [getUserLoggedFavPets.rejected]: (state, { payload }) => {
       state.loading = false;
       state.error = payload;
+    },
+    // Modify User
+    [modifyUserInfo.pending]: state => {
+      state.loading = true;
+      state.error = null;
+      state.success = false;
+    },
+    [modifyUserInfo.fulfilled]: (state, { payload }) => {
+      state.loading = false;
+      state.success = true;
+      state.userInfo = { ...state.userInfo, ...payload };
+      state.error = null;
+    },
+    [modifyUserInfo.rejected]: (state, { payload }) => {
+      state.loading = false;
+      state.error = payload;
+      state.success = false;
     }
   }
 });

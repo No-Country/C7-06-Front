@@ -1,0 +1,73 @@
+@use "../../sass/variables" as *
+
+.form
+  display: flex
+  flex-flow: column nowrap
+  max-width: 358px
+  padding: 1em
+  margin: 2em auto
+  border: 1px solid $light-gray
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25)
+  padding: 1em
+  width: 100%
+  align-items: center
+
+  form
+    display: flex
+    flex-flow: column nowrap
+    align-items: center
+    min-width: 85%
+   
+
+  @include mq(medium)
+    max-width: 783px
+    margin: 3em auto
+
+  h3
+    text-align: center
+    margin: 1.5em
+
+  
+  form
+    display: flex
+    flex-flow: column nowrap
+    align-items: center
+
+  &_wrapper
+    display: flex
+    flex-flow: column nowrap
+    align-items: center
+    margin-top: 2em
+    width: 100%
+  
+    & > p
+      text-align: left
+      width: 100%
+      padding: 0 1em
+
+  &_group
+    text-align: right
+    padding: 1em
+    width: 100%
+
+    span 
+      font-size: 0.8em
+
+    textarea
+      background: rgba($light-gray, 30%)
+      border: rgba($light-gray, 30%)
+      resize: none
+      border-radius: 5px
+      padding: 1em
+      width: 100%
+      height: 125px
+
+  &_submit
+    @include buttonsAnimatch ($color: white , $background: $main-color )
+    min-width: 100px
+    margin: 1em
+    @include mq(medium)
+      min-width: 175px
+
+.instructions
+  color: red

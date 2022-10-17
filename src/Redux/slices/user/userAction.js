@@ -6,8 +6,7 @@ export const getUserLogged = createAsyncThunk(
   "userSlice.getUserById",
   async ({ id }, { rejectWithValue }) => {
     try {
-      const config = { headers: { "Content-Type": "aplication/json" } };
-      const response = await apiUserAuth.get(`/api/users/${id}`, config);
+      const response = await apiUserAuth.get(`/api/users/${id}`);
       const userData = {
         id: response.data.user.id,
         address: response.data.user.address,
@@ -71,6 +70,25 @@ export const getUserLoggedFavPets = createAsyncThunk(
         race: response.data.race
       };
       return usersFavPetsData;
+    } catch (error) {
+      console.log("error: ", error);
+      if (error.response && error.response.data.message) {
+        return rejectWithValue(error.response.data.message);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
+
+// Modify User Logged Data
+export const modifyUserInfo = createAsyncThunk(
+  "userSlice.modifyUserInfo",
+  async ({ userId, userObject }, { rejectWithValue }) => {
+    console.log("objeto update ", userId, " ", userObject);
+    try {
+      const response = await apiUserAuth.put(`/api/users/${userId}/update`, userObject);
+      return response.data.user;
     } catch (error) {
       console.log("error: ", error);
       if (error.response && error.response.data.message) {

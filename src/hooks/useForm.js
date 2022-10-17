@@ -20,10 +20,11 @@ export const useForm = initForm => {
 
   // Validation when focus is gone
   const handleBlur = e => {
+    console.log(e);
     const champ = e.target.name;
     handleChange(e);
     setErrors(
-      Object.assign(errors, { [champ]: validate(initForm.data[champ], form[champ]) } || false)
+      Object.assign(errors, { [champ]: _validate(initForm.data[champ], form[champ]) } || false)
     );
   };
 
@@ -35,12 +36,12 @@ export const useForm = initForm => {
       ...form,
       [champ]: value
     });
-    setErrors(Object.assign(errors, { [champ]: validate(initForm.data[champ], value) } || false));
+    setErrors(Object.assign(errors, { [champ]: _validate(initForm.data[champ], value) } || false));
   };
 
   // Validation Form
 
-  const validate = (champ, val) => {
+  const _validate = (champ, val) => {
     if (champ?.required && !val) return "Este campo es requerido";
     const result = champ.validation?.find(el => !el.condition(val));
     return result?.error || false;
@@ -56,7 +57,7 @@ export const useForm = initForm => {
         ...form,
         [champ]: file.name
       });
-      setErrors(Object.assign(errors, { [champ]: validate(initForm.data[champ], file) }));
+      setErrors(Object.assign(errors, { [champ]: _validate(initForm.data[champ], file) }));
       if (errors[champ]) {
         setForm({
           ...form,
@@ -82,7 +83,7 @@ export const useForm = initForm => {
 
     // Checking validation of all champs
     Object.entries(form).forEach(([key]) => {
-      setErrors(Object.assign(errors, { [key]: validate(initForm.data[key], form[key]) }));
+      setErrors(Object.assign(errors, { [key]: _validate(initForm.data[key], form[key]) }));
     });
 
     // Checking if errors has all false values

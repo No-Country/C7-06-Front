@@ -64,7 +64,7 @@ const UserInfo = () => {
   return (
     <>
       <div className={styles.userInfo}>
-        <UserPicture image={user.picture ? user.picture : userDefault} name={user.name} />
+        <UserPicture image={user.image ? user.image : userDefault} name={user.name} />
         <div className={styles.userInfo_data}>
           <h2>{user.name}</h2>
           <ul>

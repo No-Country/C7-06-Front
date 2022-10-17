@@ -1,7 +1,7 @@
 import classes from "./UserInfoForm.module.sass";
 import { useState } from "react";
 import { useForm } from "../../hooks/useForm";
-import { apiUser } from "../../helpers/axios";
+import { apiUserPub } from "../../helpers/axios";
 import { regexConditions } from "../../helpers/regexs";
 
 const UserInfoForm = () => {
@@ -81,10 +81,8 @@ const UserInfoForm = () => {
       }
     },
     apicall: () => {
-      return apiUser.put(`/api/users/$userId/update'`, form);
-    },
-    onSuccess: () => {},
-    onError: () => {}
+      return apiUserPub.put(`/api/users/$userId/update'`, form);
+    }
   };
 
   // Api Call Function

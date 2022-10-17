@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { apiUser, apiPub } from "../../../helpers/axios";
+import { apiUserAuth, apiPub } from "../../../helpers/axios";
 
 // GET USER LOGGED
 export const getUserLogged = createAsyncThunk(
@@ -7,7 +7,7 @@ export const getUserLogged = createAsyncThunk(
   async ({ id }, { rejectWithValue }) => {
     try {
       const config = { headers: { "Content-Type": "aplication/json" } };
-      const response = await apiUser.get(`/api/users/${id}`, config);
+      const response = await apiUserAuth.get(`/api/users/${id}`, config);
       const userData = {
         id: response.data.user.id,
         address: response.data.user.address,
@@ -35,8 +35,7 @@ export const getUserLoggedPets = createAsyncThunk(
   "userSlice.getUserLoggedPets",
   async ({ id, pages }, { rejectWithValue }) => {
     try {
-      const config = { headers: { "Content-Type": "aplication/json" } };
-      const response = await apiPub.get(`/users/${id}/pets`, config);
+      const response = await apiPub.get(`/users/${id}/pets`);
       const usersPetsData = {
         id: response.data.user.petId,
         pictureResponse: response.data.pictureResponse,
@@ -57,13 +56,12 @@ export const getUserLoggedPets = createAsyncThunk(
   }
 );
 
-// GET USER PETS
+// GET USER FAVORITES PETS
 export const getUserLoggedFavPets = createAsyncThunk(
   "userSlice.getUserLoggedFavPets",
   async ({ userId, pages = 0 }, { rejectWithValue }) => {
     try {
-      const config = { headers: { "Content-Type": "aplication/json" } };
-      const response = await apiPub.get(`/users/${userId}/favourites?pages=${pages}`, config);
+      const response = await apiPub.get(`/users/${userId}/favourites?pages=${pages}`);
       const usersFavPetsData = {
         id: response.data.user.petId,
         pictureResponse: response.data.pictureResponse,

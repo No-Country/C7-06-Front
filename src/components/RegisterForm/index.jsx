@@ -13,7 +13,7 @@ const RegisterForm = () => {
   // States
   const [seePass, setSeePass] = useState(false);
 
-  const { userInfo, success } = useSelector(state => state.auth);
+  const { userLogged, success } = useSelector(state => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -23,10 +23,10 @@ const RegisterForm = () => {
       navigate("/login");
     }
     // redirect authenticated user to profile screen
-    if (userInfo) {
+    if (userLogged) {
       navigate("/account");
     }
-  }, [userInfo, success]);
+  }, [userLogged, success]);
 
   // Referencies
   const emailRegRef = useRef();

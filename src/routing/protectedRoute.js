@@ -1,20 +1,14 @@
 // ProtectedRoute.js
 import { useSelector } from "react-redux";
-import { NavLink, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
+import { Forbidden401 } from "../pages";
 
 const ProtectedRoute = () => {
   const { userInfo } = useSelector(state => state.auth);
   console.log("userInfo=", userInfo);
   // show unauthorized screen if no user is found in redux store
   if (!userInfo) {
-    return (
-      <div className="unauthorized">
-        <h1>Unauthorized :(</h1>
-        <span>
-          <NavLink to="/login">Login</NavLink> to gain access
-        </span>
-      </div>
-    );
+    return <Forbidden401 />;
   }
   // returns child route elements
   return <Outlet />;

@@ -2,7 +2,7 @@ import { PetInfoCard, PetBanner, CommentsPetsList } from "../components";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 // import petMock from "../data/petprofilemock.json";
-import classes from "./PetProfile.module.sass";
+import classes from "./styles/PetProfile.module.sass";
 import catMobile from "../assets/perfil_mascotas_gato_mobile.webp";
 import catDesktop from "../assets/perfil_mascotas_gato_desktop.webp";
 import dogMobile from "../assets/perfil_mascotas_perro_mobile.webp";

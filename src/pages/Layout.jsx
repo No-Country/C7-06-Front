@@ -1,4 +1,4 @@
-import classes from "./Layout.module.sass";
+import classes from "./styles/Layout.module.sass";
 import { Outlet } from "react-router-dom";
 import { Navbar, Footer, Spinner } from "../components";
 import { useEffect } from "react";

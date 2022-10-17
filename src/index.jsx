@@ -10,7 +10,8 @@ import {
   Layout,
   UserProfile,
   ContactUs,
-  UserAccount
+  UserAccount,
+  NotFound
 } from "./pages";
 import ProtectedRoute from "./routing/protectedRoute";
 
@@ -59,6 +60,10 @@ const router = createBrowserRouter([
             element: <UserAccount />
           }
         ]
+      },
+      {
+        path: "*",
+        element: <NotFound />
       }
     ]
   }

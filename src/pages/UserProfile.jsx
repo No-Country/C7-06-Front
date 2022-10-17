@@ -2,6 +2,7 @@ import { PetBanner } from "../components";
 import UserInfo from "../components/UserInfo";
 import mobileBanner from "../assets/perfil_usuarios_mobile.webp";
 import desktopBanner from "../assets/perfil_usuarios_desktop.webp";
+// import classes from "./styles/UserProfile.module.sass";
 
 const UserProfile = () => {
   return (

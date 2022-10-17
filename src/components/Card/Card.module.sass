@@ -2,42 +2,46 @@
 
 .card
     display: flex
-    flex-direction: row nowrap
+    flex-direction: column
+    align-items: center
     justify-content: center
+    width: clamp(325px, 22%, 50%)
     background-color: $background-light
     border-radius: 8px
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2)
     transition: all 0.3s ease
     flex-grow: 1
-    min-height: 130px
     &:hover
         transform: scale(1.02)
     @include mq("medium")
-        //height: 250px
-        align-items: center
+        height: 250px
         flex-direction: column
         align-items: center
         justify-content: center
-        min-width: 20%
-
+    @include mq("large")
+        width: clamp(260px, 22%, 50%)
     &__img
-        //width: 60%
+        width: 60%
         min-width: 140px
+        overflow: hidden
         border-radius: 8px 0 0 8px
         @include mq("medium")
             width: 100%
             height: 100%
             object-fit: cover
             border-radius: 8px 8px 0 0
+            overflow: hidden
         img
+            position: relative
+            left: -50%
             object-fit: cover
-            object-position: center
             border-radius: 8px 0 0 8px
-            height: 100%
-            width: 100%
             @include mq("medium")
+                left: 0
                 border-radius: 8px 8px 0 0
-       
+                width: 100%
+                height: 100%
+                object-fit: cover
     &__content
         width: 100%
         position: relative
@@ -80,6 +84,4 @@
 .cardLink
     text-decoration: none
     color: $main-color
-    width: 90%
-    @include mq(medium)
-        width: clamp(260px, 22%, 50%)
+    width: clamp(260px, 22%, 50%)

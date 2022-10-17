@@ -4,7 +4,7 @@ const local = JSON.parse(localStorage.getItem("userToken"));
 const token = local && local.token ? local.token : null;
 
 export const apiPrivate = axios.create({
-  baseURL: "https://animatch-test.herokuapp.com",
+  baseURL: "https://animatchapp.herokuapp.com",
   headers: {
     "Content-Type": "application/json",
     Authorization: `Bearer ${token}`,
@@ -13,7 +13,7 @@ export const apiPrivate = axios.create({
 });
 
 export const apiPub = axios.create({
-  baseURL: "https://animatch-test.herokuapp.com",
+  baseURL: "https://animatchapp.herokuapp.com",
   headers: {
     "Content-Type": "application/json",
     withCredentials: true

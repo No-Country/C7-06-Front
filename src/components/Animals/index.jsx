@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { Card, Spinner } from "../../components";
-import dogsMock from "../../data/dogsmock.json";
-import catsMock from "../../data/catsmock.json";
+// import dogsMock from "../../data/dogsmock.json";
+// import catsMock from "../../data/catsmock.json";
 import styles from "./Animals.module.sass";
 import { Link } from "react-router-dom";
-// import { apiPub } from "../../helpers/axios";
+import { apiPub } from "../../helpers/axios";
 
 const Animals = () => {
   const [dogs, setDogs] = useState([]);
@@ -17,58 +17,58 @@ const Animals = () => {
   useEffect(() => {
     // comentar aquí una vez que funcione la api
     // https://dog.ceo/api/breeds/image/random
-    setDogs(dogsMock);
-    setCats(catsMock);
-    setLoadingDog(false);
-    setLoadingCat(false);
-    setErrorDog(false);
-    setErrorCat(false);
+    // setDogs(dogsMock);
+    // setCats(catsMock);
+    // setLoadingDog(false);
+    // setLoadingCat(false);
+    // setErrorDog(false);
+    // setErrorCat(false);
 
     // descomentar aquí una vez que funcione la api
-    // let isMounted = true;
-    // const controller = new AbortController();
+    let isMounted = true;
+    const controller = new AbortController();
 
-    // const getPets = async type => {
-    //   try {
-    //     const response = await apiPub.get(`/petsByAnimalType?animal=${type}`, {
-    //       signal: controller.signal
-    //     });
+    const getPets = async type => {
+      try {
+        const response = await apiPub.get(`/petsByAnimalType?animal=${type}`, {
+          signal: controller.signal
+        });
 
-    //     if (isMounted) {
-    //       if (type === "CAT") {
-    //         const catsLoaded = response.data;
-    //         console.log("cat ", catsLoaded);
-    //         setCats(catsLoaded);
-    //         setLoadingCat(false);
-    //       } else if (type === "DOG") {
-    //         const dogsLoaded = response.data;
-    //         console.log("dog ", dogsLoaded);
-    //         setDogs(dogsLoaded);
-    //         setLoadingDog(false);
-    //       } else {
-    //         console.log("Not a category");
-    //       }
-    //     }
-    //   } catch (err) {
-    //     console.log(`"ERROR": ${err.message}`);
-    //     setLoadingCat(false);
-    //     setLoadingDog(false);
-    //     if (type === "CAT") {
-    //       setErrorCat(true);
-    //     } else if (type === "DOG") {
-    //       setErrorDog(true);
-    //     }
-    //   }
-    // };
+        if (isMounted) {
+          if (type === "CAT") {
+            const catsLoaded = response.data.petCardResponses;
+            console.log("cat ", catsLoaded);
+            setCats(catsLoaded);
+            setLoadingCat(false);
+          } else if (type === "DOG") {
+            const dogsLoaded = response.data.petCardResponses;
+            console.log("dog ", dogsLoaded);
+            setDogs(dogsLoaded);
+            setLoadingDog(false);
+          } else {
+            console.log("Not a category");
+          }
+        }
+      } catch (err) {
+        console.log(`"ERROR": ${err.message}`);
+        setLoadingCat(false);
+        setLoadingDog(false);
+        if (type === "CAT") {
+          setErrorCat(true);
+        } else if (type === "DOG") {
+          setErrorDog(true);
+        }
+      }
+    };
 
-    // getPets("CAT");
-    // getPets("DOG");
+    getPets("CAT");
+    getPets("DOG");
 
-    // // if unmounted component
-    // return () => {
-    //   isMounted = false;
-    //   controller.abort();
-    // };
+    // if unmounted component
+    return () => {
+      isMounted = false;
+      controller.abort();
+    };
   }, []);
 
   return (

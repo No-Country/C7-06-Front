@@ -14,6 +14,8 @@ export const regexConditions = type => {
       return /^[A-Za-z0-9.:/]+[(".jpg")(".png")("webp")]$/;
     case "phone":
       return /^(\+\d{1,3}( )?)?((\(\d{1,3}\))|\d{1,3})[- .]?\d{3,4}[- .]?\d{4}$/;
+    case "age":
+      return /[0-9]{2}/;
     default:
       return true;
   }

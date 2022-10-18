@@ -36,14 +36,14 @@ const Animals = () => {
 
         if (isMounted) {
           if (type === "CAT") {
-            const catsLoaded = response.data.petCardResponses;
+            const catsLoaded = response.data.content;
             console.log("cat ", catsLoaded);
             setCats(catsLoaded);
             setLoadingCat(false);
             setErrorCat(false);
           } else if (type === "DOG") {
-            const dogsLoaded = response.data.petCardResponses;
-            console.log("perror ", dogs && dogsLoaded.lenght > 0);
+            const dogsLoaded = response.data.content;
+            console.log("perror ", dogs && dogsLoaded.length > 0);
             console.log("dog ", dogsLoaded);
             setDogs(dogsLoaded);
             setLoadingDog(false);
@@ -88,7 +88,7 @@ const Animals = () => {
             <>
               {errorDog ? (
                 <p>Se ha producido une error, por favor intente recargar la página.</p>
-              ) : dogs && dogs.lenght > 0 ? (
+              ) : dogs && dogs.length > 0 ? (
                 dogs.map(dog => <Card key={dog.id} animal={dog} />)
               ) : (
                 <p> No hay masotas para mostrar.</p>

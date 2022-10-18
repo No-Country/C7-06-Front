@@ -18,6 +18,7 @@ import ProtectedRoute from "./routing/protectedRoute";
 import reportWebVitals from "./reportWebVitals";
 import store from "./Redux/store"; // Configuracion redux toolkit
 import { Provider } from "react-redux"; // Configuracion redux toolkit
+import PetFormPage from "./pages/PetFormPage";
 
 const router = createBrowserRouter([
   {
@@ -58,7 +59,8 @@ const router = createBrowserRouter([
           {
             path: "/account",
             element: <UserAccount />
-          }
+          },
+          { path: "/managepet", element: <PetFormPage /> }
         ]
       },
       {

@@ -7,7 +7,7 @@ const token = () => {
 };
 
 export const apiPrivate = axios.create({
-  baseURL: "https://animatchapp.herokuapp.com",
+  baseURL: "http://animatchapp.herokuapp.com",
   headers: {
     "Content-Type": "application/json",
     Authorization: `Bearer ${token}`,
@@ -16,10 +16,9 @@ export const apiPrivate = axios.create({
 });
 
 export const apiPub = axios.create({
-  baseURL: "https://animatchapp.herokuapp.com",
+  baseURL: "http://animatchapp.herokuapp.com",
   headers: {
-    "Content-Type": "application/json",
-    withCredentials: true
+    "Content-Type": "application/json"
   }
 });
 export const apiUserPub = axios.create({

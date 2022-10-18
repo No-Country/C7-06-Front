@@ -17,6 +17,7 @@ export const getUserLogged = createAsyncThunk(
         phone_number: response.data.user.phone_number,
         role: response.data.user.role
       };
+      console.log(userData);
       return userData;
     } catch (error) {
       console.log("error: ", error);
@@ -85,10 +86,27 @@ export const getUserLoggedFavPets = createAsyncThunk(
 export const modifyUserInfo = createAsyncThunk(
   "userSlice.modifyUserInfo",
   async ({ userId, userObject }, { rejectWithValue }) => {
-    console.log("objeto update ", userId, " ", userObject);
     try {
       const response = await apiUserAuth.put(`/api/users/${userId}/update`, userObject);
       return response.data.user;
+    } catch (error) {
+      console.log("error: ", error);
+      if (error.response && error.response.data.message) {
+        return rejectWithValue(error.response.data.message);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
+
+// Delete User
+export const deleteUser = createAsyncThunk(
+  "userSlice.deleteUser",
+  async ({ id }, { rejectWithValue }) => {
+    try {
+      const response = await apiUserAuth.delete(`/api/users/${id}/delete`);
+      return response.data;
     } catch (error) {
       console.log("error: ", error);
       if (error.response && error.response.data.message) {

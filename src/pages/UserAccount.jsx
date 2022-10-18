@@ -1,4 +1,10 @@
-import { UserInfoForm, Spinner, UserDescriptionForm } from "../components";
+import {
+  UserInfoForm,
+  Spinner,
+  ChangePassForm,
+  UserDescriptionForm,
+  DeleteAccountForm
+} from "../components";
 import { useSelector, useDispatch } from "react-redux";
 import { getUserLogged } from "../Redux/slices/user/userAction";
 import { useEffect } from "react";
@@ -12,7 +18,7 @@ const UserAccount = () => {
     if (!userInfo && !error) {
       dispatch(getUserLogged({ id: userLogged.id }));
     }
-  }, [userInfo, loading, error]);
+  }, [userInfo, error]);
 
   return (
     <>
@@ -24,6 +30,8 @@ const UserAccount = () => {
         <div>
           <UserInfoForm />
           <UserDescriptionForm />
+          <ChangePassForm />
+          <DeleteAccountForm />
         </div>
       )}
     </>

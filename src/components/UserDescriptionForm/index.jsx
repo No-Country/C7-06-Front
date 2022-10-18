@@ -5,13 +5,13 @@ import { modifyUserInfo } from "../../Redux/slices/user/userAction";
 
 const UserDescriptionForm = () => {
   const { userInfo } = useSelector(state => state.user);
-  const [characteres, setCharacteres] = useState(500 - userInfo.description.length || 500);
+  const [characteres, setCharacteres] = useState(500 - userInfo.description?.length || 500);
   const [description, setDescription] = useState(userInfo.description || "");
   const [errors, setErrors] = useState(false);
   const dispatch = useDispatch();
 
   const handleInput = e => {
-    if (e.target.lenght > 500) {
+    if (e.target.length > 500) {
       setErrors("Solo se admiten hasta 500 caracteres.");
     } else {
       setErrors(false);

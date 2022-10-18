@@ -3,7 +3,8 @@ import {
   getUserLogged,
   getUserLoggedPets,
   getUserLoggedFavPets,
-  modifyUserInfo
+  modifyUserInfo,
+  deleteUser
 } from "./userAction";
 
 const initialState = {
@@ -82,6 +83,23 @@ const userSlice = createSlice({
       state.error = null;
     },
     [modifyUserInfo.rejected]: (state, { payload }) => {
+      state.loading = false;
+      state.error = payload;
+      state.success = false;
+    },
+    // Delete User
+    [deleteUser.pending]: state => {
+      state.loading = true;
+      state.error = null;
+      state.success = false;
+    },
+    [deleteUser.fulfilled]: (state, { payload }) => {
+      state.loading = false;
+      state.success = true;
+      state.userInfo = false;
+      state.error = null;
+    },
+    [deleteUser.rejected]: (state, { payload }) => {
       state.loading = false;
       state.error = payload;
       state.success = false;

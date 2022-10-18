@@ -1,7 +1,10 @@
 import axios from "axios";
 
-const local = JSON.parse(localStorage.getItem("userToken"));
-const token = local && local.token ? local.token : null;
+const token = () => {
+  const local = JSON.parse(localStorage.getItem("userToken"));
+  const token = local && local.token ? local.token : null;
+  return token;
+};
 
 export const apiPrivate = axios.create({
   baseURL: "https://animatchapp.herokuapp.com",
@@ -32,7 +35,7 @@ export const apiUserAuth = axios.create({
   baseURL: "http://localhost:5000",
   headers: {
     "Content-Type": "application/json",
-    Authorization: `Bearer ${token}`,
+    Authorization: `Bearer ${token()}`,
     withCredentials: true
   }
 });

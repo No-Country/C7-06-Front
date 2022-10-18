@@ -18,3 +18,7 @@ export { default as TextAreaResize } from "./TextAreaRezise";
 export { default as UserInfoForm } from "./UserInfoForm";
 export { default as Spinner } from "./Spinner";
 export { default as Contact } from "./Contact";
+export { default as UserDescriptionForm } from "./UserDescriptionForm";
+export { default as ChangePassForm } from "./ChangePassForm";
+export { default as DeleteAccountForm } from "./DeleteAccountForm";
+export { default as PetForm } from "./PetForm";

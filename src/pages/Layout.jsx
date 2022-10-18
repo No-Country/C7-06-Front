@@ -14,7 +14,7 @@ const Layout = () => {
         <>
           <Navbar />
           <main className={classes.main}>
-            <Outlet />
+            <Outlet className={classes.wrapper} />
           </main>
           <Footer />
         </>

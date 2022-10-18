@@ -2,8 +2,9 @@ export const regexConditions = type => {
   switch (type) {
     case "email":
       return /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/;
+    // TODO: cambiar el password regex
     case "passwordHard":
-      return /[a-zA-Z0-9]+/; // /^(?=.*[a-zA-Z])(?=.*[0-9])/;
+      return /^[a-zA-Z0-9][a-zA-Z0-9./*_-]+/;
     case "name":
       return /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/;
     case "address":

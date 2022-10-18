@@ -21,19 +21,23 @@ const authSlice = createSlice({
     // register user
     [registerUser.pending]: state => {
       state.loading = true;
+      state.success = false;
       state.error = null;
     },
     [registerUser.fulfilled]: (state, { payload }) => {
       state.loading = false;
+      state.error = null;
       state.success = true; // register successful
     },
     [registerUser.rejected]: (state, { payload }) => {
       state.loading = false;
+      state.success = false;
       state.error = payload;
     },
     // login user
     [userLogin.pending]: state => {
       state.loading = true;
+      state.success = false;
       state.error = null;
     },
     [userLogin.fulfilled]: (state, { payload }) => {
@@ -41,10 +45,12 @@ const authSlice = createSlice({
       state.success = true; // login succefull
       state.userLogged = { id: payload.id, role: payload.role };
       state.userToken = payload.token;
+      state.error = false;
     },
     [userLogin.rejected]: (state, { payload }) => {
       state.loading = false;
       state.error = payload;
+      state.success = false;
     }
     // register user reducer...
   }

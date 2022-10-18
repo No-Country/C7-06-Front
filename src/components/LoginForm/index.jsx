@@ -12,24 +12,26 @@ import { regexConditions } from "../../helpers/regexs";
 
 const LoginForm = () => {
   // User from context
-  const { userToken, success } = useSelector(state => state.auth); // leer los datos de la store
+  const { userToken, success, error } = useSelector(state => state.auth); // leer los datos de la store
   const dispatch = useDispatch(); // llamar funcion para actualizar estado
-
   // Navigate handler
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/"; // Get where user came from
 
   useEffect(() => {
-    if (success) {
+    console.log("success", success);
+    if (success && userToken) {
       // extraer datos de usuario
       navigate("/account");
     } else if (userToken) {
       // extraer datos de usuario
       emailRef.current.focus();
       navigate(from, { replace: true });
+    } else if (error) {
+      alert(`No se ha podido loguear. Error: ${error}`);
     }
-  }, [success, userToken]);
+  }, [success, userToken, error]);
 
   // Referencies
   const emailRef = useRef();

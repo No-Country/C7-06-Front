@@ -4,10 +4,9 @@ import { Outlet } from "react-router-dom";
 import { Forbidden401 } from "../pages";
 
 const ProtectedRoute = () => {
-  const { userInfo } = useSelector(state => state.auth);
-  console.log("userInfo=", userInfo);
+  const { userLogged } = useSelector(state => state.auth);
   // show unauthorized screen if no user is found in redux store
-  if (!userInfo) {
+  if (!userLogged) {
     return <Forbidden401 />;
   }
   // returns child route elements

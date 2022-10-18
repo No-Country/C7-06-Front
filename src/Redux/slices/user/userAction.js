@@ -1,13 +1,12 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { apiUser, apiPub } from "../../../helpers/axios";
+import { apiUserAuth, apiPub } from "../../../helpers/axios";
 
 // GET USER LOGGED
 export const getUserLogged = createAsyncThunk(
   "userSlice.getUserById",
   async ({ id }, { rejectWithValue }) => {
     try {
-      const config = { headers: { "Content-Type": "aplication/json" } };
-      const response = await apiUser.get(`/api/users/${id}`, config);
+      const response = await apiUserAuth.get(`/api/users/${id}`);
       const userData = {
         id: response.data.user.id,
         address: response.data.user.address,
@@ -18,6 +17,7 @@ export const getUserLogged = createAsyncThunk(
         phone_number: response.data.user.phone_number,
         role: response.data.user.role
       };
+      console.log(userData);
       return userData;
     } catch (error) {
       console.log("error: ", error);
@@ -35,8 +35,7 @@ export const getUserLoggedPets = createAsyncThunk(
   "userSlice.getUserLoggedPets",
   async ({ id, pages }, { rejectWithValue }) => {
     try {
-      const config = { headers: { "Content-Type": "aplication/json" } };
-      const response = await apiPub.get(`/users/${id}/pets`, config);
+      const response = await apiPub.get(`/users/${id}/pets`);
       const usersPetsData = {
         id: response.data.user.petId,
         pictureResponse: response.data.pictureResponse,
@@ -57,13 +56,12 @@ export const getUserLoggedPets = createAsyncThunk(
   }
 );
 
-// GET USER PETS
+// GET USER FAVORITES PETS
 export const getUserLoggedFavPets = createAsyncThunk(
   "userSlice.getUserLoggedFavPets",
   async ({ userId, pages = 0 }, { rejectWithValue }) => {
     try {
-      const config = { headers: { "Content-Type": "aplication/json" } };
-      const response = await apiPub.get(`/users/${userId}/favourites?pages=${pages}`, config);
+      const response = await apiPub.get(`/users/${userId}/favourites?pages=${pages}`);
       const usersFavPetsData = {
         id: response.data.user.petId,
         pictureResponse: response.data.pictureResponse,
@@ -73,6 +71,42 @@ export const getUserLoggedFavPets = createAsyncThunk(
         race: response.data.race
       };
       return usersFavPetsData;
+    } catch (error) {
+      console.log("error: ", error);
+      if (error.response && error.response.data.message) {
+        return rejectWithValue(error.response.data.message);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
+
+// Modify User Logged Data
+export const modifyUserInfo = createAsyncThunk(
+  "userSlice.modifyUserInfo",
+  async ({ userId, userObject }, { rejectWithValue }) => {
+    try {
+      const response = await apiUserAuth.put(`/api/users/${userId}/update`, userObject);
+      return response.data.user;
+    } catch (error) {
+      console.log("error: ", error);
+      if (error.response && error.response.data.message) {
+        return rejectWithValue(error.response.data.message);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
+
+// Delete User
+export const deleteUser = createAsyncThunk(
+  "userSlice.deleteUser",
+  async ({ id }, { rejectWithValue }) => {
+    try {
+      const response = await apiUserAuth.delete(`/api/users/${id}/delete`);
+      return response.data;
     } catch (error) {
       console.log("error: ", error);
       if (error.response && error.response.data.message) {

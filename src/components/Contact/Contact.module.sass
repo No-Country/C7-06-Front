@@ -6,6 +6,7 @@
     align-items: center
     text-align: center
     height: 850px
+    background-color: $background-light
 
     .title
         background-color: $main-color
@@ -27,57 +28,66 @@
 
         p
             max-width: 675px
-    .inputs
-        margin-top: 25px
+    .form
         display: flex
         flex-direction: column
-        width: 600px
-        gap: 21px
-        margin-bottom: 25px
-        input
-            background-color: #EEEBEB
-            border: none
-            border-radius: 10px
-            font-size: 21px
-            outline: none
-            height: 45px
-        input::placeholder
-            font-family: $secondary-font
-            color: black
-            font-size: 18px
-            text-align: center
-        textarea
-            background-color: #EEEBEB
-            border: none
-            border-radius: 10px
-            font-size: 21px
-            outline: none
-            overflow: scroll
-            resize: vertical
-            height: 100px
-        textarea::placeholder
-            font-family: $secondary-font
-            color: black
+        justify-content: center
+        align-items: center
+        .inputs
+            margin-top: 25px
             display: flex
-            align-items: flex-start
-            font-size: 18px
-            text-align: center
+            flex-direction: column
+            width: 600px
+            gap: 21px
+            margin-bottom: 25px
+
+            input
+                background-color: #d9d9d999
+                border: none
+                border-radius: 10px
+                font-size: 18px
+                outline: none
+                height: 40px
+                width: 100%
+                max-width: 600px
+                padding: 0 40px
+            input::placeholder
+                font-family: $main-font
+                color: #696565aa
+                font-size: 16px
+            textarea
+                background-color: #d9d9d999
+                border: none
+                padding: 18px 40px
+                border-radius: 10px
+                font-size: 18px
+                outline: none
+                overflow: scroll
+                resize: vertical
+                height: 100px
+            textarea::placeholder
+                font-family: $main-font
+                color: #696565aa
+                display: flex
+                align-items: flex-start
+                font-size: 16px
+
     .conditions
         display: flex
         gap: 25px
         margin-bottom: 25px
+        .checkbox
+            width: 20px
+            height: 20px
+            margin: 0
+            padding: 0
+            background-color: black
+            border: 0px solid white
+            border-radius: 0px
     button
-        width: 170px
-        height: 40px
-        background-color: #E8D641
-        cursor: pointer
-        color: black
-        font-family: $secondary-font
-        font-weight: bold
-        border: none
-        border-radius: 12px
+        @include buttonsAnimatch ($color: $dark-gray, $background: $secondary-color )
 
-@media screen and (max-width: 650px)    
+@media screen and (max-width: 650px)
     .container
         height: 930px
         .title
@@ -87,6 +97,6 @@
             input::placeholder
                 font-size: 15px
             textarea::placeholder
-                font-size: 15px    
+                font-size: 15px
         .conditions
-            font-size: 10px    
+            font-size: 10px

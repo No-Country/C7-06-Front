@@ -91,7 +91,7 @@ const Animals = () => {
               ) : dogs && dogs.length > 0 ? (
                 dogs.map(dog => <Card key={dog.id} animal={dog} />)
               ) : (
-                <p> No hay masotas para mostrar.</p>
+                <p> No hay mascotas para mostrar.</p>
               )}
             </>
           )}
@@ -110,7 +110,7 @@ const Animals = () => {
             <>
               {errorCat ? (
                 <p>Se ha producido un error, por favor intente recargar la página.</p>
-              ) : cats && cats.lenght > 0 ? (
+              ) : cats && cats.length > 0 ? (
                 cats.map(cat => <Card key={cat.id} animal={cat} />)
               ) : (
                 <p>No hay mascotas para mostrar</p>

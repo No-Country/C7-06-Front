@@ -3,8 +3,8 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 import PropTypes from "prop-types";
 import styles from "./Card.module.sass";
 import { Link } from "react-router-dom";
-import cat from "../../assets/genericCat.jpg";
-import dog from "../../assets/genericDog.jpg";
+import cat from "../../assets/catDefault.png";
+import dog from "../../assets/dogDefault.png";
 
 // Boton de favorito
 const Favorite = ({ isFavorite, handleClick }) => {
@@ -36,7 +36,7 @@ const Card = ({ animal, isFavorite }) => {
           {animal.pictureResponse ? (
             <img src={`/animals/${animal.pictureResponse}`} alt={animal?.name} />
           ) : (
-            <img src={animal.type === "cat" ? cat : dog} alt={animal?.name} />
+            <img src={animal.animalType === "CAT" ? cat : dog} alt={animal?.name} />
           )}
         </div>
         <div className={styles.card__content}>

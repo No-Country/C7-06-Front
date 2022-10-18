@@ -87,6 +87,9 @@ export const modifyUserInfo = createAsyncThunk(
   "userSlice.modifyUserInfo",
   async ({ userId, userObject }, { rejectWithValue }) => {
     try {
+      apiUserAuth.common.headers.Authorization = `Bearer ${
+        localStorage.getItem("userToken").token
+      }`;
       const response = await apiUserAuth.put(`/api/users/${userId}/update`, userObject);
       return response.data.user;
     } catch (error) {

@@ -67,7 +67,7 @@ const PetProfile = () => {
         <div>Loading...</div>
       ) : (
         <>
-          {pet.type === "cat" ? (
+          {pet.animalType === "CAT" ? (
             <PetBanner
               text="Gato"
               images={{
@@ -78,8 +78,8 @@ const PetProfile = () => {
             />
           ) : (
             <PetBanner
-              text={"Perro"}
-              image={{
+              text="Perro"
+              images={{
                 mobile: { src: dogMobile, size: 2412 },
                 desktop: { src: dogDesktop, size: 3013 }
               }}

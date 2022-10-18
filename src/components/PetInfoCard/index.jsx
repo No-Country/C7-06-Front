@@ -51,7 +51,7 @@ function PetInfoCard({ pet }) {
             <div className={classes.card_gallery_image}>
               {images[0] ? (
                 <img src={images[0].path} className={classes.active} alt={`Foto de ${pet.name}`} />
-              ) : pet.type === "cat" ? (
+              ) : pet.animalType === "CAT" ? (
                 <img src={cat} className={classes.active} alt={`Foto de ${pet.name}`} />
               ) : (
                 <img src={dog} className={classes.active} alt={`Foto de ${pet.name}`} />

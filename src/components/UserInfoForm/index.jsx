@@ -1,19 +1,13 @@
 import classes from "./UserInfoForm.module.sass";
-import { useState } from "react";
 import { useForm } from "../../hooks/useForm";
-import { apiUser } from "../../helpers/axios";
 import { regexConditions } from "../../helpers/regexs";
+import { useDispatch, useSelector } from "react-redux";
+import avatar from "../../assets/userDefault.png";
+import { modifyUserInfo } from "../../Redux/slices/user/userAction";
 
 const UserInfoForm = () => {
-  const [user] = useState({
-    avatar: "/persons/user1.jpg",
-    name: "Jane",
-    surname: "Doe",
-    email: "janedoe@gmail.com",
-    phone: "+33 565458111",
-    address: "Paris",
-    userId: 1
-  });
+  const { userInfo } = useSelector(state => state.user);
+  const dispatch = useDispatch();
 
   const initForm = {
     data: {
@@ -21,29 +15,31 @@ const UserInfoForm = () => {
         initVal: null
       },
       avatar: {
-        initVal: user.avatar,
+        initVal: userInfo.picture,
         validation: [
           {
-            condition: val => regexConditions("path").test(val.name),
+            condition: val => !val || regexConditions("path").test(val?.name),
             error: "Sólo acepta formatos jpg, png, y webp."
           },
           {
-            condition: val => val.size <= 5000000,
+            condition: val => !val || val.size <= 5000000,
             error: "Sólo acepta archivos de menos de 5GB"
           }
         ]
       },
       name: {
-        initVal: user.name,
+        initVal: userInfo.name,
         validation: [
           {
             condition: val => regexConditions("name").test(val),
             error: "No se aceptan caracteres numéricos"
           }
-        ]
+        ],
+        required: true
       },
       surname: {
-        initVal: user.surname,
+        initVal: userInfo.surname,
+        required: true,
         validation: [
           {
             condition: val => regexConditions("name").test(val),
@@ -52,7 +48,7 @@ const UserInfoForm = () => {
         ]
       },
       email: {
-        initVal: user.email,
+        initVal: userInfo.email,
         required: true,
         validation: [
           {
@@ -61,40 +57,33 @@ const UserInfoForm = () => {
           }
         ]
       },
-      phone: {
-        initVal: user.phone,
+      phone_number: {
+        initVal: userInfo.phone_number || "",
         validation: [
           {
-            condition: val => regexConditions("phone").test(val),
+            condition: val => !val || regexConditions("phone").test(val),
             error: "Usar un formato de número de teléfono"
           }
         ]
       },
       address: {
-        initVal: user.address,
+        initVal: userInfo.address || "",
         validation: [
           {
-            condition: val => regexConditions("address").test(val),
+            condition: val => !val || regexConditions("address").test(val),
             error: "Escribe una dirección válida"
           }
         ]
       }
     },
     apicall: () => {
-      return apiUser.put(`/api/users/$userId/update'`, form);
+      return dispatch(modifyUserInfo({ userId: userInfo.id, userObject: form }));
     },
-    onSuccess: () => {},
-    onError: () => {}
+    noreset: true
   };
 
-  // Api Call Function
-  const apicall = () => {};
-
   // Form handler
-  const { form, errors, handleChange, handleBlur, handleFiles, handleSubmit } = useForm(
-    initForm,
-    apicall
-  );
+  const { form, errors, handleChange, handleBlur, handleFiles, handleSubmit } = useForm(initForm);
 
   return (
     <div className={classes.form}>
@@ -103,11 +92,18 @@ const UserInfoForm = () => {
         <div className={classes.form_wrapper}>
           <div className={classes.form_avatar}>
             <div className={classes.form_avatar_image}>
-              <img src={form.file || form.avatar} alt={"nombre persona"} />
+              <img src={form.file || form.avatar || avatar} alt={"nombre persona"} />
             </div>
             <div className={classes.form_avatar_editButton}>
               <label htmlFor="avatar">Editar</label>
-              <input id="avatar" name="avatar" onChange={handleFiles} type="file" hidden />
+              <input
+                id="avatar"
+                name="avatar"
+                onChange={handleFiles}
+                type="file"
+                value={form.files}
+                hidden
+              />
               {errors?.avatar && <p className={classes.instructions}>{errors.avatar}</p>}
             </div>
           </div>
@@ -146,13 +142,15 @@ const UserInfoForm = () => {
             </div>
             <div>
               <input
-                name="phone"
+                name="phone_number"
                 placeholder="Teléfono"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={form.phone}
+                value={form.phone_number}
               />
-              {errors?.phone && <p className={classes.instructions}>{errors.phone}</p>}
+              {errors?.phone_number && (
+                <p className={classes.instructions}>{errors.phone_number}</p>
+              )}
             </div>
             <div>
               <input

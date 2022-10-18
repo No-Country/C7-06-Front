@@ -1,26 +1,41 @@
 import axios from "axios";
 
-export const apiPub = axios.create({
-  baseURL: "https://animatch-test.herokuapp.com",
-  headers: { "Content-Type": "application/json", withCredentials: true }
-});
+const token = () => {
+  const local = JSON.parse(localStorage.getItem("userToken"));
+  const token = local && local.token ? local.token : null;
+  return token;
+};
 
 export const apiPrivate = axios.create({
-  baseURL: "https://animatch-test.herokuapp.com",
+  baseURL: "https://animatchapp.herokuapp.com",
+  headers: {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${token}`,
+    withCredentials: true
+  }
+});
+
+export const apiPub = axios.create({
+  baseURL: "https://animatchapp.herokuapp.com",
   headers: {
     "Content-Type": "application/json",
     withCredentials: true
   }
 });
-export const apiUser = axios.create({
-  // baseURL: "https://c7-06-authentication.up.railway.app",
-  baseURL: "http://localhost:5000",
+export const apiUserPub = axios.create({
+  baseURL: "https://c7-06-authentication.up.railway.app",
+  // baseURL: "http://localhost:5000",
   headers: {
     "Content-Type": "application/json"
   }
 });
 
-export const apiAuth = axios.create({
-  baseURL: "https://c7-06-authentication.up.railway.app",
-  header: { "Content-Type": "application/json" }
+export const apiUserAuth = axios.create({
+  // baseURL: "https://c7-06-authentication.up.railway.app",
+  baseURL: "http://localhost:5000",
+  headers: {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${token()}`,
+    withCredentials: true
+  }
 });

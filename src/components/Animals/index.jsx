@@ -30,7 +30,7 @@ const Animals = () => {
 
     const getPets = async type => {
       try {
-        const response = await apiPub.get(`/petsByAnimalType?animal=${type}`, {
+        const response = await apiPub.get(`/filteredPets?animal=${type}`, {
           signal: controller.signal
         });
 
@@ -40,11 +40,14 @@ const Animals = () => {
             console.log("cat ", catsLoaded);
             setCats(catsLoaded);
             setLoadingCat(false);
+            setErrorCat(false);
           } else if (type === "DOG") {
             const dogsLoaded = response.data.petCardResponses;
+            console.log("perror ", dogs && dogsLoaded.lenght > 0);
             console.log("dog ", dogsLoaded);
             setDogs(dogsLoaded);
             setLoadingDog(false);
+            setErrorDog(false);
           } else {
             console.log("Not a category");
           }
@@ -85,8 +88,10 @@ const Animals = () => {
             <>
               {errorDog ? (
                 <p>Se ha producido une error, por favor intente recargar la página.</p>
-              ) : (
+              ) : dogs && dogs.lenght > 0 ? (
                 dogs.map(dog => <Card key={dog.id} animal={dog} />)
+              ) : (
+                <p> No hay masotas para mostrar.</p>
               )}
             </>
           )}
@@ -105,8 +110,10 @@ const Animals = () => {
             <>
               {errorCat ? (
                 <p>Se ha producido un error, por favor intente recargar la página.</p>
-              ) : (
+              ) : cats && cats.lenght > 0 ? (
                 cats.map(cat => <Card key={cat.id} animal={cat} />)
+              ) : (
+                <p>No hay mascotas para mostrar</p>
               )}
             </>
           )}

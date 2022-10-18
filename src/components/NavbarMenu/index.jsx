@@ -46,6 +46,13 @@ const NavbarMenu = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  const handleLogout = () => {
+    setIsMenuOpen(false);
+    console.log("logout");
+    localStorage.removeItem("userToken");
+    window.location.replace("/");
+  };
+
   return (
     <nav className={styles.menu} style={renderMenu}>
       <ul onClick={handleLinkClick}>
@@ -56,7 +63,7 @@ const NavbarMenu = () => {
           <NavLink to="/search">Nuestras mascotas</NavLink>
         </li>
         <li>
-          <NavLink to="/">Acerca de Animatch</NavLink>
+          <NavLink to="/contact">Contacto</NavLink>
         </li>
         {!userLogged ? (
           <li>
@@ -70,18 +77,23 @@ const NavbarMenu = () => {
         </li> */}
       </ul>
       {userLogged ? (
-        <Link to="/user" className={styles.user} onClick={handleLinkClick}>
-          <span>
-            {loading ? (
-              <>User</>
-            ) : (
-              <>
-                {userInfo.name} {userInfo.surname}{" "}
-              </>
-            )}
-          </span>
-          <FontAwesomeIcon icon={faCircleUser} />
-        </Link>
+        <>
+          <Link to="/user" className={styles.user} onClick={handleLinkClick}>
+            <span>
+              {loading ? (
+                <>User</>
+              ) : (
+                <>
+                  {userInfo.name} {userInfo.surname}{" "}
+                </>
+              )}
+            </span>
+            <FontAwesomeIcon icon={faCircleUser} />
+          </Link>
+          <Link to="/" className={styles.logout} onClick={handleLogout}>
+            Cerrar sesión
+          </Link>
+        </>
       ) : null}
     </nav>
   );

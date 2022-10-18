@@ -31,8 +31,8 @@ export const apiUserPub = axios.create({
 });
 
 export const apiUserAuth = axios.create({
-  // baseURL: "https://c7-06-authentication.up.railway.app",
-  baseURL: "http://localhost:5000",
+  baseURL: "https://c7-06-authentication.up.railway.app",
+  // baseURL: "http://localhost:5000",
   headers: {
     "Content-Type": "application/json",
     Authorization: `Bearer ${token()}`,

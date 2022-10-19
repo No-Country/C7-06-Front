@@ -4,6 +4,7 @@ import mobileBanner from "../../assets/buscador_mobile.webp";
 import { useEffect, useState } from "react";
 import { Card, PetBanner, Spinner } from "../../components";
 import { apiPrivate, apiPub } from "../../helpers/axios";
+import Paginator from "../Paginator";
 
 const Filter = () => {
   const [callbacks, setCallbacks] = useState({
@@ -28,6 +29,7 @@ const Filter = () => {
     firstCallResultsEmpty: false,
     secondCallResultsEmpty: false
   });
+  const [suggestedPetsParams, setSuggestedPetsParams] = useState({ pageNumber: 0 });
   const [filteredPetsParams, setFilteredPetsParams] = useState({
     animal: "",
     gender: "",
@@ -41,7 +43,11 @@ const Filter = () => {
   useEffect(() => {
     loadSuggestedPets();
     loadFilteredPets();
-  }, []);
+  }, [filteredPetsParams.pageNumber]);
+
+  useEffect(() => {
+    loadSuggestedPets();
+  }, [suggestedPetsParams.pageNumber]);
 
   const handleChangeParam = e => {
     setFilteredPetsParams(prevParams => ({ ...prevParams, [e.target.name]: e.target.value }));
@@ -56,11 +62,13 @@ const Filter = () => {
     loadFilteredPets();
   };
 
+  const buildSuggestedPetsEndpoint = params => {
+    return `/suggestedPets?pageNumber=${params.pageNumber}`;
+  };
+
   const buildFilteredPetsEndpoint = params => {
     let endpoint = "/filteredPets";
-    const keyParams = Object.keys(filteredPetsParams).filter(
-      param => filteredPetsParams[param] !== "" && param !== "pageNumber"
-    );
+    const keyParams = Object.keys(params).filter(param => params[param] !== "");
 
     if (keyParams.length > 0) endpoint += "?";
 
@@ -75,10 +83,19 @@ const Filter = () => {
     return endpoint;
   };
 
+  const loadFilteredPetsFromPage = page => {
+    setFilteredPetsParams(prevParams => ({ ...prevParams, pageNumber: page }));
+  };
+
+  const loadSuggestedPetsFromPage = page => {
+    setSuggestedPetsParams(prevParams => ({ ...prevParams, pageNumber: page }));
+  };
+
   const loadSuggestedPets = () => {
+    const endpoint = buildSuggestedPetsEndpoint(suggestedPetsParams);
     setCallbacks(prevCallbacks => ({ ...prevCallbacks, firstCallLoading: true }));
     apiPrivate
-      .get("/suggestedPets")
+      .get(endpoint)
       .then(response => {
         setCallbacks(prevCallbacks => ({
           ...prevCallbacks,
@@ -152,26 +169,31 @@ const Filter = () => {
               <h3 className={styles.title}>Posibles animatch</h3>
             </div>
             {/* Container renderizado de animales CARDS */}
-            <div className={styles.renderAnimals}>
-              {callbacks.firstCallLoading ? (
-                <Spinner />
-              ) : callbacks.firstCallError ? (
-                <h3>Error.</h3>
-              ) : (
-                callbacks.firstCallData.content &&
-                (callbacks.firstCallData.content.length === 0 ? (
-                  <h3>No se encontraron resultados.</h3>
+            <Paginator
+              pageNumber={callbacks.firstCallData.pageNumber}
+              totalPages={callbacks.firstCallData.totalPages}
+              loadDataFromPage={loadSuggestedPetsFromPage}>
+              <div className={styles.renderAnimals}>
+                {callbacks.firstCallLoading ? (
+                  <Spinner />
+                ) : callbacks.firstCallError ? (
+                  <h3>Se ha producido un error.</h3>
                 ) : (
+                  callbacks.firstCallData.content &&
+                  (callbacks.firstCallData.content.length === 0 ? (
+                    <h3>No se encontraron resultados.</h3>
+                  ) : (
+                    callbacks.firstCallData.content.map(pet => {
+                      return <Card key={pet.id} animal={pet} />;
+                    })
+                  ))
+                )}
+                {callbacks.firstCallData.content &&
                   callbacks.firstCallData.content.map(pet => {
                     return <Card key={pet.id} animal={pet} />;
-                  })
-                ))
-              )}
-              {callbacks.firstCallData.content &&
-                callbacks.firstCallData.content.map(pet => {
-                  return <Card key={pet.id} animal={pet} />;
-                })}
-            </div>
+                  })}
+              </div>
+            </Paginator>
           </div>
           <div className={styles.secondCards}>
             {/* Container de las cards 2 */}
@@ -179,22 +201,27 @@ const Filter = () => {
               <h3 className={styles.title}>Resultados de busqueda</h3>
             </div>
             {/* Container renderizado de animales CARDS */}
-            <div className={styles.renderAnimals}>
-              {callbacks.secondCallLoading ? (
-                <Spinner />
-              ) : callbacks.secondCallError ? (
-                <h3>Error.</h3>
-              ) : (
-                callbacks.secondCallData.content &&
-                (callbacks.secondCallData.content.length === 0 ? (
-                  <h3>No se encontraron resultados.</h3>
+            <Paginator
+              pageNumber={callbacks.secondCallData.pageNumber}
+              totalPages={callbacks.secondCallData.totalPages}
+              loadDataFromPage={loadFilteredPetsFromPage}>
+              <div className={styles.renderAnimals}>
+                {callbacks.secondCallLoading ? (
+                  <Spinner />
+                ) : callbacks.secondCallError ? (
+                  <h3>Se ha producido un error.</h3>
                 ) : (
-                  callbacks.secondCallData.content.map(pet => {
-                    return <Card key={pet.id} animal={pet} />;
-                  })
-                ))
-              )}
-            </div>
+                  callbacks.secondCallData.content &&
+                  (callbacks.secondCallData.content.length === 0 ? (
+                    <h3>No se encontraron resultados.</h3>
+                  ) : (
+                    callbacks.secondCallData.content.map(pet => {
+                      return <Card key={pet.id} animal={pet} />;
+                    })
+                  ))
+                )}
+              </div>
+            </Paginator>
           </div>
         </div>
         {/* Container lado IZQUIERDO */}

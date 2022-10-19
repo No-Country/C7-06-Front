@@ -62,6 +62,22 @@ export const useForm = initForm => {
     return result?.error || false;
   };
 
+  const handleMultipleFiles = e => {
+    const files = e.target.files;
+    const name = e.target.name;
+    // const prevFiles = form[name];
+
+    if (files.length > 0) {
+      console.log("mas de un file");
+      setForm(prev => {
+        return {
+          ...prev,
+          [name]: files
+        };
+      });
+    }
+  };
+
   // Validation Files
   const handleFiles = e => {
     const file = e.target.files[0];
@@ -135,6 +151,7 @@ export const useForm = initForm => {
     addForm,
     handleChange,
     handleFiles,
+    handleMultipleFiles,
     handleCheck,
     handleBlur,
     handleSubmit

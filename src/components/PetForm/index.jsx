@@ -10,6 +10,14 @@ function PetForm({ petId }) {
   const [loading, setLoading] = useState();
   const [characteres, setCharacteres] = useState(500);
 
+  const getImages = () => {
+    const AnimalPhotos = [];
+    for (let i = 1; i <= form.pictures.length - 1; i++) {
+      AnimalPhotos.push(form.pictures[i]);
+    }
+    return AnimalPhotos;
+  };
+
   const initForm = {
     data: {
       name: {
@@ -71,11 +79,21 @@ function PetForm({ petId }) {
       },
       size: {
         initVal: ""
+      },
+      pictures: {
+        initVal: [],
+        validation: [
+          {
+            condition: val => val.length <= 4,
+            error: "No se aceptan mas que 4 archivos."
+          }
+        ]
       }
     }
   };
   // Form handler
-  const { form, errors, addForm, handleChange, handleBlur, handleSubmit } = useForm(initForm);
+  const { form, errors, addForm, handleChange, handleBlur, handleMultipleFiles, handleSubmit } =
+    useForm(initForm);
 
   useEffect(() => {
     if (petId) {
@@ -100,7 +118,8 @@ function PetForm({ petId }) {
               weight: response.data.weight,
               size: response.data.size,
               vaccinationsUpToDate: response.data.vaccinationsUpToDate,
-              pureRace: response.data.pureRace
+              pureRace: response.data.pureRace,
+              pictures: response.data.pictures || ""
             });
             console.log("respuesta", response.data);
             setCharacteres(500 - response.data.description.length);
@@ -359,6 +378,34 @@ function PetForm({ petId }) {
                     <label htmlFor="pureRaceNo">No</label>
                   </div>
                 </fieldset>
+              </div>
+            </div>
+            <div className={classes.from_wrapper_pictures}>
+              <h3>Imágenes:</h3>
+              <p>Puedes agregar hasta 4 imágenes de cada mascota.</p>
+              <div className={classes.form_avatar_image}>
+                {form.pictures.length > 0 &&
+                  getImages().map((photo, id) => (
+                    <img
+                      src={photo.file || photo.path}
+                      alt={`Foto de ${form.name}`}
+                      key={`file${id}`}
+                    />
+                  ))}
+              </div>
+              <div className={classes.form_avatar_editButton}>
+                <label htmlFor="images">Seleccionar Archivos</label>
+                <input
+                  id="images"
+                  name="pictures"
+                  onChange={handleMultipleFiles}
+                  type="file"
+                  multiple
+                  accept="image/jpg, image/jpeg, image/png, image/webp"
+                  hidden
+                  value={form.pictures}
+                />
+                {errors?.pictures && <p className={classes.instructions}>{errors.pictures}</p>}
               </div>
             </div>
           </form>

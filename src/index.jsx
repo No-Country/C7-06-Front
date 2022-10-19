@@ -60,7 +60,7 @@ const router = createBrowserRouter([
             path: "/account",
             element: <UserAccount />
           },
-          { path: "/managepet", element: <PetFormPage /> }
+          { path: "/add-pet", element: <PetFormPage /> }
         ]
       },
       {

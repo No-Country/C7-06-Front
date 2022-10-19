@@ -15,6 +15,11 @@
     gap: 20px
     justify-content: flex-start
     width: 100%
+    flex-flow: row wrap
+
+    .legend
+      font-weight: bolder
+      min-width: 5.5em
     div
       display: flex
       align-items: center
@@ -28,6 +33,10 @@
         border: 6px solid transparent
         width: 20px
         height: 20px
+        
+        &:checked
+          border-color: #edeEf4
+          background: $main-color
 
  
 
@@ -73,9 +82,14 @@
       & > div
         width: 100%
         max-width: 358px
+        text-align: left
         @include mq(medium)
           max-width: 654px
-      
+      .wrapper_options
+        display: flex
+        flex-flow: row nowra
+        gap: 20px
+
     & > p
       text-align: left
       width: 100%

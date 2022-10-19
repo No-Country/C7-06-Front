@@ -9,8 +9,8 @@ const Home = () => {
         <PetBanner
           text="Encuentra al mejor compañero para tu mascota"
           images={{
-            mobile: { src: homeMobil, width: 2207 },
-            desktop: { src: homeDesktop, width: 3360 }
+            mobile: { src: homeMobil, size: 2207 },
+            desktop: { src: homeDesktop, size: 3360 }
           }}
         />
         <Intro />

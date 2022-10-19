@@ -7,9 +7,75 @@ import { regexConditions } from "../../helpers/regexs";
 import { Spinner } from "../../components";
 
 function PetForm({ petId }) {
-  const [pet, setPet] = useState([]);
   const [loading, setLoading] = useState();
   const [characteres, setCharacteres] = useState(500);
+
+  const initForm = {
+    data: {
+      name: {
+        initVal: "",
+        required: true,
+        validation: [
+          {
+            condition: val => regexConditions("name").test(val),
+            error: "No se aceptan caracteres numéricos."
+          }
+        ]
+      },
+      age: {
+        initVal: "",
+        required: true,
+        validation: [
+          {
+            condition: val => regexConditions("age").test(val),
+            error: "Solo se aceptan caracteres numéricos."
+          }
+        ]
+      },
+      location: {
+        initVal: "",
+        required: true,
+        validation: [
+          {
+            condition: val => regexConditions("adress").test(val),
+            error: "Indica una dirección válida."
+          }
+        ]
+      },
+      description: {
+        initVal: "",
+        validation: [
+          {
+            condition: val => val.length <= 500,
+            error: "No se aceptan mas de 500 caracteres."
+          }
+        ]
+      },
+      animalType: {
+        initVal: ""
+      },
+      gender: {
+        initVal: ""
+      },
+      race: {
+        initVal: ""
+      },
+      weigth: {
+        initVal: ""
+      },
+      vaccinationUpToDate: {
+        initVal: false
+      },
+      pureRace: {
+        initVal: false
+      },
+      size: {
+        initVal: ""
+      }
+    }
+  };
+  // Form handler
+  const { form, errors, addForm, handleChange, handleBlur, handleSubmit } = useForm(initForm);
 
   useEffect(() => {
     if (petId) {
@@ -23,7 +89,20 @@ function PetForm({ petId }) {
           });
 
           if (isMounted) {
-            setPet(response.data);
+            addForm({
+              name: response.data.name,
+              age: response.data.age,
+              location: response.data.location,
+              description: response.data.description,
+              animalType: response.data.animalType,
+              gender: response.data.gender,
+              race: response.data.race,
+              weight: response.data.weight,
+              size: response.data.size,
+              vaccinationsUpToDate: response.data.vaccinationsUpToDate,
+              pureRace: response.data.pureRace
+            });
+            console.log("respuesta", response.data);
             setCharacteres(500 - response.data.description.length);
             setLoading(false);
           }
@@ -45,53 +124,6 @@ function PetForm({ petId }) {
     }
   }, []);
 
-  const initForm = {
-    data: {
-      name: {
-        initVal: pet.name || "",
-        required: true,
-        validation: [
-          {
-            condition: val => regexConditions("name").test(val),
-            error: "No se aceptan caracteres numéricos."
-          }
-        ]
-      },
-      age: {
-        initVal: pet.age || "",
-        required: true,
-        validation: [
-          {
-            condition: val => regexConditions("age").test(val),
-            error: "Solo se aceptan caracteres numéricos."
-          }
-        ]
-      },
-      location: {
-        initVal: pet.location || "",
-        required: true,
-        validation: [
-          {
-            condition: val => regexConditions("adress").test(val),
-            error: "Indica una dirección válida."
-          }
-        ]
-      },
-      description: {
-        initVal: pet.description || "",
-        validation: [
-          {
-            condition: val => val.length <= 500,
-            error: "No se aceptan mas de 500 caracteres."
-          }
-        ]
-      }
-    }
-  };
-
-  // Form handler
-  const { form, errors, handleChange, handleBlur, handleSubmit } = useForm(initForm);
-
   const handleInput = e => {
     handleChange(e);
     setCharacteres(500 - e.target.value.length);
@@ -99,7 +131,7 @@ function PetForm({ petId }) {
 
   return (
     <>
-      {petId && loading ? (
+      {loading ? (
         <Spinner />
       ) : (
         <div className={classes.form}>
@@ -156,13 +188,175 @@ function PetForm({ petId }) {
               <div className={classes.form.group_controler}>
                 <fieldset>
                   <div>
-                    <input type="radio" id="cat" name="animalType" value="CAT" />
+                    <input
+                      type="radio"
+                      id="cat"
+                      name="animalType"
+                      value="CAT"
+                      onChange={handleChange}
+                      checked={form.animalType === "CAT"}
+                    />
                     <label htmlFor="cat">Gato</label>
                   </div>
 
                   <div>
-                    <input type="radio" id="dog" name="animalType" value="DOG" />
+                    <input
+                      type="radio"
+                      id="dog"
+                      onChange={handleChange}
+                      name="animalType"
+                      value="DOG"
+                      checked={form.animalType === "DOG"}
+                    />
                     <label htmlFor="dog">Perro</label>
+                  </div>
+                </fieldset>
+              </div>
+              <div className={classes.form.group_controler}>
+                <fieldset>
+                  <div>
+                    <input
+                      type="radio"
+                      id="male"
+                      name="gender"
+                      value="MALE"
+                      onChange={handleChange}
+                      checked={form.gender === "MALE"}
+                    />
+                    <label htmlFor="male">Macho</label>
+                  </div>
+
+                  <div>
+                    <input
+                      type="radio"
+                      id="female"
+                      onChange={handleChange}
+                      name="gender"
+                      value="FEMALE"
+                      checked={form.gender === "FEMALE"}
+                    />
+                    <label htmlFor="female">Hembra</label>
+                  </div>
+                </fieldset>
+              </div>
+              <div className={classes.form_group}>
+                <input
+                  name="race"
+                  placeholder="Raza"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={form.race}
+                />
+                {errors?.race && <p className={classes.instructions}>{errors.race}</p>}
+              </div>
+              <div className={classes.form_group}>
+                <input
+                  name="weight"
+                  placeholder="peso"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={form.weight}
+                />
+                {errors?.weight && <p className={classes.instructions}>{errors.weight}</p>}
+              </div>
+
+              <div className={classes.form.group_controler}>
+                <fieldset>
+                  <div className={classes.legend}>Tamaño:</div>
+                  <div className={classes.wrapper_options}>
+                    <div>
+                      <input
+                        type="radio"
+                        id="sizes"
+                        name="size"
+                        value="SHORT"
+                        onChange={handleChange}
+                        checked={form.size === "SHORT"}
+                      />
+                      <label htmlFor="sizes">Pequeño</label>
+                    </div>
+
+                    <div>
+                      <input
+                        type="radio"
+                        id="sizem"
+                        onChange={handleChange}
+                        name="size"
+                        value="MEDIUM"
+                        checked={form.size === "MEDIUM"}
+                      />
+                      <label htmlFor="sizem">Mediano</label>
+                    </div>
+
+                    <div>
+                      <input
+                        type="radio"
+                        id="sizel"
+                        onChange={handleChange}
+                        name="size"
+                        value="BIG"
+                        checked={form.size === "BIG"}
+                      />
+                      <label htmlFor="sizel">Grande</label>
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
+
+              <div className={classes.form.group_controler}>
+                <fieldset>
+                  <div className={classes.legend}>Vacunación:</div>
+                  <div className={classes.wrapper_options}>
+                    <input
+                      type="radio"
+                      id="vacyes"
+                      name="vaccinationsUpToDate"
+                      value="true"
+                      onChange={handleChange}
+                      checked={form.vaccinationsUpToDate}
+                    />
+                    <label htmlFor="vacyes">Completa</label>
+                  </div>
+
+                  <div>
+                    <input
+                      type="radio"
+                      id="vacNo"
+                      onChange={handleChange}
+                      name="vaccinationsUpToDate"
+                      value="false"
+                      checked={form.vaccinationsUpToDate}
+                    />
+                    <label htmlFor="vacNo">Incompleta</label>
+                  </div>
+                </fieldset>
+              </div>
+
+              <div className={classes.form.group_controler}>
+                <fieldset>
+                  <div className={classes.legend}>Pura raza:</div>
+                  <div className={classes.wrapper_options}>
+                    <input
+                      type="radio"
+                      id="pureRaceYes"
+                      name="pureRace                      "
+                      value="true"
+                      onChange={handleChange}
+                      checked={form.pureRace === true}
+                    />
+                    <label htmlFor="pureRaceYes">Si</label>
+                  </div>
+
+                  <div>
+                    <input
+                      type="radio"
+                      id="pureRaceNo"
+                      onChange={handleChange}
+                      name="pureRace"
+                      value="false"
+                      checked={form.pureRace === false}
+                    />
+                    <label htmlFor="pureRaceNo">No</label>
                   </div>
                 </fieldset>
               </div>

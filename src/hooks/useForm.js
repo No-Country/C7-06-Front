@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 export const useForm = initForm => {
+  console.log("initform ", initForm);
   const formStructure = {};
   Object.keys(initForm.data).forEach(el => (formStructure[el] = initForm.data[el].initVal));
   // States
@@ -15,36 +16,42 @@ export const useForm = initForm => {
     if (!initForm.data[name]?.required && !value) {
       setErrors({ ...errors, [name]: false });
     }
-    setForm({
-      ...form,
-      [name]: value
+    setForm(prev => {
+      return {
+        ...prev,
+        [name]: value
+      };
     });
   };
 
   // Validation when focus is gone
   const handleBlur = e => {
     const champ = e.target.name;
+    const value = e.target.value;
     handleChange(e);
-    if (!initForm.data[champ].required && !form[champ]) {
+    if (!initForm.data[champ].required && !value) {
       return;
     }
+
     setErrors(
-      Object.assign(
-        errors,
-        { [champ]: _validate(initForm.data[champ], form[champ], champ) } || false
-      )
+      Object.assign(errors, { [champ]: _validate(initForm.data[champ], value, champ) } || false)
     );
   };
 
+  const addForm = obj => {
+    setForm(obj);
+  };
   // Validation for check champs
   const handleCheck = e => {
-    const champ = e.target.name;
+    const name = e.target.name;
     const value = !e.target.value;
-    setForm({
-      ...form,
-      [champ]: value
+    setForm(prev => {
+      return {
+        ...prev,
+        [name]: value
+      };
     });
-    setErrors(Object.assign(errors, { [champ]: _validate(initForm.data[champ], value) } || false));
+    setErrors(Object.assign(errors, { [name]: _validate(initForm.data[name], value) } || false));
   };
 
   // Validation Form
@@ -58,26 +65,32 @@ export const useForm = initForm => {
   // Validation Files
   const handleFiles = e => {
     const file = e.target.files[0];
-    const champ = e.target.name;
-    const oldUrl = form[champ];
+    const name = e.target.name;
+    const oldUrl = form[name];
     if (file) {
-      setForm({
-        ...form,
-        [champ]: file.name
+      setForm(prev => {
+        return {
+          ...prev,
+          [name]: file
+        };
       });
-      setErrors(Object.assign(errors, { [champ]: _validate(initForm.data[champ], file) }));
-      if (errors[champ]) {
-        setForm({
-          ...form,
-          [champ]: oldUrl
+      setErrors(Object.assign(errors, { [name]: _validate(initForm.data[name], file) }));
+      if (errors[name]) {
+        setForm(prev => {
+          return {
+            ...prev,
+            [name]: oldUrl
+          };
         });
         return;
       }
       const reader = new FileReader();
       reader.onload = function (e) {
-        setForm({
-          ...form,
-          file: e.target.result
+        setForm(prev => {
+          return {
+            ...prev,
+            file: e.target.result
+          };
         });
       };
       reader.readAsDataURL(file);
@@ -119,6 +132,7 @@ export const useForm = initForm => {
     errors,
     loading,
     response,
+    addForm,
     handleChange,
     handleFiles,
     handleCheck,

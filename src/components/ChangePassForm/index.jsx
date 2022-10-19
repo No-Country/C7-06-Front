@@ -83,7 +83,7 @@ const ChangePassForm = () => {
                 type="password"
                 placeholder="Confirmar la nueva contraseña"
                 onChange={handleChange}
-                onBlur={handleBlur}
+                onInput={handleBlur}
                 value={form.passConfirm}
               />
               {errors?.passConfirm && <p className={classes.instructions}>{errors.passConfirm}</p>}

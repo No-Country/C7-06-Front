@@ -3,8 +3,8 @@ import {
   Spinner,
   ChangePassForm,
   UserDescriptionForm,
-  DeleteAccountForm,
-  PetForm
+  DeleteAccountForm // ,
+  // PetForm
 } from "../components";
 import { useSelector, useDispatch } from "react-redux";
 import { getUserLogged } from "../Redux/slices/user/userAction";
@@ -33,7 +33,7 @@ const UserAccount = () => {
           <UserDescriptionForm />
           <ChangePassForm />
           <DeleteAccountForm />
-          <PetForm />
+          {/* <PetForm /> */}
         </div>
       )}
     </>

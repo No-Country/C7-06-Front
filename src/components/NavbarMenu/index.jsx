@@ -23,7 +23,7 @@ const NavbarMenu = () => {
   // Renderizado condicional del menú
   const renderMenu = {
     display: isMenuOpen && "flex",
-    width: isMenuOpen && "100%"
+    width: isMenuOpen && "350px"
   };
 
   useEffect(() => {
@@ -70,11 +70,6 @@ const NavbarMenu = () => {
             <NavLink to="/login">Iniciar Sesión</NavLink>
           </li>
         ) : null}
-        {/* <li>
-          <NavLink to="/search" className={styles.search}>
-            <FontAwesomeIcon icon={faMagnifyingGlass} />
-          </NavLink>
-        </li> */}
       </ul>
       {userLogged ? (
         <>
@@ -90,9 +85,23 @@ const NavbarMenu = () => {
             </span>
             <FontAwesomeIcon icon={faCircleUser} />
           </Link>
-          <Link to="/" className={styles.logout} onClick={handleLogout}>
-            Cerrar sesión
-          </Link>
+          {isMenuOpen ? (
+            <div className={styles.userSubmenu}>
+              <ul className={styles.userSubmenu_container}>
+                <li>
+                  <Link to="/account">Información personal</Link>
+                </li>
+                <li>
+                  <Link to="/pets">Gestión de mascotas</Link>
+                </li>
+                <li>
+                  <Link to="/" className={styles.logout} onClick={handleLogout}>
+                    Cerrar sesión
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          ) : null}
         </>
       ) : null}
     </nav>

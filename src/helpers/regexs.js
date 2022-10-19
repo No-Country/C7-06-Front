@@ -11,7 +11,7 @@ export const regexConditions = type => {
       return /[\w',-\\/.\s]/;
     case "path":
       console.log("path");
-      return /^[A-Za-z0-9.:/]+[(".jpg")(".png")("webp")]$/;
+      return /^[A-Za-z0-9.:/]+[(".jpg")(".jpeg)(".png")("webp")]$/;
     case "phone":
       return /^(\+\d{1,3}( )?)?((\(\d{1,3}\))|\d{1,3})[- .]?\d{3,4}[- .]?\d{4}$/;
     case "age":

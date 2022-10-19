@@ -32,15 +32,16 @@ export const useForm = initForm => {
     if (!initForm.data[champ].required && !value) {
       return;
     }
-
     setErrors(
       Object.assign(errors, { [champ]: _validate(initForm.data[champ], value, champ) } || false)
     );
   };
 
+  // Load data from outside de hook to the form
   const addForm = obj => {
     setForm(obj);
   };
+
   // Validation for check champs
   const handleCheck = e => {
     const name = e.target.name;
@@ -62,13 +63,26 @@ export const useForm = initForm => {
     return result?.error || false;
   };
 
+  // leer files
+  const readFile = async file => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    const result = await new Promise(
+      (resolve, reject) =>
+        (reader.onload = function (e) {
+          resolve(reader.result);
+        })
+    );
+    return result;
+  };
+
+  // Handle multiple files load
   const handleMultipleFiles = e => {
     const files = e.target.files;
     const name = e.target.name;
     // const prevFiles = form[name];
 
-    if (files.length > 0) {
-      console.log("mas de un file");
+    if (files) {
       setForm(prev => {
         return {
           ...prev,
@@ -76,6 +90,18 @@ export const useForm = initForm => {
         };
       });
     }
+    const newFiles = [];
+    for (const file of files) {
+      newFiles.push(readFile(file));
+    }
+    console.log(newFiles);
+    setForm(prev => {
+      return {
+        ...prev,
+        files: newFiles
+      };
+    });
+    console.log("archivos muliples:", form.files);
   };
 
   // Validation Files
@@ -83,6 +109,7 @@ export const useForm = initForm => {
     const file = e.target.files[0];
     const name = e.target.name;
     const oldUrl = form[name];
+    console.log("file", file);
     if (file) {
       setForm(prev => {
         return {

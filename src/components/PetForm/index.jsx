@@ -10,13 +10,13 @@ function PetForm({ petId }) {
   const [loading, setLoading] = useState();
   const [characteres, setCharacteres] = useState(500);
 
-  const getImages = () => {
-    const AnimalPhotos = [];
-    for (let i = 1; i <= form.pictures.length - 1; i++) {
-      AnimalPhotos.push(form.pictures[i]);
-    }
-    return AnimalPhotos;
-  };
+  // const getImages = () => {
+  //   const AnimalPhotos = [];
+  //   for (let i = 1; i <= form.pictures.length - 1; i++) {
+  //     AnimalPhotos.push(form.pictures[i]);
+  //   }
+  //   return AnimalPhotos;
+  // };
 
   const initForm = {
     data: {
@@ -88,6 +88,9 @@ function PetForm({ petId }) {
             error: "No se aceptan mas que 4 archivos."
           }
         ]
+      },
+      files: {
+        initVal: ""
       }
     }
   };
@@ -384,13 +387,13 @@ function PetForm({ petId }) {
               <h3>Imágenes:</h3>
               <p>Puedes agregar hasta 4 imágenes de cada mascota.</p>
               <div className={classes.form_avatar_image}>
-                {form.pictures.length > 0 &&
-                  getImages().map((photo, id) => (
-                    <img
-                      src={photo.file || photo.path}
-                      alt={`Foto de ${form.name}`}
-                      key={`file${id}`}
-                    />
+                {form.files &&
+                  form.files.map((image, key) => (
+                    <img key={`file${key}`} src={image} alt={"nombre mascota"} />
+                  ))}
+                {form.picture &&
+                  form.picture.map((image, key) => (
+                    <img key={`picture${key}`} src={image.path} alt={"nombre mascota"} />
                   ))}
               </div>
               <div className={classes.form_avatar_editButton}>
@@ -401,9 +404,9 @@ function PetForm({ petId }) {
                   onChange={handleMultipleFiles}
                   type="file"
                   multiple
-                  accept="image/jpg, image/jpeg, image/png, image/webp"
                   hidden
-                  value={form.pictures}
+                  accept="image/jpg, image/jpeg, image/png, image/webp"
+                  value={form.files}
                 />
                 {errors?.pictures && <p className={classes.instructions}>{errors.pictures}</p>}
               </div>

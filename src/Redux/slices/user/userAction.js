@@ -17,7 +17,7 @@ export const getUserLogged = createAsyncThunk(
         phone_number: response.data.user.phone_number,
         role: response.data.user.role
       };
-      console.log(userData);
+
       return userData;
     } catch (error) {
       console.log("error: ", error);
@@ -87,10 +87,11 @@ export const modifyUserInfo = createAsyncThunk(
   "userSlice.modifyUserInfo",
   async ({ userId, userObject }, { rejectWithValue }) => {
     try {
-      apiUserAuth.common.headers.Authorization = `Bearer ${
+      apiUserAuth.defaults.headers.common.Authorization = `Bearer ${
         localStorage.getItem("userToken").token
       }`;
       const response = await apiUserAuth.put(`/api/users/${userId}/update`, userObject);
+      console.log("put", response.data.user);
       return response.data.user;
     } catch (error) {
       console.log("error: ", error);

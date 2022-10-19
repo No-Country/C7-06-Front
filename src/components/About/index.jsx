@@ -6,11 +6,9 @@ const About = () => {
     <div className={styles.aboutContainer}>
       <h1>Sobre ANIMATCH</h1>
       <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel
-        sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum quisquam
-        eius sed odit fugiat iusto fuga praesentium optio, eaque rerum! Provident similique
-        accusantium nemo autem. Veritatis obcaecati tenetur iure eius earum ut molestias architecto
-        voluptate aliquam nihil, eveniet aliquid culpa officia aut!
+        ANIMATCH surge de la necesidad de los amantes de las mascotas por encontrar la pareja ideal
+        de su querida mascotita. Si buscas una raza en especifico seguro aqui la encontraras, vas a
+        poder contactar a su dueño y acordad el momento del encuentro.
       </p>
       <div className={styles.button}>
         <Link to="/contact">Contacto </Link>

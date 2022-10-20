@@ -10,6 +10,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { getUserLogged } from "../Redux/slices/user/userAction";
 import { useEffect } from "react";
 
+const styles = {
+  backgroundColor: "#f5f2ff"
+};
+
 const UserAccount = () => {
   const { userInfo, loading, error } = useSelector(state => state.user);
   const { userLogged } = useSelector(state => state.auth);
@@ -28,7 +32,7 @@ const UserAccount = () => {
       ) : error ? (
         <div>Se ha producido un error, intentarlo nuevamente mas tarde.</div>
       ) : (
-        <div>
+        <div style={styles}>
           <UserInfoForm />
           <UserDescriptionForm />
           <ChangePassForm />

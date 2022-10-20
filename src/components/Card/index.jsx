@@ -33,10 +33,12 @@ const Card = ({ animal, isFavorite }) => {
     <Link to={`/pet/${animal.id}`} className={styles.cardLink}>
       <div className={styles.card}>
         <div className={styles.card__img}>
-          {animal.pictureResponse ? (
-            <img src={`/animals/${animal.pictureResponse}`} alt={animal?.name} />
+          {animal.pictureResponse?.path ? (
+            <img src={animal.pictureResponse.path} alt={animal?.name} />
+          ) : animal.animalType === "CAT" ? (
+            <img src={cat} alt={animal?.name} />
           ) : (
-            <img src={animal.animalType === "CAT" ? cat : dog} alt={animal?.name} />
+            <img src={dog} alt={animal?.name} />
           )}
         </div>
         <div className={styles.card__content}>

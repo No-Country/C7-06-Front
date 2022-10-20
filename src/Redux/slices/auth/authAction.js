@@ -39,3 +39,24 @@ export const userLogin = createAsyncThunk(
     }
   }
 );
+
+// LOGIN USER WITH GOOGLE
+
+export const userLoginGoogle = createAsyncThunk(
+  "authSlice/userLoginGoogle",
+  async ({ token }, { rejectWithValue }) => {
+    try {
+      const { data } = await apiUserPub.post("/api/auth/google", { token });
+      // store user's token in local storage
+      localStorage.setItem("userToken", JSON.stringify(data.data));
+      return data;
+    } catch (error) {
+      // return custom error message from API if any
+      if (error.response && error.response.data.message) {
+        return rejectWithValue(error.response.data.message);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);

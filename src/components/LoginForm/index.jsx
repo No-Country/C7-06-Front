@@ -1,5 +1,4 @@
 import classes from "./LoginForm.module.sass";
-import jwtDecode from "jwt-decode";
 import { useRef, useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useForm } from "../../hooks/useForm";
@@ -7,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEyeSlash, faEye, faLock, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 // import { getUserLogin } from "../../Redux/slices/auth";
 import { useDispatch, useSelector } from "react-redux";
-import { userLogin } from "../../Redux/slices/auth/authAction";
+import { userLogin, userLoginGoogle } from "../../Redux/slices/auth/authAction";
 import { regexConditions } from "../../helpers/regexs";
 
 const LoginForm = () => {
@@ -35,11 +34,6 @@ const LoginForm = () => {
 
   // Referencies
   const emailRef = useRef();
-
-  // Focus on email input at first render
-  useEffect(() => {
-    emailRef.current.focus();
-  }, []);
 
   // Password visibility handler
   const [seePass, setSeePass] = useState(false);
@@ -81,8 +75,11 @@ const LoginForm = () => {
 
   // GOOGLE LOGIN
   function handleCallbackResponse(response) {
-    const userObject = jwtDecode(response.credential);
-    console.log(userObject);
+    return dispatch(
+      userLoginGoogle({
+        token: response.credential
+      })
+    );
   }
 
   useEffect(() => {

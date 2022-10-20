@@ -6,17 +6,19 @@
     display: flex
     flex-direction: row
     height: auto
-    align-items: center
     justify-content: center
     background-color: $background-light
     border-radius: 8px
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2)
     transition: all 0.3s ease
     flex-grow: 1
+    align-items: unset
     
     @include mq("medium")
         flex-direction: column
         height: 100%
+        align-items: unset
+        align-items: center
     
     &:hover
         transform: scale(1.02)
@@ -90,13 +92,13 @@
             margin: 10px 0
 
         .card__text
-            position: relative
             width: 100%
-            font-size: 14px
             font-weight: 400
             padding: 10px 0
             color: #666
             font-family: $main-font
+            display: flex
+
             ul
                 list-style: none
                 padding: 0

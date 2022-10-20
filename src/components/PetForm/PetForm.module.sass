@@ -8,6 +8,7 @@
   margin: 2em auto
   border: 1px solid $light-gray
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25)
+  margin-bottom: 2em
 
   fieldset
     border: none
@@ -45,7 +46,7 @@
     border: none
     outline: none
     min-height: 40px
-    min-width: 300px
+    min-width: 358px
     background: rgba($light-gray, 30%)
     border-radius: 5px
     margin: 10px
@@ -66,6 +67,16 @@
     flex-flow: column nowrap
     align-items: center
 
+  &_wrapper_pictures
+    display: flex
+    max-width: 358px
+    flex-flow: column nowrap
+    width: 100%
+    margin: 2em auto
+    @include mq(medium)
+      max-width: 650px
+    p
+      margin: 1em 0
   &_wrapper
     display: flex
     flex-flow: column nowrap
@@ -74,8 +85,6 @@
       display: flex
       flex-flow: column nowrap
       align-items: center
-      width: 100%
-      max-width: 358px
       @include mq(medium)
         max-width: 783px
       h3
@@ -147,3 +156,37 @@
 
 .instructions
   color: red
+
+.pictures_wrapper
+  display: flex
+  flex-flow: row wrap
+  align-items: top
+  justify-content: center
+  gap: 5px
+
+.pictures_image
+  max-height: 400px
+  max-width: 400px
+  min-height: 200px
+  min-width: 200px
+  position: relative
+  flex: 1 0
+
+  img 
+    width: 100%
+    height: 100%
+    object-fit: cover
+    object-position: center center
+
+.pictures_icon
+  position: absolute
+  height: 2em
+  width: 2em
+  color: white
+  right: 1em
+  top: 1em
+  background: $main-color
+  padding: 0.5em
+  border-radius: 50%
+  &:hover
+    color: $secondary-color

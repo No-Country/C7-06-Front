@@ -8,6 +8,7 @@
 
 .wrapper 
   padding: 10px
+  width: 100%
 
 
 .shareHeader 
@@ -40,7 +41,11 @@
       background-color: transparent
     
   
-
+.previewer 
+  display: flex
+  flex-flow: row wrap
+  gap:20px
+  
 
 .separator 
   margin: 20px
@@ -58,9 +63,13 @@
 
   &_options 
     display: flex
+    flex-direction: column
     align-items: center
     justify-content: space-between
-  
+    gap: 1em
+    @include mq(medium)
+      flex-direction: row
+      
   &_option 
     display: flex
     align-items: center
@@ -94,6 +103,8 @@
   border: none
   border-radius: 5px
   cursor: pointer
+  width: 100px
+  font-size: 1em
 
   &:hover 
     background-color: $main-color + 'CC'
@@ -101,8 +112,15 @@
 
 
 .share_btn_cancel 
-  padding: 1em 2em
+  padding: 1em
+  margin-right: 20px
+  font-weight: 500
   color: black
-  background: $secondary-color
+  background-color: $secondary-color
+  border: none
   border-radius: 5px
-  margin-right: 1em
+  cursor: pointer
+  widows: 100px
+  font-size: 1em
+  &:hover 
+    background-color: $secondary-color + 'CC'

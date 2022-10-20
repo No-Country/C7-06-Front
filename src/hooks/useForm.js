@@ -12,6 +12,7 @@ export const useForm = initForm => {
   // Handle changing values of inputs
   const handleChange = e => {
     const { name, value } = e.target;
+    console.log(e.target.value);
     if (!initForm.data[name]?.required && !value) {
       setErrors({ ...errors, [name]: false });
     }
@@ -28,7 +29,8 @@ export const useForm = initForm => {
     const champ = e.target.name;
     const value = e.target.value;
     handleChange(e);
-    if (!initForm.data[champ].required && !value) {
+    if (!initForm.data[champ].required && !value && !typeof value === Boolean) {
+      console.log("nada que cambiar");
       return;
     }
     setErrors(
@@ -58,24 +60,25 @@ export const useForm = initForm => {
 
   const _validate = (champ, val) => {
     if (champ?.required && !val) return "Este campo es requerido";
-    const result = champ.validation?.find(el => !el.condition(val));
-    console.log(champ, " ", val, " ", result);
-    return result?.error || false;
+    if (champ?.validation) {
+      const result = champ.validation?.find(el => !el.condition(val));
+      return result?.error || false;
+    }
   };
 
-  // Handle multiple files load
-  const handleMultipleFiles = e => {
-    const files = e.target.files;
+  // handle radio buttons
+
+  const handleRadio = e => {
+    const value = e.target.value;
     const name = e.target.name;
-    // const prevFiles = form[name];
-    const filesData = new FormData();
-    filesData.append("file", files);
+    console.log("radio ", name, " valor ", value);
     setForm(prev => {
       return {
         ...prev,
-        [name]: filesData
+        [name]: value
       };
     });
+    setErrors(Object.assign(errors, { [name]: _validate(initForm.data[name], value) } || false));
   };
 
   // Validation Files
@@ -111,13 +114,14 @@ export const useForm = initForm => {
     Object.entries(form).forEach(([key]) => {
       setErrors(Object.assign(errors, { [key]: _validate(initForm.data[key], form[key]) }));
     });
+    console.log("ERRORES ENCONTRAOS ", errors);
     // Checking if errors has all false values
     if (Object.values(errors).filter(val => val !== false).length === 0) {
       console.log("no hay errores");
       setLoading(true);
       try {
         setResponse(await initForm.apicall());
-        console.log(response);
+        console.log("respuesta", response);
         setLoading(false);
         if (!form.notreset) {
           e.target.reset();
@@ -141,7 +145,7 @@ export const useForm = initForm => {
     addForm,
     handleChange,
     handleFiles,
-    handleMultipleFiles,
+    handleRadio,
     handleCheck,
     handleBlur,
     handleSubmit

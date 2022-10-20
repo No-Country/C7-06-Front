@@ -31,7 +31,7 @@ function PetForm({ petId }) {
         ]
       },
       age: {
-        initVal: "",
+        initVal: 0,
         required: true,
         validation: [
           {
@@ -172,6 +172,8 @@ function PetForm({ petId }) {
               </div>
               <div className={classes.form_group}>
                 <input
+                  type="number"
+                  min="0"
                   name="age"
                   placeholder="Edad de la mascota"
                   onBlur={handleBlur}

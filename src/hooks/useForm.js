@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Swal from "sweetalert2";
 
 export const useForm = initForm => {
   const formStructure = {};
@@ -121,7 +122,14 @@ export const useForm = initForm => {
       setLoading(true);
       try {
         setResponse(await initForm.apicall());
-        console.log("respuesta", response);
+        Swal.fire({
+          title: "¡Éxito!",
+          text: "Se ha guardado correctamente",
+          icon: "success",
+          confirmButtonText: "Aceptar"
+        });
+
+        console.log(response);
         setLoading(false);
         if (!form.notreset) {
           e.target.reset();

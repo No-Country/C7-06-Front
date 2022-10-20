@@ -8,7 +8,11 @@ const Contact = () => {
   const form = useRef();
 
   const sweetAlert = () => {
-    Swal.fire("Mensaje enviado con exito");
+    Swal.fire({
+      icon: "success",
+      title: "¡Perfecto!",
+      text: "Tu mensaje ha sido enviado."
+    });
   };
 
   const sendEmail = e => {
@@ -48,10 +52,8 @@ const Contact = () => {
           <textarea type="textarea" placeholder="Escribe aqui tu mensaje..." name="mensaje" />{" "}
         </div>
         <div className={styles.conditions}>
-          <input className={styles.checkbox} type="checkbox" name="conditions" />
-          <label htmlFor="conditions">
-            <span></span>Acepto las condiciones y politicas de privacidad
-          </label>
+          <input className={styles.checkbox} type="checkbox" name="conditions" required />
+          <label htmlFor="conditions">Acepto las condiciones y politicas de privacidad</label>
         </div>
         <button>Enviar</button>
       </form>

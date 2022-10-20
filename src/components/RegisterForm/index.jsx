@@ -1,5 +1,4 @@
 import classes from "./RegisterForm.module.sass";
-import jwtDecode from "jwt-decode";
 import { useRef, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "../../hooks/useForm";
@@ -7,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEyeSlash, faEye, faUser, faLock, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { regexConditions } from "../../helpers/regexs";
 import { useDispatch, useSelector } from "react-redux";
-import { registerUser } from "../../Redux/slices/auth/authAction";
+import { registerUser, userLoginGoogle } from "../../Redux/slices/auth/authAction";
 
 const RegisterForm = () => {
   // States
@@ -102,14 +101,11 @@ const RegisterForm = () => {
 
   // GOOGLE LOGIN
   function handleCallbackResponse(response) {
-    const userObject = jwtDecode(response.credential);
-    console.log(response);
-    const userData = {
-      email: userObject.email,
-      name: userObject.given_name,
-      surname: userObject.family_name
-    };
-    console.log(userData);
+    return dispatch(
+      userLoginGoogle({
+        token: response.credential
+      })
+    );
   }
 
   useEffect(() => {
@@ -127,9 +123,6 @@ const RegisterForm = () => {
       width: widthView,
       height: 40
     });
-
-    // Focus on email
-    emailRegRef.current.focus();
   }, []);
 
   return (

@@ -2,6 +2,7 @@ import classes from "./UserDescriptionForm.module.sass";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import { modifyUserInfo } from "../../Redux/slices/user/userAction";
+import Swal from "sweetalert2";
 
 const UserDescriptionForm = () => {
   const { userInfo } = useSelector(state => state.user);
@@ -24,6 +25,11 @@ const UserDescriptionForm = () => {
     e.preventDefault();
     if (description.length <= 500) {
       dispatch(modifyUserInfo({ userId: userInfo.id, userObject: { description } }));
+      Swal.fire({
+        icon: "success",
+        title: "¡Perfecto!",
+        text: "Tu descripción ha sido actualizada."
+      });
       setErrors(false);
     } else {
       setErrors("No se aceptan descripciones de mas de 500 caracteres");

@@ -48,7 +48,7 @@ export const userLoginGoogle = createAsyncThunk(
     try {
       const { data } = await apiUserPub.post("/api/auth/google", { token });
       // store user's token in local storage
-      localStorage.setItem("userToken", JSON.stringify(data.data));
+      localStorage.setItem("userToken", JSON.stringify(data));
       return data;
     } catch (error) {
       // return custom error message from API if any

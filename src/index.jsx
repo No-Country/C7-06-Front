@@ -50,6 +50,10 @@ const router = createBrowserRouter([
         element: <UserProfile />
       },
       {
+        path: "/user/:id",
+        element: <UserProfile />
+      },
+      {
         path: "/contact",
         element: <ContactUs />
       },

@@ -13,6 +13,7 @@ const DeleteAccountForm = () => {
       title: "Estas seguro?",
       text: "Esta accion es irreversible!",
       type: "warning",
+      icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#6342e8",
       cancelButtonColor: "#d33",

@@ -6,6 +6,31 @@ import { NavbarContext } from "../../contexts/NavbarContext";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./NavbarMenu.module.sass";
 import { getUserLogged } from "../../Redux/slices/user/userAction";
+import PropTypes from "prop-types";
+
+const ProfileSubmenu = ({ handleLogout }) => {
+  return (
+    <div className={styles.userSubmenu}>
+      <ul className={styles.userSubmenu_container}>
+        <li>
+          <Link to="/account">Información personal</Link>
+        </li>
+        <li>
+          <Link to="/pets">Gestión de mascotas</Link>
+        </li>
+        <li>
+          <Link to="/" className={styles.logout} onClick={handleLogout}>
+            Cerrar sesión
+          </Link>
+        </li>
+      </ul>
+    </div>
+  );
+};
+
+ProfileSubmenu.propTypes = {
+  handleLogout: PropTypes.func.isRequired
+};
 
 const NavbarMenu = () => {
   const { userLogged } = useSelector(state => state.auth);
@@ -17,13 +42,14 @@ const NavbarMenu = () => {
 
   // Función para cerrar el menú
   const handleLinkClick = e => {
-    setIsMenuOpen(false);
+    console.log("click");
+    setIsMenuOpen(!isMenuOpen);
   };
 
   // Renderizado condicional del menú
   const renderMenu = {
     display: isMenuOpen && "flex",
-    width: isMenuOpen && "350px"
+    width: isMenuOpen & (window.innerWidth < 850) ? "350px" : "100%"
   };
 
   useEffect(() => {
@@ -73,7 +99,7 @@ const NavbarMenu = () => {
       </ul>
       {userLogged ? (
         <>
-          <Link to="/user" className={styles.user} onClick={handleLinkClick}>
+          <Link className={styles.user} onClick={handleLinkClick}>
             <span>
               {loading ? (
                 <>User</>
@@ -85,23 +111,7 @@ const NavbarMenu = () => {
             </span>
             <FontAwesomeIcon icon={faCircleUser} />
           </Link>
-          {isMenuOpen ? (
-            <div className={styles.userSubmenu}>
-              <ul className={styles.userSubmenu_container}>
-                <li>
-                  <Link to="/account">Información personal</Link>
-                </li>
-                <li>
-                  <Link to="/pets">Gestión de mascotas</Link>
-                </li>
-                <li>
-                  <Link to="/" className={styles.logout} onClick={handleLogout}>
-                    Cerrar sesión
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          ) : null}
+          {isMenuOpen ? <ProfileSubmenu handleLogout={handleLogout} /> : null}
         </>
       ) : null}
     </nav>

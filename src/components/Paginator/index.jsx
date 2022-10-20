@@ -1,4 +1,6 @@
 import styles from "./Paginator.module.sass";
+import PropTypes from "prop-types";
+
 const Paginator = ({ children, pageNumber, totalPages, loadDataFromPage }) => {
   const handleClickPage = e => {
     loadDataFromPage(e.target.value);
@@ -24,6 +26,13 @@ const Paginator = ({ children, pageNumber, totalPages, loadDataFromPage }) => {
       </ul>
     </div>
   );
+};
+
+Paginator.propTypes = {
+  children: PropTypes.node.isRequired,
+  pageNumber: PropTypes.number.isRequired,
+  totalPages: PropTypes.number.isRequired,
+  loadDataFromPage: PropTypes.func.isRequired
 };
 
 export default Paginator;

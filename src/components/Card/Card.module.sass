@@ -1,8 +1,11 @@
 @use '../../sass/variables' as *
 
 .card
+    width: 100%
+    margin-bottom: 20px
     display: flex
-    flex-direction: column
+    flex-direction: row
+    height: auto
     align-items: center
     justify-content: center
     background-color: $background-light
@@ -10,26 +13,36 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2)
     transition: all 0.3s ease
     flex-grow: 1
+    
+    @include mq("medium")
+        flex-direction: column
+        height: 100%
+    
     &:hover
         transform: scale(1.02)
+        
     @include mq("medium")
         height: minmax(250px, 1fr)
         flex-direction: column
         align-items: center
         justify-content: center
+        width: 325px
+
     @include mq("large")
-        width: 100%
+    
     &__img
-        width: 60%
-        min-width: 140px
+        // width: 40%
+        max-width: 60%
         overflow: hidden
         border-radius: 8px 0 0 8px
+        object-position: center center
+
         @include mq("medium")
             width: 100%
             height: 100%
+            max-width: 100%
             object-fit: cover
-            border-radius: 8px 8px 0 0
-            overflow: hidden
+
         img
             width: 100%
             height: 100%
@@ -43,9 +56,15 @@
                 height: 100%
                 object-fit: cover
     &__content
-        width: 100%
         position: relative
         padding: 0px 50px 0px 15px
+        width: 40%
+        display: flex
+        flex-direction: column
+        
+
+        @include mq(medium)
+            width: 100%
         .favorite
             bottom: 5px
             position: absolute
@@ -86,36 +105,3 @@
     text-decoration: none
     color: $main-color
 
-@media screen and (max-width: 768px)
-    .card
-        width: 100%
-        margin-bottom: 20px
-        display: flex
-        flex-direction: row
-        height: auto
-        .card__img
-            width: 40%
-            min-width: 140px
-            height: 136px
-            overflow: hidden
-            border-radius: 8px 0 0 8px
-            object-position: center center
-            img
-                object-fit: cover
-                border-radius: 8px 0 0 8px
-        .card__content
-            width: 100%
-            .favorite
-                bottom: 5px
-            .card__title
-                font-family: $secondary-font
-                font-size: 18px
-                font-weight: 600
-                margin: 10px 0
-            .card__text
-                position: relative
-                width: 100%
-                font-size: 14px
-                font-weight: 400
-                padding: 10px 0
-                color: #666

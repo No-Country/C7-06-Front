@@ -4,7 +4,8 @@ import {
   getUserLoggedPets,
   getUserLoggedFavPets,
   modifyUserInfo,
-  deleteUser
+  deleteUser,
+  ChangePasswordUser
 } from "./userAction";
 
 const initialState = {
@@ -100,6 +101,22 @@ const userSlice = createSlice({
       state.error = null;
     },
     [deleteUser.rejected]: (state, { payload }) => {
+      state.loading = false;
+      state.error = payload;
+      state.success = false;
+    },
+    // Change password User
+    [ChangePasswordUser.pending]: state => {
+      state.loading = true;
+      state.error = null;
+      state.success = false;
+    },
+    [ChangePasswordUser.fulfilled]: (state, { payload }) => {
+      state.loading = false;
+      state.success = true;
+      state.error = null;
+    },
+    [ChangePasswordUser.rejected]: (state, { payload }) => {
       state.loading = false;
       state.error = payload;
       state.success = false;

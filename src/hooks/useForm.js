@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 export const useForm = initForm => {
-  console.log("initform ", initForm);
   const formStructure = {};
   Object.keys(initForm.data).forEach(el => (formStructure[el] = initForm.data[el].initVal));
   // States
@@ -60,20 +59,8 @@ export const useForm = initForm => {
   const _validate = (champ, val) => {
     if (champ?.required && !val) return "Este campo es requerido";
     const result = champ.validation?.find(el => !el.condition(val));
+    console.log(champ, " ", val, " ", result);
     return result?.error || false;
-  };
-
-  // leer files
-  const readFile = async file => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    const result = await new Promise(
-      (resolve, reject) =>
-        (reader.onload = function (e) {
-          resolve(reader.result);
-        })
-    );
-    return result;
   };
 
   // Handle multiple files load
@@ -81,27 +68,14 @@ export const useForm = initForm => {
     const files = e.target.files;
     const name = e.target.name;
     // const prevFiles = form[name];
-
-    if (files) {
-      setForm(prev => {
-        return {
-          ...prev,
-          [name]: files
-        };
-      });
-    }
-    const newFiles = [];
-    for (const file of files) {
-      newFiles.push(readFile(file));
-    }
-    console.log(newFiles);
+    const filesData = new FormData();
+    filesData.append("file", files);
     setForm(prev => {
       return {
         ...prev,
-        files: newFiles
+        [name]: filesData
       };
     });
-    console.log("archivos muliples:", form.files);
   };
 
   // Validation Files
@@ -125,18 +99,7 @@ export const useForm = initForm => {
             [name]: oldUrl
           };
         });
-        return;
       }
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        setForm(prev => {
-          return {
-            ...prev,
-            file: e.target.result
-          };
-        });
-      };
-      reader.readAsDataURL(file);
     }
   };
 

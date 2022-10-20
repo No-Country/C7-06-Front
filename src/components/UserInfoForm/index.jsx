@@ -17,10 +17,10 @@ const UserInfoForm = () => {
       avatar: {
         initVal: userInfo.picture,
         validation: [
-          {
-            condition: val => !val || regexConditions("path").test(val?.name),
-            error: "Sólo acepta formatos jpg, png, y webp."
-          },
+          // {
+          // condition: val => !val || regexConditions("path").test(val?.path),
+          // error: "Sólo acepta formatos jpg, png, y webp."
+          // },
           {
             condition: val => !val || val.size <= 5000000,
             error: "Sólo acepta archivos de menos de 5GB"

@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { apiPub } from "../../helpers/axios";
 import { useForm } from "../../hooks/useForm";
 import { regexConditions } from "../../helpers/regexs";
-import { Spinner } from "../../components";
+import { Spinner, ThumbnailInput } from "../../components";
 
 function PetForm({ petId }) {
   const [loading, setLoading] = useState();
@@ -95,8 +95,7 @@ function PetForm({ petId }) {
     }
   };
   // Form handler
-  const { form, errors, addForm, handleChange, handleBlur, handleMultipleFiles, handleSubmit } =
-    useForm(initForm);
+  const { form, errors, addForm, handleChange, handleBlur, handleSubmit } = useForm(initForm);
 
   useEffect(() => {
     if (petId) {
@@ -386,30 +385,8 @@ function PetForm({ petId }) {
             <div className={classes.from_wrapper_pictures}>
               <h3>Imágenes:</h3>
               <p>Puedes agregar hasta 4 imágenes de cada mascota.</p>
-              <div className={classes.form_avatar_image}>
-                {form.files &&
-                  form.files.map((image, key) => (
-                    <img key={`file${key}`} src={image} alt={"nombre mascota"} />
-                  ))}
-                {form.picture &&
-                  form.picture.map((image, key) => (
-                    <img key={`picture${key}`} src={image.path} alt={"nombre mascota"} />
-                  ))}
-              </div>
-              <div className={classes.form_avatar_editButton}>
-                <label htmlFor="images">Seleccionar Archivos</label>
-                <input
-                  id="images"
-                  name="pictures"
-                  onChange={handleMultipleFiles}
-                  type="file"
-                  multiple
-                  hidden
-                  accept="image/jpg, image/jpeg, image/png, image/webp"
-                  value={form.files}
-                />
-                {errors?.pictures && <p className={classes.instructions}>{errors.pictures}</p>}
-              </div>
+              <ThumbnailInput />
+              {errors?.pictures && <p className={classes.instructions}>{errors.pictures}</p>}
             </div>
           </form>
         </div>

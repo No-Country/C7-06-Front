@@ -3,7 +3,7 @@ import {
   Spinner,
   ChangePassForm,
   UserDescriptionForm,
-  DeleteAccountForm // ,
+  DeleteAccountForm
   // PetForm
 } from "../components";
 import { useSelector, useDispatch } from "react-redux";

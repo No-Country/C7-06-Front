@@ -1,11 +1,10 @@
 import classes from "./ChangePassForm.module.sass";
 import { useForm } from "../../hooks/useForm";
 import { regexConditions } from "../../helpers/regexs";
-import { useDispatch, useSelector } from "react-redux";
-import { modifyUserInfo } from "../../Redux/slices/user/userAction";
+import { useDispatch } from "react-redux";
+import { ChangePasswordUser } from "../../Redux/slices/user/userAction";
 
 const ChangePassForm = () => {
-  const { userInfo } = useSelector(state => state.user);
   const dispatch = useDispatch();
 
   const initForm = {
@@ -34,15 +33,10 @@ const ChangePassForm = () => {
           }
         ],
         required: true
-      },
-      apicall: () => {
-        return dispatch(
-          modifyUserInfo({
-            userId: userInfo.id,
-            userObject: { oldpassword: form.pwdActual, password: form.password }
-          })
-        );
       }
+    },
+    apicall: () => {
+      return dispatch(ChangePasswordUser());
     }
   };
 

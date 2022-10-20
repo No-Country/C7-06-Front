@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { apiUserAuth, apiPub } from "../../../helpers/axios";
+import { apiUserAuth, apiPub, apiPrivate } from "../../../helpers/axios";
 
 // GET USER LOGGED
 export const getUserLogged = createAsyncThunk(
@@ -87,11 +87,27 @@ export const modifyUserInfo = createAsyncThunk(
   "userSlice.modifyUserInfo",
   async ({ userId, userObject }, { rejectWithValue }) => {
     try {
-      apiUserAuth.defaults.headers.common.Authorization = `Bearer ${
-        localStorage.getItem("userToken").token
-      }`;
+      // apiUserAuth.defaults.headers.common.Authorization = `Bearer ${
+      //   localStorage.getItem("userToken").token
+      // }`; // esto no hace falta y da error porque ya esta puesto ese header en el helper axios
       const response = await apiUserAuth.put(`/api/users/${userId}/update`, userObject);
-      console.log("put", response.data.user);
+
+      let pictureLoad;
+      console.log("fileuseraction:", userObject.file);
+      if (userObject.file) {
+        const data = new FormData();
+        data.append("file", userObject.file);
+        console.log(" data ", data);
+        if (userObject.avatar.id) {
+          pictureLoad = await apiPrivate.put(`/pictures/${userObject.avatar.id}`, { data: data });
+          response.data.avatar = pictureLoad.data;
+          console.log(pictureLoad);
+        } else {
+          pictureLoad = await apiPrivate.post(`/avatar`, { data: data });
+          response.data.avatar = pictureLoad.data;
+          console.log(pictureLoad);
+        }
+      }
       return response.data.user;
     } catch (error) {
       console.log("error: ", error);
@@ -111,6 +127,24 @@ export const deleteUser = createAsyncThunk(
     try {
       const response = await apiUserAuth.delete(`/api/users/${id}/delete`);
       return response.data;
+    } catch (error) {
+      console.log("error: ", error);
+      if (error.response && error.response.data.message) {
+        return rejectWithValue(error.response.data.message);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
+
+// Change Password User
+export const ChangePasswordUser = createAsyncThunk(
+  "userSlice.deleteUser",
+  async (objeto, { rejectWithValue }) => {
+    try {
+      // agregar llamada
+      // return response.data;
     } catch (error) {
       console.log("error: ", error);
       if (error.response && error.response.data.message) {

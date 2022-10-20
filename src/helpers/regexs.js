@@ -15,7 +15,7 @@ export const regexConditions = type => {
     case "phone":
       return /^(\+\d{1,3}( )?)?((\(\d{1,3}\))|\d{1,3})[- .]?\d{3,4}[- .]?\d{4}$/;
     case "age":
-      return /[0-9]{2}/;
+      return /[0-9]{1,3}/;
     default:
       return true;
   }

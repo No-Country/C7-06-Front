@@ -1,11 +1,10 @@
 @use '../../sass/variables' as *
 
 .card
-    width: 100%
-    margin-bottom: 20px
+    width: minmax(100%, 285px)
     display: flex
     flex-direction: row
-    height: auto
+    height: 150px
     justify-content: center
     background-color: $background-light
     border-radius: 8px
@@ -13,57 +12,36 @@
     transition: all 0.3s ease
     flex-grow: 1
     align-items: unset
-    
+
     @include mq("medium")
         flex-direction: column
         height: 100%
-        align-items: unset
-        align-items: center
-    
+
     &:hover
         transform: scale(1.02)
-        
-    @include mq("medium")
-        height: minmax(250px, 1fr)
-        flex-direction: column
-        align-items: center
-        justify-content: center
-        width: 325px
 
-    @include mq("large")
-    
     &__img
-        // width: 40%
-        max-width: 60%
+        width: 100%
         overflow: hidden
-        border-radius: 8px 0 0 8px
-        object-position: center center
 
         @include mq("medium")
-            width: 100%
-            height: 100%
-            max-width: 100%
+            height: 200px
             object-fit: cover
 
         img
             width: 100%
             height: 100%
             object-fit: cover
-            object-position: center
+            object-position: top center
             border-radius: 8px 0 0 8px
             @include mq("medium")
-                left: 0
                 border-radius: 8px 8px 0 0
-                width: 100%
-                height: 100%
-                object-fit: cover
     &__content
         position: relative
         padding: 0px 50px 0px 15px
-        width: 40%
+        width: 100%
         display: flex
         flex-direction: column
-        
 
         @include mq(medium)
             width: 100%
@@ -106,4 +84,3 @@
 .cardLink
     text-decoration: none
     color: $main-color
-

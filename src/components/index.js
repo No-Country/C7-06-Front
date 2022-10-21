@@ -22,3 +22,5 @@ export { default as UserDescriptionForm } from "./UserDescriptionForm";
 export { default as ChangePassForm } from "./ChangePassForm";
 export { default as DeleteAccountForm } from "./DeleteAccountForm";
 export { default as PetForm } from "./PetForm";
+export { default as Thumbnail } from "./Thumbnail";
+export { default as ThumbnailInput } from "./ThumbnailInput";

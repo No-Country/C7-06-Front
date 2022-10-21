@@ -2,7 +2,8 @@ import classes from "./CommentsPetList.module.sass";
 import CommentPet from "../CommentPet";
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { apiPub } from "../../helpers/axios";
+import { useSelector } from "react-redux";
+import { apiPub, apiPrivate } from "../../helpers/axios";
 
 function CommentsPetsList({ petId }) {
   const [comments, setComments] = useState([]);
@@ -13,9 +14,7 @@ function CommentsPetsList({ petId }) {
 
   const [onEdit] = useState(false);
 
-  // TODO: getting userLogged Data from Store
-  const userLogged = { userId: 2, role: "user" };
-
+  const { userLogged } = useSelector(state => state.auth);
   // Get comments of pet
   useEffect(() => {
     let isMounted = true;
@@ -29,7 +28,6 @@ function CommentsPetsList({ petId }) {
             signal: controller.signal
           }
         );
-
         if (isMounted) {
           // Stock data
           console.log(response.data);
@@ -72,8 +70,7 @@ function CommentsPetsList({ petId }) {
   const submitHandler = async e => {
     e.preventDefault();
     try {
-      const response = await apiPub.post(`/pets/${petId}/comments`, {
-        userId: userLogged.userId,
+      const response = await apiPrivate.post(`/pets/${petId}/comments`, {
         message: text
       });
       if (!response) {

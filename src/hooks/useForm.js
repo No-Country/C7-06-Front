@@ -2,7 +2,6 @@ import { useState } from "react";
 import Swal from "sweetalert2";
 
 export const useForm = initForm => {
-  console.log("initform ", initForm);
   const formStructure = {};
   Object.keys(initForm.data).forEach(el => (formStructure[el] = initForm.data[el].initVal));
   // States
@@ -14,6 +13,7 @@ export const useForm = initForm => {
   // Handle changing values of inputs
   const handleChange = e => {
     const { name, value } = e.target;
+    console.log(e.target.value);
     if (!initForm.data[name]?.required && !value) {
       setErrors({ ...errors, [name]: false });
     }
@@ -30,7 +30,8 @@ export const useForm = initForm => {
     const champ = e.target.name;
     const value = e.target.value;
     handleChange(e);
-    if (!initForm.data[champ].required && !value) {
+    if (!initForm.data[champ].required && !value && !typeof value === Boolean) {
+      console.log("nada que cambiar");
       return;
     }
     setErrors(
@@ -60,49 +61,25 @@ export const useForm = initForm => {
 
   const _validate = (champ, val) => {
     if (champ?.required && !val) return "Este campo es requerido";
-    const result = champ.validation?.find(el => !el.condition(val));
-    return result?.error || false;
+    if (champ?.validation) {
+      const result = champ.validation?.find(el => !el.condition(val));
+      return result?.error || false;
+    }
   };
 
-  // leer files
-  const readFile = async file => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    const result = await new Promise(
-      (resolve, reject) =>
-        (reader.onload = function (e) {
-          resolve(reader.result);
-        })
-    );
-    return result;
-  };
+  // handle radio buttons
 
-  // Handle multiple files load
-  const handleMultipleFiles = e => {
-    const files = e.target.files;
+  const handleRadio = e => {
+    const value = e.target.value;
     const name = e.target.name;
-    // const prevFiles = form[name];
-
-    if (files) {
-      setForm(prev => {
-        return {
-          ...prev,
-          [name]: files
-        };
-      });
-    }
-    const newFiles = [];
-    for (const file of files) {
-      newFiles.push(readFile(file));
-    }
-    console.log(newFiles);
+    console.log("radio ", name, " valor ", value);
     setForm(prev => {
       return {
         ...prev,
-        files: newFiles
+        [name]: value
       };
     });
-    console.log("archivos muliples:", form.files);
+    setErrors(Object.assign(errors, { [name]: _validate(initForm.data[name], value) } || false));
   };
 
   // Validation Files
@@ -126,18 +103,7 @@ export const useForm = initForm => {
             [name]: oldUrl
           };
         });
-        return;
       }
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        setForm(prev => {
-          return {
-            ...prev,
-            file: e.target.result
-          };
-        });
-      };
-      reader.readAsDataURL(file);
     }
   };
 
@@ -149,6 +115,7 @@ export const useForm = initForm => {
     Object.entries(form).forEach(([key]) => {
       setErrors(Object.assign(errors, { [key]: _validate(initForm.data[key], form[key]) }));
     });
+    console.log("ERRORES ENCONTRAOS ", errors);
     // Checking if errors has all false values
     if (Object.values(errors).filter(val => val !== false).length === 0) {
       console.log("no hay errores");
@@ -186,7 +153,7 @@ export const useForm = initForm => {
     addForm,
     handleChange,
     handleFiles,
-    handleMultipleFiles,
+    handleRadio,
     handleCheck,
     handleBlur,
     handleSubmit

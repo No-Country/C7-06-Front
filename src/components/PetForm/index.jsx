@@ -1,22 +1,18 @@
 import classes from "./PetForm.module.sass";
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { apiPub } from "../../helpers/axios";
+import { apiPrivate, apiPub } from "../../helpers/axios";
 import { useForm } from "../../hooks/useForm";
 import { regexConditions } from "../../helpers/regexs";
-import { Spinner } from "../../components";
+import { Spinner, ThumbnailInput } from "../../components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 function PetForm({ petId }) {
+  const [id, setId] = useState(petId);
   const [loading, setLoading] = useState();
   const [characteres, setCharacteres] = useState(500);
-
-  // const getImages = () => {
-  //   const AnimalPhotos = [];
-  //   for (let i = 1; i <= form.pictures.length - 1; i++) {
-  //     AnimalPhotos.push(form.pictures[i]);
-  //   }
-  //   return AnimalPhotos;
-  // };
+  const [pictures, setPictures] = useState("");
 
   const initForm = {
     data: {
@@ -36,7 +32,7 @@ function PetForm({ petId }) {
         validation: [
           {
             condition: val => regexConditions("age").test(val),
-            error: "Solo se aceptan caracteres numéricos."
+            error: "Solo se aceptan caracteres numéricos y no mas de dos dígitos."
           }
         ]
       },
@@ -45,7 +41,7 @@ function PetForm({ petId }) {
         required: true,
         validation: [
           {
-            condition: val => regexConditions("adress").test(val),
+            condition: val => regexConditions("address").test(val),
             error: "Indica una dirección válida."
           }
         ]
@@ -60,46 +56,103 @@ function PetForm({ petId }) {
         ]
       },
       animalType: {
-        initVal: ""
-      },
-      gender: {
-        initVal: ""
-      },
-      race: {
-        initVal: ""
-      },
-      weigth: {
-        initVal: ""
-      },
-      vaccinationUpToDate: {
-        initVal: false
-      },
-      pureRace: {
-        initVal: false
-      },
-      size: {
-        initVal: ""
-      },
-      pictures: {
-        initVal: [],
+        initVal: "",
+        required: true,
         validation: [
           {
-            condition: val => val.length <= 4,
-            error: "No se aceptan mas que 4 archivos."
+            condition: val => val === "DOG" || val === "CAT",
+            error: "Los valores solo pueden ser gato o perro"
           }
         ]
       },
-      files: {
-        initVal: ""
+      gender: {
+        initVal: "",
+        required: true,
+        validation: [
+          {
+            condition: val => val === "MALE" || val === "FEMALE",
+            error: "Los valores solo pueden ser macho o hembra."
+          }
+        ]
+      },
+      race: {
+        initVal: "",
+        validation: [
+          {
+            condition: val => val,
+            error: false
+          }
+        ]
+      },
+      weight: {
+        initVal: "",
+        validation: [
+          {
+            condition: val => regexConditions("age").test(val),
+            error: "Solo se aceptan caracteres numéricos y no mas de dos dígitos."
+          }
+        ]
+      },
+      vaccinationUpToDate: {
+        initVal: false,
+        validation: [
+          {
+            condition: val => val === "true" || val === "false",
+            error: false
+          }
+        ]
+      },
+      pureRace: {
+        initVal: false,
+        validation: [
+          {
+            condition: val => val === "true" || val === "false",
+            error: false
+          }
+        ]
+      },
+      size: {
+        initVal: "",
+        validation: [
+          {
+            condition: val => val === "SHORT" || val === "MEDIUM" || val === "BIG",
+            error: "Sólo se admiten las medidas pequeño, medio y grande"
+          }
+        ]
+      }
+    },
+    apicall: () => {
+      const formToSend = {
+        name: form.name,
+        age: form.age,
+        location: form.location,
+        description: form.description,
+        animalType: form.animalType,
+        gender: form.gender,
+        race: form.race,
+        weight: form.weight,
+        size: form.size,
+        vaccinationUpToDate: form.vaccinationUpToDate,
+        pureRace: form.pureRace
+      };
+      if (petId) {
+        return apiPrivate.put(`/pets/${petId}`, formToSend);
+      } else {
+        return apiPrivate.post("/pets", formToSend);
       }
     }
   };
   // Form handler
-  const { form, errors, addForm, handleChange, handleBlur, handleMultipleFiles, handleSubmit } =
+  const { form, response, errors, addForm, handleChange, handleRadio, handleBlur, handleSubmit } =
     useForm(initForm);
 
   useEffect(() => {
-    if (petId) {
+    if (response?.data.id) {
+      setId(response.data.id);
+    }
+  }, [response]);
+  useEffect(() => {
+    if (id) {
       let isMounted = true;
       const controller = new AbortController();
 
@@ -121,9 +174,9 @@ function PetForm({ petId }) {
               weight: response.data.weight,
               size: response.data.size,
               vaccinationsUpToDate: response.data.vaccinationsUpToDate,
-              pureRace: response.data.pureRace,
-              pictures: response.data.pictures || ""
+              pureRace: response.data.pureRace
             });
+            setPictures(response.data.pictures);
             console.log("respuesta", response.data);
             setCharacteres(500 - response.data.description.length);
             setLoading(false);
@@ -149,6 +202,19 @@ function PetForm({ petId }) {
   const handleInput = e => {
     handleChange(e);
     setCharacteres(500 - e.target.value.length);
+  };
+
+  const handleDeletePicture = async e => {
+    const pictureId = parseInt(e.target.closest("div").id);
+    try {
+      const response = await apiPrivate.delete(`/pictures/${pictureId}`);
+      if (response) {
+        setPictures(pictures.filter(el => parseInt(el.id) !== response.data.id));
+      }
+    } catch (err) {
+      alert("No ha sido posible borrar la foto. Intentalo nuevamente.");
+      console.log(err);
+    }
   };
 
   return (
@@ -217,7 +283,7 @@ function PetForm({ petId }) {
                       id="cat"
                       name="animalType"
                       value="CAT"
-                      onChange={handleChange}
+                      onChange={handleRadio}
                       checked={form.animalType === "CAT"}
                     />
                     <label htmlFor="cat">Gato</label>
@@ -227,7 +293,7 @@ function PetForm({ petId }) {
                     <input
                       type="radio"
                       id="dog"
-                      onChange={handleChange}
+                      onChange={handleRadio}
                       name="animalType"
                       value="DOG"
                       checked={form.animalType === "DOG"}
@@ -294,7 +360,7 @@ function PetForm({ petId }) {
                         id="sizes"
                         name="size"
                         value="SHORT"
-                        onChange={handleChange}
+                        onChange={handleBlur}
                         checked={form.size === "SHORT"}
                       />
                       <label htmlFor="sizes">Pequeño</label>
@@ -304,7 +370,7 @@ function PetForm({ petId }) {
                       <input
                         type="radio"
                         id="sizem"
-                        onChange={handleChange}
+                        onChange={handleBlur}
                         name="size"
                         value="MEDIUM"
                         checked={form.size === "MEDIUM"}
@@ -316,7 +382,7 @@ function PetForm({ petId }) {
                       <input
                         type="radio"
                         id="sizel"
-                        onChange={handleChange}
+                        onChange={handleBlur}
                         name="size"
                         value="BIG"
                         checked={form.size === "BIG"}
@@ -334,10 +400,10 @@ function PetForm({ petId }) {
                     <input
                       type="radio"
                       id="vacyes"
-                      name="vaccinationsUpToDate"
+                      name="vaccinationUpToDate"
                       value="true"
-                      onChange={handleChange}
-                      checked={form.vaccinationsUpToDate}
+                      onChange={handleBlur}
+                      checked={form.vaccinationUpToDate === "true"}
                     />
                     <label htmlFor="vacyes">Completa</label>
                   </div>
@@ -346,10 +412,10 @@ function PetForm({ petId }) {
                     <input
                       type="radio"
                       id="vacNo"
-                      onChange={handleChange}
-                      name="vaccinationsUpToDate"
+                      onChange={handleBlur}
+                      name="vaccinationUpToDate"
                       value="false"
-                      checked={form.vaccinationsUpToDate}
+                      checked={form.vaccinationUpToDate === "false"}
                     />
                     <label htmlFor="vacNo">Incompleta</label>
                   </div>
@@ -363,10 +429,10 @@ function PetForm({ petId }) {
                     <input
                       type="radio"
                       id="pureRaceYes"
-                      name="pureRace                      "
+                      name="pureRace"
                       value="true"
-                      onChange={handleChange}
-                      checked={form.pureRace === true}
+                      onChange={handleBlur}
+                      checked={form.pureRace === "true"}
                     />
                     <label htmlFor="pureRaceYes">Si</label>
                   </div>
@@ -375,45 +441,47 @@ function PetForm({ petId }) {
                     <input
                       type="radio"
                       id="pureRaceNo"
-                      onChange={handleChange}
+                      onChange={handleBlur}
                       name="pureRace"
                       value="false"
-                      checked={form.pureRace === false}
+                      checked={form.pureRace === "false"}
                     />
                     <label htmlFor="pureRaceNo">No</label>
                   </div>
                 </fieldset>
               </div>
             </div>
-            <div className={classes.from_wrapper_pictures}>
-              <h3>Imágenes:</h3>
-              <p>Puedes agregar hasta 4 imágenes de cada mascota.</p>
-              <div className={classes.form_avatar_image}>
-                {form.files &&
-                  form.files.map((image, key) => (
-                    <img key={`file${key}`} src={image} alt={"nombre mascota"} />
-                  ))}
-                {form.picture &&
-                  form.picture.map((image, key) => (
-                    <img key={`picture${key}`} src={image.path} alt={"nombre mascota"} />
-                  ))}
-              </div>
-              <div className={classes.form_avatar_editButton}>
-                <label htmlFor="images">Seleccionar Archivos</label>
-                <input
-                  id="images"
-                  name="pictures"
-                  onChange={handleMultipleFiles}
-                  type="file"
-                  multiple
-                  hidden
-                  accept="image/jpg, image/jpeg, image/png, image/webp"
-                  value={form.files}
-                />
-                {errors?.pictures && <p className={classes.instructions}>{errors.pictures}</p>}
-              </div>
+            <div className={classes.form_wrapper}>
+              <button type="submit" className={classes.form_submit}>
+                Guardar
+              </button>
             </div>
           </form>
+          <div className={classes.form_wrapper_pictures}>
+            <h3>Imágenes:</h3>
+            {pictures ? (
+              <div className={classes.pictures_wrapper}>
+                {pictures &&
+                  pictures.map((image, key) => (
+                    <div key={`photo${image.id}`} id={image.id} className={classes.pictures_image}>
+                      <img src={image.path} alt={image.name} />
+                      <FontAwesomeIcon
+                        onClick={handleDeletePicture}
+                        icon={faTrash}
+                        className={classes.pictures_icon}
+                      />
+                    </div>
+                  ))}
+              </div>
+            ) : null}
+            {id ? (
+              <>
+                <p>Puedes agregar hasta 4 imágenes de cada mascota.</p>
+                <ThumbnailInput id={id} pictures={pictures} setPictures={setPictures} />
+                {errors?.pictures && <p className={classes.instructions}>{errors.pictures}</p>}
+              </>
+            ) : null}
+          </div>
         </div>
       )}
     </>

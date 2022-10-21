@@ -33,8 +33,8 @@
             margin-bottom: 20px
             font-size: 20px
         .renderAnimals
-            display: flex
-            flex-flow: row wrap
+            display: grid
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr))
             gap: 20px
 
     .leftSide
@@ -53,8 +53,6 @@
             margin: 20px 0 10px 0
             padding: 0 20px
         fieldset
-            // display: flex
-            // justify-content: space-between
             width: 100%
             padding: 16px
             border-radius: 8px

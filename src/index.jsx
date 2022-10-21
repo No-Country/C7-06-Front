@@ -11,7 +11,8 @@ import {
   UserProfile,
   ContactUs,
   UserAccount,
-  NotFound
+  NotFound,
+  AboutUs
 } from "./pages";
 import ProtectedRoute from "./routing/protectedRoute";
 
@@ -35,7 +36,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/about",
-        element: <Login />
+        element: <AboutUs />
       },
       {
         path: "/search",

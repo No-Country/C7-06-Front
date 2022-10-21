@@ -5,18 +5,17 @@ import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencil, faTrash } from "@fortawesome/free-solid-svg-icons";
 import TextAreaRezise from "../TextAreaRezise";
-import { apiPub } from "../../helpers/axios";
+import { apiPub, apiPrivate } from "../../helpers/axios";
 import { getDateFormatted } from "../../helpers/dateFormat";
-
+import { useSelector } from "react-redux";
 function CommentPet({ comment, setIsLoading, pet }) {
   // States
   const [text, setText] = useState(comment.message);
   const [onEdit, setOnEdit] = useState(false);
 
-  // TODO: Get user Logged from store
-  const userLogged = { userId: 2, role: "user" };
+  const { userLogged } = useSelector(state => state.auth);
 
-  const allowEdition = userLogged.userId === comment.userId || userLogged.role === "admin";
+  const allowEdition = userLogged.id === comment.userId || userLogged.role === "admin";
 
   const messageRef = useRef();
 
@@ -43,7 +42,7 @@ function CommentPet({ comment, setIsLoading, pet }) {
   // On Delete Handler
   const onDelete = async () => {
     try {
-      const response = await apiPub.delete(`/pets/comments/${comment.commentId}`);
+      const response = await apiPrivate.delete(`/pets/comments/${comment.commentId}`);
       if (!response) {
         console.log("No answer");
         return;
@@ -62,7 +61,6 @@ function CommentPet({ comment, setIsLoading, pet }) {
     e.preventDefault();
     try {
       const response = await apiPub.put(`/pets/comments/${comment.commentId}`, {
-        userId: userLogged.userId,
         message: text
       });
       if (!response) {

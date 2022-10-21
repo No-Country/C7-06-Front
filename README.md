@@ -66,6 +66,4 @@ Puedes encontrar nuestro sitio en el siguiente link: [click aquí](#)
 
 ### Martin Kun : [LinkedIn](https://www.linkedin.com/in/mart%C3%ADn-kun-b13620209/) | [GitHub](https://github.com/MartinKun) | [Portfolio]()
 
-### Cristian Aguirre : [LinkedIn](https://www.linkedin.com/in/aguirre-cristian-javadeveloper/) | [GitHub](https://github.com/Cristianaaguirre) | [Portfolio]()
-
 ### Karen Huaman [LinkedIn]() | [GitHub](https://github.com/yoelexe) | [Portfolio]()

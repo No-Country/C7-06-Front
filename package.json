@@ -1,6 +1,7 @@
 {
   "name": "c7-06-front",
   "version": "0.1.0",
+  "homepage": "https://animatch.ingenial.co/",
   "private": true,
   "dependencies": {
     "@emailjs/browser": "^3.7.0",

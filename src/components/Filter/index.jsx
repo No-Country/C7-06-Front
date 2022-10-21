@@ -41,7 +41,7 @@ const Filter = () => {
   });
 
   useEffect(() => {
-    loadSuggestedPets();
+    // loadSuggestedPets();
     loadFilteredPets();
   }, [filteredPetsParams.pageNumber]);
 

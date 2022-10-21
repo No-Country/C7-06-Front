@@ -82,7 +82,6 @@
 				padding: 0
 				li
 					text-align: right
-					padding: 0.5rem 0
 					justify-content: flex-end
 					align-items: center
 					display: flex
@@ -122,3 +121,22 @@
 						transition: all 0.3s ease
 						&:hover
 							color: $main-color
+
+@media screen and (min-width: 850px)
+	.userSubmenu
+		position: absolute
+		top: 60px
+		right: 10px
+		padding: 1rem
+		width: 200px
+		&_container
+			flex-direction: column
+			padding: 0
+			li
+				text-align: right
+				padding: 0.5rem 0
+				justify-content: flex-end
+				align-items: center
+				display: flex
+				&:last-child
+					border-bottom: none

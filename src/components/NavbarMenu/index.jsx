@@ -20,7 +20,7 @@ const ProfileSubmenu = ({ handleLogout, handleLinkClick }) => {
           <Link to="/account">Información personal</Link>
         </li>
         <li>
-          <Link to="/pets">Gestión de mascotas</Link>
+          <Link to="/add-pet">Gestión de mascotas</Link>
         </li>
         <li>
           <Link to="/" className={styles.logout} onClick={handleLogout}>
@@ -47,7 +47,7 @@ const NavbarMenu = () => {
 
   // Función para cerrar el menú
   const handleLinkClick = e => {
-    setIsMenuOpen(!isMenuOpen);
+    setIsMenuOpen(false);
   };
 
   // Renderizado condicional del menú
@@ -103,7 +103,7 @@ const NavbarMenu = () => {
       </ul>
       {userLogged ? (
         <>
-          <Link className={styles.user} onClick={handleLinkClick}>
+          <Link className={styles.user} onClick={() => setIsMenuOpen(!isMenuOpen)}>
             <span>
               {loading ? (
                 <>User</>
@@ -115,9 +115,9 @@ const NavbarMenu = () => {
             </span>
             <FontAwesomeIcon icon={faCircleUser} />
           </Link>
-          {isMenuOpen ? (
+          {isMenuOpen && (
             <ProfileSubmenu handleLogout={handleLogout} handleLinkClick={handleLinkClick} />
-          ) : null}
+          )}
         </>
       ) : null}
     </nav>

@@ -89,7 +89,10 @@ const Animals = () => {
               {errorDog ? (
                 <p>Se ha producido une error, por favor intente recargar la página.</p>
               ) : dogs && dogs.length > 0 ? (
-                dogs.map(dog => <Card key={dog.id} animal={dog} />)
+                dogs
+                  .sort((b, a) => new Date(a.created_date) - new Date(b.created_date))
+                  .slice(0, 4)
+                  .map(dog => <Card key={dog.id} animal={dog} />)
               ) : (
                 <p> No hay mascotas para mostrar.</p>
               )}
@@ -111,7 +114,10 @@ const Animals = () => {
               {errorCat ? (
                 <p>Se ha producido un error, por favor intente recargar la página.</p>
               ) : cats && cats.length > 0 ? (
-                cats.map(cat => <Card key={cat.id} animal={cat} />)
+                cats
+                  .sort((b, a) => new Date(a.created_date) - new Date(b.created_date))
+                  .slice(0, 4)
+                  .map(cat => <Card key={cat.id} animal={cat} />)
               ) : (
                 <p>No hay mascotas para mostrar</p>
               )}

@@ -1,0 +1,113 @@
+@use "../../sass/variables" as *
+  
+.card
+  padding: 1em 0
+  max-width: 80%
+  margin: 0 auto
+
+  h2
+    font-family: $secondary-font
+    font-weight: 700 
+    font-size: 1.5em
+    color: black
+    margin: 1em 0.7em
+    @include mq(medium)
+      font-size: 2em
+
+  &_wrapper
+    display: flex
+    flex-flow: row nowrap
+    
+  &_gallery
+    display: flex
+    flex-direction: row nowrap
+    flex-grow: 1
+    @include mq(large)
+      flex-grow: 0
+
+   
+    &_wrapper 
+      display: flex
+      flex-direction: column
+      flex-grow: 1
+      @include mq(xlarge)
+        flex-direction: row-reverse
+        flex-grow: 0
+    &_image 
+      flex-grow: 1
+
+      img 
+        height: 100%
+        width: 100%
+        border-radius: 10px
+        object-fit: cover
+        min-width: 125px
+        max-height: 300px
+        object-position: top
+        @include mq(large)
+          min-width: 440px
+          width: 440px
+          max-height: 500px
+          object-position: center
+
+    
+    &_thumbnail 
+      display: flex 
+      flex-flow: row nowrap
+      justify-content: space-evenly
+      @include mq(xlarge)
+        flex-flow: column nowrap
+
+      
+
+      img
+        height: 110px
+        width: 95px 
+        margin: 20px
+        object-fit: cover
+        border-radius: 10px
+
+  &_info
+    display: flex
+    flex-direction: column
+    flex: 1 0
+    padding: 0px 20px 20px 20px 
+
+    &_header
+      margin-bottom: 1em
+      h3
+        font-family: $secondary-font
+        font-weight: 700
+        font-size: 2em
+        color: $main-color
+
+    &_body
+      p
+        font-family: $main-font
+        font-weight: 600
+        font-size: 1.3em
+        color: black
+
+        span
+          font-weight: 300
+
+      .description
+        margin: 2em 0
+        font-weight: 600
+        span 
+          font-weight: 300
+
+  &_footer
+    button, a
+      display: block
+      margin: 1em auto
+
+    .favourite
+      @include buttonsAnimatch ($color: #fff, $background: $main-color )
+      height: 40px
+
+    .contact
+      @include buttonsAnimatch ($color: #000, $background: $secondary-color )
+      height: 40px
+      line-height: 1.5em
+      max-width: 305px

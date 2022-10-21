@@ -1,0 +1,86 @@
+@use '../../sass/variables' as *
+
+.card
+    width: minmax(100%, 285px)
+    display: flex
+    flex-direction: row
+    height: 150px
+    justify-content: center
+    background-color: $background-light
+    border-radius: 8px
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2)
+    transition: all 0.3s ease
+    flex-grow: 1
+    align-items: unset
+
+    @include mq("medium")
+        flex-direction: column
+        height: 100%
+
+    &:hover
+        transform: scale(1.02)
+
+    &__img
+        width: 100%
+        overflow: hidden
+
+        @include mq("medium")
+            height: 200px
+            object-fit: cover
+
+        img
+            width: 100%
+            height: 100%
+            object-fit: cover
+            object-position: top center
+            border-radius: 8px 0 0 8px
+            @include mq("medium")
+                border-radius: 8px 8px 0 0
+    &__content
+        position: relative
+        padding: 0px 50px 0px 15px
+        width: 100%
+        display: flex
+        flex-direction: column
+
+        @include mq(medium)
+            width: 100%
+        .favorite
+            bottom: 5px
+            position: absolute
+            display: flex
+            justify-content: center
+            align-items: center
+            border-radius: 50%
+            background-color: $secondary-color
+            bottom: 10px
+            right: 10px
+            width: 30px
+            height: 30px
+            cursor: pointer
+            font-size: 1.1rem
+            color: $background-light
+            &_active
+                svg:hover
+                    color: $main-color
+        .card__title
+            font-family: $secondary-font
+            font-size: 18px
+            font-weight: 600
+            margin: 10px 0
+
+        .card__text
+            width: 100%
+            font-weight: 400
+            padding: 10px 0
+            color: #666
+            font-family: $main-font
+            display: flex
+
+            ul
+                list-style: none
+                padding: 0
+
+.cardLink
+    text-decoration: none
+    color: $main-color

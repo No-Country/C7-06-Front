@@ -1,0 +1,20 @@
+@use "../../sass/variables" as *
+
+.footerNav
+    margin-top: 30px
+    ul
+        display: flex
+        justify-content: space-between
+        padding: 0
+
+        li
+            list-style: none
+            a
+                color: #bcbcbc
+                cursor: pointer
+                text-decoration: none
+
+@media screen and (max-width: 810px)
+    ul
+        flex-direction: column
+        gap: 15px

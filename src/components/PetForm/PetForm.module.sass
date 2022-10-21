@@ -1,0 +1,192 @@
+@use "../../sass/variables" as *
+
+.form
+  display: flex
+  flex-flow: column nowrap
+  max-width: 358px
+  padding: 1em
+  margin: 2em auto
+  border: 1px solid $light-gray
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25)
+  margin-bottom: 2em
+
+  fieldset
+    border: none
+    display: flex
+    gap: 20px
+    justify-content: flex-start
+    width: 100%
+    flex-flow: row wrap
+
+    .legend
+      font-weight: bolder
+      min-width: 5.5em
+    div
+      display: flex
+      flex-wrap: wrap
+      align-items: center
+      input
+        min-width: auto
+      input[type='radio'] 
+        box-sizing: border-box
+        appearance: none
+        background: rgba($light-gray, 30%)
+        outline: none
+        border: 6px solid transparent
+        width: 20px
+        height: 20px
+        
+        &:checked
+          border-color: #edeEf4
+          background: $main-color
+
+ 
+
+  input
+    border: none
+    outline: none
+    min-height: 40px
+    min-width: 358px
+    background: rgba($light-gray, 30%)
+    border-radius: 5px
+    margin: 10px
+    padding: 0 1em
+    
+    @include mq(medium)
+      min-width: 600px
+
+  @include mq("medium")
+    max-width: 783px
+
+  h3
+    text-align: center
+    margin: 1.5em
+
+  form
+    display: flex
+    flex-flow: column nowrap
+    align-items: center
+
+  &_wrapper_pictures
+    display: flex
+    max-width: 358px
+    flex-flow: column nowrap
+    width: 100%
+    margin: 2em auto
+    @include mq(medium)
+      max-width: 650px
+    p
+      margin: 1em 0
+  &_wrapper
+    display: flex
+    flex-flow: column nowrap
+    align-items: center
+    &_pets 
+      display: flex
+      flex-flow: column nowrap
+      align-items: center
+      @include mq(medium)
+        max-width: 783px
+      h3
+        text-align: left
+      & > div
+        width: 100%
+        max-width: 358px
+        text-align: left
+        @include mq(medium)
+          max-width: 654px
+      .wrapper_options
+        display: flex
+        flex-flow: row nowra
+        gap: 20px
+
+    & > p
+      text-align: left
+      width: 100%
+      padding: 0 1em
+
+  &_group
+    text-align: right
+    width: 100%
+
+    &_textarea 
+      text-align: right
+      width: 100%
+      padding: 1em 0.5em
+
+      p span
+        color: $dark-gray
+
+  textarea
+    background: rgba($light-gray, 30%)
+    border: rgba($light-gray, 30%)
+    resize: none
+    border-radius: 5px
+    padding: 1em
+    width: 100%
+    height: 125px
+    width: 100%
+
+  &_photo
+    display: flex
+    align-items: center
+    flex-flow: column nowrap
+
+    &_image
+      max-width: 130px
+      max-height: 130px
+      border-radius: 50%
+      overflow: hidden
+
+      @include mq(medium)
+        max-width: 145px
+        max-height: 145px
+    
+      img
+        width: 100%
+        height: 100%
+        object-fit: cover
+      
+  &_submit
+    @include buttonsAnimatch ($color: white , $background: $main-color )
+    min-width: 100px
+    margin: 1em
+    @include mq(medium)
+      min-width: 175px
+
+.instructions
+  color: red
+
+.pictures_wrapper
+  display: flex
+  flex-flow: row wrap
+  align-items: top
+  justify-content: center
+  gap: 5px
+
+.pictures_image
+  max-height: 400px
+  max-width: 400px
+  min-height: 200px
+  min-width: 200px
+  position: relative
+  flex: 1 0
+
+  img 
+    width: 100%
+    height: 100%
+    object-fit: cover
+    object-position: center center
+
+.pictures_icon
+  position: absolute
+  height: 2em
+  width: 2em
+  color: white
+  right: 1em
+  top: 1em
+  background: $main-color
+  padding: 0.5em
+  border-radius: 50%
+  &:hover
+    color: $secondary-color

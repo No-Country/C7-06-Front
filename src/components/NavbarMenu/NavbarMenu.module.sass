@@ -1,0 +1,147 @@
+@use '../../sass/variables' as *
+
+.menu
+	display: flex
+	justify-content: flex-end
+	align-items: center
+	margin: 0
+	font-family: $secondary-font
+	z-index: 2
+	transition: all 0.3s ease
+	position: relative
+	ul
+		display: flex
+		justify-content: space-between
+		align-items: center
+		list-style: none
+		.search
+			margin-left: 3rem
+			padding: 5px 7px
+			width: 20px
+			height: 20px
+			border-radius: 50%
+			&:hover
+				background-color: #e7e0ff
+
+		li
+			margin: 0 1rem
+			a
+				color: $dark-gray
+				font-family: $main-font
+				text-decoration: none
+				&:hover
+					color: $main-color
+
+	.user
+		display: flex
+		justify-content: space-between
+		align-items: center
+		min-width: 5rem
+		margin-left: 2rem
+		padding: 0.5rem
+		text-decoration: none
+		color: $dark-gray
+		order: 2
+		span
+			margin-right: 0.5rem
+		&:hover
+			background-color: #e7e0ff
+			border-radius: 5px
+			cursor: pointer
+
+	.userSubmenu
+		margin: 20px auto
+		order: 1
+		background-color: white
+		border: 1px solid #e7e0ff
+		padding: 2rem
+		width: 280px
+		border-radius: 5px
+		&_container
+			li
+				border-bottom: 1px solid $light-gray
+				width: 100%
+				text-align: right
+				vertical-align: middle
+				height: 30px
+
+		li
+			width: 100%
+			height: 50px
+			border-bottom: 1px solid $light-gray
+			&:last-child
+				border-bottom: none
+		@include mq('large')
+			position: absolute
+			top: 60px
+			right: 10px
+			padding: 1rem
+			width: 200px
+			&_container
+				flex-direction: column
+				padding: 0
+				li
+					text-align: right
+					justify-content: flex-end
+					align-items: center
+					display: flex
+					&:last-child
+						border-bottom: none
+.login
+	background-color: #e7e0ff
+	border-radius: 5px
+	padding: 0.5rem
+	cursor: pointer
+
+@media screen and (max-width: 850px)
+	.menu
+		display: none
+		flex-flow: column-reverse nowrap
+		justify-content: flex-end
+		align-items: center
+		position: fixed
+		padding-top: 4rem
+		top: 0px
+		right: 0px
+		height: 100%
+		box-shadow: -1px 0px 5px grey
+		width: 0
+		background-color: #f5f2ff
+		z-index: 1
+		transition: all 0.3s ease
+		ul
+			display: flex
+			flex-direction: column
+			align-items: center
+			justify-content: center
+			height: 100%
+			padding-left: 0
+			@include mq(medium)
+				padding-left: initial
+
+				li
+					margin-bottom: 1rem
+					a
+						letter-spacing: 1px
+						transition: all 0.3s ease
+						&:hover
+							color: $main-color
+
+@media screen and (min-width: 850px)
+	.userSubmenu
+		position: absolute
+		top: 60px
+		right: 10px
+		padding: 1rem
+		width: 200px
+		&_container
+			flex-direction: column
+			padding: 0
+			li
+				text-align: right
+				padding: 0.5rem 0
+				justify-content: flex-end
+				align-items: center
+				display: flex
+				&:last-child
+					border-bottom: none

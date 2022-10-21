@@ -1,0 +1,87 @@
+// IMPORT FONTS
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@500;700&family=Roboto:wght@400;700&display=swap')
+
+// VARIABLES
+$main-color: #6342e8
+$secondary-color: #e8d641
+$background-light: #f5f2ff
+$dark-gray: #272727
+$light-gray: #D9D9D9
+$main-font: "Roboto", sans-serif
+$secondary-font: "Raleway", sans-serif
+
+// MEDIA QUERIES
+
+/* Breakpoints */
+
+$breakpoints: ("small": 390px, "medium": 768px, "large": 992px,"xlarge": 1440px)
+
+/* Break Points */
+
+@mixin mq($mq-breakpoint, $mq-breakpoints: $breakpoints)
+  @if map-has-key($mq-breakpoints, $mq-breakpoint)
+    $mq-breakpoint: map-get($mq-breakpoints, $mq-breakpoint)
+
+  @media screen and (min-width: #{$mq-breakpoint})
+    @content
+
+// CSS BUTTONS 
+// CSS BUTTONS 
+
+@mixin buttonsAnimatch ($color: white, $background: $main-color)
+  font-family: $secondary-font
+  font-weight: 700
+  font-size: 1em
+  line-height: 1.5em
+  text-align: center
+  color: $color !important
+  background-color: $background
+  min-width: 214px
+  min-height: 40px
+  border-radius: 8px
+  border: none
+  padding: 0.5rem 2.5rem
+  cursor: pointer
+  transition: background-color 500ms ease-in-out
+  text-decoration: none
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25)
+
+  @include mq(medium)
+    min-width: 305px
+
+  &:hover
+    background-color: lighten($background, 5)
+
+// Overlay Layer
+@mixin overlay ()
+  &::before
+    content: ""
+    position: absolute
+    top: 0
+    left: 0
+    height: 100%
+    width: 100%
+    background: rgba(217,217,217,0.6)
+
+@mixin buttonsAnimatch ($color: white, $background: $main-color)
+  width: auto
+  display: flex
+  align-items: center
+  justify-content: center
+  cursor: pointer
+  font-size: 1em
+  line-height: 1em
+  color: $color !important
+  background-color: $background
+  transition: background-color 500ms ease-in-out
+  min-height: 40px
+  border-radius: 8px
+  border: none
+  text-decoration: none
+  text-align: center
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25)
+  @include mq(small)
+    min-width: 305px
+
+  &:hover
+    background-color: lighten($background, 5)

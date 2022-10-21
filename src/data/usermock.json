@@ -1,0 +1,11 @@
+{
+  "id": 1,
+  "name": "Jane Doe",
+  "mail": "admin@localhost",
+  "phone_number": "1234567890",
+  "address": "123 Main St",
+  "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt, minima, voluptate culpa sunt magnam rerum dolorem doloribus earum quidem cupiditate, aperiam neque voluptates ut ratione debitis ab cum odio. Nihil.",
+  "image": "jane-doe.png",
+  "pets": [3],
+  "favourite": [1, 2, 8]
+}

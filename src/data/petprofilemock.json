@@ -1,0 +1,98 @@
+[
+  {
+    "id": 1,
+    "name": "Oscar",
+    "type": "cat",
+    "age": "3",
+    "race": "persa",
+    "gender": "macho",
+    "location": "Madrid",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi non quis exercitationem culpa nesciunt nihil aut nostrum explicabo reprehenderit optio amet ab temporibus asperiores quasi cupiditate. Voluptatum ducimus voluptates voluptas?",
+    "pictures": ["cat1.png"],
+    "userId": 1
+  },
+  {
+    "id": 2,
+    "name": "Lali",
+    "type": "cat",
+    "age": "2",
+    "race": "siames",
+    "gender": "hembra",
+    "location": "Madrid",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi non quis exercitationem culpa nesciunt nihil aut nostrum explicabo reprehenderit optio amet ab temporibus asperiores quasi cupiditate. Voluptatum ducimus voluptates voluptas?",
+    "pictures": ["cat2.png", "cat2b.webp"],
+    "userId": 1
+  },
+  {
+    "id": 3,
+    "name": "Pipo",
+    "type": "cat",
+    "age": "5",
+    "race": "main",
+    "gender": "macho",
+    "location": "Bariloche",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi non quis exercitationem culpa nesciunt nihil aut nostrum explicabo reprehenderit optio amet ab temporibus asperiores quasi cupiditate. Voluptatum ducimus voluptates voluptas?",
+    "pictures": ["cat3.png", "cat3b.webp", "cat3c.webp"],
+    "userId": 2
+  },
+  {
+    "id": 4,
+    "name": "Blackie",
+    "type": "cat",
+    "age": "2",
+    "race": "siames",
+    "gender": "hembra",
+    "location": "Paris",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi non quis exercitationem culpa nesciunt nihil aut nostrum explicabo reprehenderit optio amet ab temporibus asperiores quasi cupiditate. Voluptatum ducimus voluptates voluptas?",
+    "pictures": ["cat4.png", "cat4b.webp", "cat4c.webp", "cat4d.webp"],
+    "userId": 3
+  },
+  {
+    "id": 5,
+    "name": "John",
+    "type": "dog",
+    "age": "3",
+    "race": "caniche",
+    "gender": "macho",
+    "location": "Bariloche",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi non quis exercitationem culpa nesciunt nihil aut nostrum explicabo reprehenderit optio amet ab temporibus asperiores quasi cupiditate. Voluptatum ducimus voluptates voluptas?",
+    "pictures": ["dog1.png"],
+    "userId": 3
+  },
+  {
+    "id": 6,
+    "name": "Mary",
+    "type": "dog",
+    "age": "2",
+    "race": "caniche",
+    "gender": "hembra",
+    "location": "Bariloche",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi non quis exercitationem culpa nesciunt nihil aut nostrum explicabo reprehenderit optio amet ab temporibus asperiores quasi cupiditate. Voluptatum ducimus voluptates voluptas?",
+    "pictures": ["dog2.png"],
+    "userId": 4
+  },
+  {
+    "id": 7,
+    "name": "Peter",
+    "type": "dog",
+    "age": "5",
+    "race": "caniche",
+    "gender": "macho",
+    "location": "Bariloche",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi non quis exercitationem culpa nesciunt nihil aut nostrum explicabo reprehenderit optio amet ab temporibus asperiores quasi cupiditate. Voluptatum ducimus voluptates voluptas?",
+    "pictures": ["dog3.png"],
+    "userId": 5
+  },
+  {
+    "id": 8,
+    "name": "Julie",
+    "type": "dog",
+    "age": "2",
+    "race": "caniche",
+    "gender": "hembra",
+    "location": "Bariloche",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi non quis exercitationem culpa nesciunt nihil aut nostrum explicabo reprehenderit optio amet ab temporibus asperiores quasi cupiditate. Voluptatum ducimus voluptates voluptas?",
+    "pictures": ["dog4.png"],
+    "userId": 6
+  }
+]

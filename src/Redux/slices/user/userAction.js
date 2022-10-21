@@ -87,9 +87,6 @@ export const modifyUserInfo = createAsyncThunk(
   "userSlice.modifyUserInfo",
   async ({ userId, userObject }, { rejectWithValue }) => {
     try {
-      // apiUserAuth.defaults.headers.common.Authorization = `Bearer ${
-      //   localStorage.getItem("userToken").token
-      // }`; // esto no hace falta y da error porque ya esta puesto ese header en el helper axios
       const response = await apiUserAuth.put(`/api/users/${userId}/update`, userObject);
 
       let pictureLoad;
@@ -99,11 +96,11 @@ export const modifyUserInfo = createAsyncThunk(
         data.append("file", userObject.file);
         console.log(" data ", data);
         if (userObject.avatar.id) {
-          pictureLoad = await apiPrivate.put(`/pictures/${userObject.avatar.id}`, { data: data });
+          pictureLoad = await apiPrivate.put(`/pictures/${userObject.avatar.id}`, { data });
           response.data.avatar = pictureLoad.data;
           console.log(pictureLoad);
         } else {
-          pictureLoad = await apiPrivate.post(`/avatar`, { data: data });
+          pictureLoad = await apiPrivate.post(`/avatar`, { data });
           response.data.avatar = pictureLoad.data;
           console.log(pictureLoad);
         }

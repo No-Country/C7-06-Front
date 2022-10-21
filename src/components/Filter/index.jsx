@@ -188,10 +188,10 @@ const Filter = () => {
                     })
                   ))
                 )}
-                {callbacks.firstCallData.content &&
+                {/* {callbacks.firstCallData.content &&
                   callbacks.firstCallData.content.map(pet => {
                     return <Card key={pet.id} animal={pet} />;
-                  })}
+                  })} */}
               </div>
             </Paginator>
           </div>
@@ -226,43 +226,64 @@ const Filter = () => {
         </div>
         {/* Container lado IZQUIERDO */}
         <div className={styles.leftSide}>
-          <h2 style={{ padding: "10px" }}>Mascota</h2>
+          <h2>Filtro de búsqueda</h2>
           <div onChange={handleChangeParam} className={styles.perrogato}>
-            <div className={styles.perro}>
-              <input type="radio" value="DOG" name="animal" />
-              <h4>Perro</h4>
-            </div>
-            <div className={styles.gato}>
-              <input type="radio" value="CAT" name="animal" />
-              <h4>Gato</h4>
-            </div>
+            <fieldset>
+              <legend>Mascota</legend>
+              <div className={styles.perro}>
+                <label htmlFor="animal" className={styles.form_control}>
+                  <input type="radio" value="DOG" name="animal" />
+                  Perro
+                </label>
+              </div>
+              <div className={styles.gato}>
+                <label htmlFor="animal" className={styles.form_control}>
+                  <input type="radio" value="CAT" name="animal" />
+                  Gato
+                </label>
+              </div>
+            </fieldset>
           </div>
-          <h2 style={{ padding: "10px" }}>Sexo</h2>
+
           <div onChange={handleChangeParam} className={styles.machohembra}>
-            <div className={styles.macho}>
-              <input type="radio" value="MALE" name="gender" />
-              <h4>Macho</h4>
-            </div>
-            <div className={styles.hembra}>
-              <input type="radio" value="FEMALE" name="gender" />
-              <h4>Hembra</h4>
-            </div>
+            <fieldset>
+              <legend> Sexo </legend>
+              <div className={styles.macho}>
+                <label htmlFor="gender" className={styles.form_control}>
+                  <input type="radio" value="MALE" name="gender" />
+                  Macho
+                </label>
+              </div>
+              <div className={styles.hembra}>
+                <label htmlFor="age" className={styles.form_control}>
+                  <input type="radio" value="FEMALE" name="gender" />
+                  Hembra
+                </label>
+              </div>
+            </fieldset>
           </div>
-          <h2 style={{ padding: "10px" }}>Edad</h2>
+
           <div onChange={handleChangeAgeRange} className={styles.cachorrojoven}>
-            <div className={styles.cachorro}>
-              <input type="radio" value="0-3" name="age" />
-              <h4>0 - 3 años</h4>
-            </div>
-            <div className={styles.joven}>
-              <input type="radio" value="3-6" name="age" />
-              <h4>3 - 6 años</h4>
-            </div>
+            <fieldset>
+              <legend> Edad </legend>
+              <div className={styles.cachorro}>
+                <label htmlFor="age" className={styles.form_control}>
+                  <input type="radio" value="0-3" name="age" />0 - 3 años
+                </label>
+              </div>
+              <div className={styles.joven}>
+                <label htmlFor="age" className={styles.form_control}>
+                  <input type="radio" value="3-6" name="age" />3 - 6 años
+                </label>
+              </div>
+              <div className={styles.adulto}>
+                <label htmlFor="age" className={styles.form_control}>
+                  <input type="radio" value="6-100" name="age" />6 o mas años
+                </label>
+              </div>
+            </fieldset>
           </div>
-          <div onChange={handleChangeAgeRange} className={styles.adulto}>
-            <input type="radio" value="6-100" name="age" />
-            <h4>6 o mas años</h4>
-          </div>
+
           <div className={styles.inputText}>
             <input
               onChange={handleChangeParam}

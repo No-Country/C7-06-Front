@@ -97,7 +97,9 @@ const NavbarMenu = () => {
         </li>
         {!userLogged ? (
           <li>
-            <NavLink to="/login">Iniciar Sesión</NavLink>
+            <NavLink to="/login" className={styles.login}>
+              Iniciar Sesión
+            </NavLink>
           </li>
         ) : null}
       </ul>

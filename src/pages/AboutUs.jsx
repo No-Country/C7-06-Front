@@ -5,7 +5,7 @@ import albert from "../assets/albert.jpeg";
 import romina from "../assets/romina.png";
 import maria from "../assets/maria.jpg";
 import martin from "../assets/martin.jpeg";
-import karen from "../assets/userDefault.png";
+import karen from "../assets/karen.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLinkedin, faGithub } from "@fortawesome/free-brands-svg-icons";
 
@@ -67,6 +67,9 @@ const AboutUs = () => {
             <h4 className={styles.team__name}>María Villén</h4>
             <p className={styles.team__description}>Desarrolladora Full Stack</p>
             <div>
+              <a href="https://www.linkedin.com/in/maria-villen/" target="_blank" rel="noreferrer">
+                <FontAwesomeIcon icon={faLinkedin} size="2x" />
+              </a>
               <a href="https://github.com/MariaVillen" target="_blank" rel="noreferrer">
                 <FontAwesomeIcon icon={faGithub} size="2x" />
               </a>
@@ -112,9 +115,14 @@ const AboutUs = () => {
             <img src={karen} alt="Karen" />
             <h4 className={styles.team__name}>Karen Huaman</h4>
             <p className={styles.team__description}>Desarrolladora Backend Java</p>
-            <a href="https://github.com/yoelexe" target="_blank" rel="noreferrer">
-              <FontAwesomeIcon icon={faGithub} size="2x" />
-            </a>
+            <div>
+              <a href="https://www.linkedin.com/in/maria-villen/" target="_blank" rel="noreferrer">
+                <FontAwesomeIcon icon={faLinkedin} size="2x" />
+              </a>
+              <a href="https://github.com/yoelexe" target="_blank" rel="noreferrer">
+                <FontAwesomeIcon icon={faGithub} size="2x" />
+              </a>
+            </div>
           </div>
           <div className={styles.team__card}>
             <img src={martin} alt="Martín" />

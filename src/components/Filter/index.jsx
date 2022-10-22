@@ -177,7 +177,7 @@ const Filter = () => {
                 {callbacks.firstCallLoading ? (
                   <Spinner />
                 ) : callbacks.firstCallError ? (
-                  <h3>Se ha producido un error.</h3>
+                  <h3>No se encontro ningun Match...</h3>
                 ) : (
                   callbacks.firstCallData.content &&
                   (callbacks.firstCallData.content.length === 0 ? (

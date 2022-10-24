@@ -1,70 +1,69 @@
-# Getting Started with Create React App
+<h1 align = "center"> ANIMATCH </h1>
+<p align = "center"> Con ANIMATCH podrás encontrar el compañero ideal para tu mascota de pura raza.</p>
+<p align = "center"> <img src = "https://i85.servimg.com/u/f85/19/88/52/56/animat10.png" /> </p>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<br/>
+## Desarrollada con: 🛠️
 
-## Available Scripts
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=flat&logo=Javascript&logoColor=%23F7DF1E) ![React](https://img.shields.io/badge/react-%2320232a.svg?style=flat&logo=React&logoColor=%2361DAFB) ![Redux](https://img.shields.io/badge/Redux-%23593d88.svg?style=flat&logo=redux&logoColor=white) ![GitHub](https://img.shields.io/badge/Github-%23121011.svg?style=flat&logo=github&logoColor=white) ![Heroku](https://img.shields.io/badge/heroku-%23430098.svg?style=flat&logo=Heroku&logoColor=white)![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=flat&logo=HTML5&logoColor=white) ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=flat&logo=CSS3&logoColor=white)
+![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=flat&logo=VS-Code&logoColor=white) ![Sass](https://img.shields.io/badge/Sass-CC6699?style=flat&logo=sass&logoColor=white) ![Java](https://img.shields.io/badge/Java-ED8B00?style=flat&logo=java&logoColor=white) ![spring](https://img.shields.io/badge/Spring-6DB33F?style=flat&logo=spring&logoColor=white) ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=flat&logo=postgresql&logoColor=white)
 
-In the project directory, you can run:
+<br/>
+
+## Requerimientos 📋
+
+### Front
+
+En el directorio del proyecto ingresa este comando:
 
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Abrir [http://localhost:3000](http://localhost:3000) para verlo en tu navegador.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### API
 
-### `npm test`
+\_1 -
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+\_2 -
 
-### `npm run build`
+\_3 -
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+\_4 -
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Deploy
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Puedes encontrar nuestro sitio en el siguiente link: [click aquí](#)
 
-### `npm run eject`
+<br/><br/>
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+# Equipo
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+</br>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Team Leader 🚀
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Romina Bello : [LinkedIn](https://www.linkedin.com/in/rominabello87/) | [GitHub]() | [Portfolio]()
 
-## Learn More
+</br>
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## UX Designer 🎨
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Josefina Córdoba : [LinkedIn](https://www.linkedin.com/in/cordobajosefina/) | [Portfolio]()
 
-### Code Splitting
+<br/>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Front - End 🚀
 
-### Analyzing the Bundle Size
+### Alberto Gomez Juan : [LinkedIn](https://www.linkedin.com/in/agomezjuan/) | [GitHub](https://github.com/agomezjuan) | [Portfolio]()
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Juan Cruz Carracedo : [LinkedIn](https://www.linkedin.com/in/juancarracedodev/) | [GitHub](https://github.com/juancarracedo7) | [Portfolio]()
 
-### Making a Progressive Web App
+### Maria Villen : [LinkedIn]() | [GitHub](https://github.com/MariaVillen) | [Portfolio]()
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+<br/>
 
-### Advanced Configuration
+## Back - End 🚀
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Martin Kun : [LinkedIn](https://www.linkedin.com/in/mart%C3%ADn-kun-b13620209/) | [GitHub](https://github.com/MartinKun) | [Portfolio]()
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Karen Huaman [LinkedIn]() | [GitHub](https://github.com/yoelexe) | [Portfolio]()

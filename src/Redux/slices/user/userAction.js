@@ -6,16 +6,16 @@ export const getUserLogged = createAsyncThunk(
   "userSlice.getUserById",
   async ({ id }, { rejectWithValue }) => {
     try {
-      const response = await apiUserAuth.get(`/api/users/${id}`);
+      const response = await apiPrivate.get(`/userProfile`);
       const userData = {
-        id: response.data.user.id,
-        address: response.data.user.address,
-        name: response.data.user.name,
-        surname: response.data.user.surname,
-        description: response.data.user.description,
-        email: response.data.user.email,
-        phone_number: response.data.user.phone_number,
-        role: response.data.user.role
+        id: response.data.id,
+        name: response.data.name,
+        surname: response.data.surname,
+        email: response.data.email,
+        address: response.data.address,
+        description: response.data.description,
+        phoneNumber: response.data.phoneNumber,
+        pictureResponse: response.data.pictureResponse
       };
 
       return userData;
@@ -96,13 +96,11 @@ export const modifyUserInfo = createAsyncThunk(
         data.append("file", userObject.file);
         console.log(" data ", data);
         if (userObject.avatar.id) {
-          pictureLoad = await apiPrivate.put(`/pictures/${userObject.avatar.id}`, { data });
-          response.data.avatar = pictureLoad.data;
-          console.log(pictureLoad);
+          pictureLoad = await apiPrivate.put(`/pictures/${userObject.avatar.id}`, data);
+          response.data.user.pictureResponse = pictureLoad.data;
         } else {
-          pictureLoad = await apiPrivate.post(`/avatar`, { data });
-          response.data.avatar = pictureLoad.data;
-          console.log(pictureLoad);
+          pictureLoad = await apiPrivate.post(`/avatar`, data);
+          response.data.user.pictureResponse = pictureLoad.data;
         }
       }
       return response.data.user;

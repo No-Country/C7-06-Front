@@ -4,6 +4,7 @@ import { regexConditions } from "../../helpers/regexs";
 import { useDispatch, useSelector } from "react-redux";
 import avatar from "../../assets/userDefault.png";
 import { modifyUserInfo } from "../../Redux/slices/user/userAction";
+import { useEffect, useState } from "react";
 
 const UserInfoForm = () => {
   const { userInfo } = useSelector(state => state.user);
@@ -12,10 +13,7 @@ const UserInfoForm = () => {
   const initForm = {
     data: {
       file: {
-        initVal: null
-      },
-      avatar: {
-        initVal: userInfo.picture,
+        initVal: "",
         validation: [
           // {
           // condition: val => !val || regexConditions("path").test(val?.path),
@@ -26,6 +24,9 @@ const UserInfoForm = () => {
             error: "Sólo acepta archivos de menos de 5GB"
           }
         ]
+      },
+      avatar: {
+        initVal: userInfo.pictureResponse
       },
       name: {
         initVal: userInfo.name,
@@ -85,6 +86,21 @@ const UserInfoForm = () => {
   // Form handler
   const { form, errors, handleChange, handleBlur, handleFiles, handleSubmit } = useForm(initForm);
 
+  const [preview, setPreview] = useState();
+
+  useEffect(() => {
+    if (!form.file) {
+      setPreview(undefined);
+      return;
+    }
+
+    const objectUrl = URL.createObjectURL(form.file);
+    setPreview(objectUrl);
+
+    // free memory when ever this component is unmounted
+    return () => URL.revokeObjectURL(objectUrl);
+  }, [form.file]);
+
   return (
     <div className={classes.form}>
       <h3>Información Básica</h3>
@@ -92,16 +108,19 @@ const UserInfoForm = () => {
         <div className={classes.form_wrapper}>
           <div className={classes.form_avatar}>
             <div className={classes.form_avatar_image}>
-              <img src={form.file || form.avatar || avatar} alt={"nombre persona"} />
+              <img
+                src={preview || userInfo.pictureResponse?.path || avatar}
+                alt={"nombre persona"}
+              />
             </div>
             <div className={classes.form_avatar_editButton}>
-              <label htmlFor="avatar">Editar</label>
+              <label htmlFor="file">Editar</label>
               <input
-                id="avatar"
-                name="avatar"
+                id="file"
+                name="file"
                 onChange={handleFiles}
+                accept="image/png, image/jpeg, image/webp"
                 type="file"
-                value={form.files}
                 hidden
               />
               {errors?.avatar && <p className={classes.instructions}>{errors.avatar}</p>}

@@ -60,6 +60,7 @@ export const useForm = initForm => {
   // Validation Form
 
   const _validate = (champ, val) => {
+    if (champ === "avatar") return false;
     if (champ?.required && !val) return "Este campo es requerido";
     if (champ?.validation) {
       const result = champ.validation?.find(el => !el.condition(val));
@@ -85,9 +86,9 @@ export const useForm = initForm => {
   // Validation Files
   const handleFiles = e => {
     const file = e.target.files[0];
+    console.log("file", file);
     const name = e.target.name;
     const oldUrl = form[name];
-    console.log("file", file);
     if (file) {
       setForm(prev => {
         return {
@@ -113,7 +114,8 @@ export const useForm = initForm => {
     console.log("submit");
     // Checking validation of all champs
     Object.entries(form).forEach(([key]) => {
-      setErrors(Object.assign(errors, { [key]: _validate(initForm.data[key], form[key]) }));
+      if (key !== "avatar")
+        setErrors(Object.assign(errors, { [key]: _validate(initForm.data[key], form[key]) }));
     });
     console.log("ERRORES ENCONTRAOS ", errors);
     // Checking if errors has all false values
@@ -129,11 +131,10 @@ export const useForm = initForm => {
           confirmButtonText: "Aceptar"
         });
 
-        console.log(response);
         setLoading(false);
         if (!form.notreset) {
           e.target.reset();
-          setForm(formStructure);
+          setForm(response);
           setErrors({});
         }
       } catch (err) {

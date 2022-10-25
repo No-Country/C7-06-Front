@@ -69,7 +69,10 @@ const UserInfo = () => {
   return (
     <>
       <div className={styles.userInfo}>
-        <UserPicture image={userDefault} name={userInfo?.name} />
+        <UserPicture
+          image={userInfo.pictureResponse ? userInfo.pictureResponse.path : userDefault}
+          name={userInfo?.name}
+        />
         <div className={styles.userInfo_data}>
           <h2>
             {userInfo?.name} {userInfo?.surname}

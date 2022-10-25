@@ -15,9 +15,12 @@
     @include mq(medium)
       font-size: 2em
 
+
   &_wrapper
     display: flex
     flex-direction: column
+    @include mq(medium)
+      flex-direction: row
     
   &_gallery
     display: flex
@@ -56,8 +59,9 @@
       display: flex 
       flex-flow: row nowrap
       justify-content: space-evenly
-      @include mq(xlarge)
+      @include mq("xlarge")
         flex-flow: column nowrap
+         
 
       
 
@@ -72,8 +76,8 @@
     display: flex
     flex-direction: column
     flex: 1 0
-    padding: 0px 20px 20px 20px 
-
+    @include mq("medium")    // padding: 0px 20px 20px 20px 
+      padding: 0px 20px 20px 20px 
     &_header
       margin-bottom: 1em
       h3

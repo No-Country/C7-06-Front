@@ -12,6 +12,9 @@
     padding: 2rem
     &__member
         display: flex
+        flex-direction: column
+        @include mq("medium")
+            flex-direction: row
         gap: 20px
 
     &__title
@@ -37,7 +40,9 @@
         margin: 40px 0 20px
     &__container
         display: flex
-        flex-direction: row
+        flex-direction: column
+        @include mq("medium")
+            flex-direction: row
         align-items: center
         justify-content: center
         gap: 20px
@@ -64,6 +69,9 @@
             border: 3px solid $main-color
             object-fit: cover
             object-position: center
+        div
+            a
+                color: $main-color
     &__tl, &__ux
         width: 300px
     .image

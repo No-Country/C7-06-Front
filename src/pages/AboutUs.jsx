@@ -14,8 +14,8 @@ const AboutUs = () => {
     <div className={styles.team}>
       <h2 className={styles.team__title}>Nuestro equipo</h2>
       <p className={styles.team__text}>
-        Somos un grupo equipo interdisciplinar participando en el reto de simulación profesional de
-        No Country.
+        Somos un grupo interdisciplinar participando en el reto de simulación profesional de No
+        Country.
       </p>
       {/* Team Leader */}
       <div className={styles.team__member}>

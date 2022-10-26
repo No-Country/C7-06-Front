@@ -127,7 +127,7 @@ function CommentsPetsList({ petId }) {
           })}
       </div>
       <form className={classes.comments_form} onSubmit={submitHandler}>
-        <h2>Deja tu comentario</h2>
+        <h2 style={{ marginLeft: "35px" }}>Deja tu comentario</h2>
         <input type="text" name="userId" defaultValue={!onEdit ? userLogged.userId : null} hidden />
         <textarea
           className={classes.comments_form_commentInput}

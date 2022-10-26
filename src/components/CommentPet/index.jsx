@@ -8,6 +8,7 @@ import TextAreaRezise from "../TextAreaRezise";
 import { apiPub, apiPrivate } from "../../helpers/axios";
 import { getDateFormatted } from "../../helpers/dateFormat";
 import { useSelector } from "react-redux";
+import Swal from "sweetalert2";
 function CommentPet({ comment, setIsLoading, pet }) {
   // States
   const [text, setText] = useState(comment.message);
@@ -18,6 +19,14 @@ function CommentPet({ comment, setIsLoading, pet }) {
   const allowEdition = userLogged.id === comment.userId || userLogged.role === "admin";
 
   const messageRef = useRef();
+
+  // SweetAlert
+  const sweetAlert = () => {
+    Swal.fire({
+      title: "Mensaje elimina con exito",
+      type: "sucess"
+    });
+  };
 
   // On Edit Event Hanlder
   const onEditHandler = () => {
@@ -47,6 +56,7 @@ function CommentPet({ comment, setIsLoading, pet }) {
         console.log("No answer");
         return;
       } else {
+        sweetAlert();
         console.log("Eliminado!");
         setOnEdit(false);
         setIsLoading(true);

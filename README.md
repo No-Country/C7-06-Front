@@ -1,4 +1,4 @@
-<h1 align = "center"> ANIMATCH </h1>
+<h1 align = "center"> LUDENS </h1>
 <p align = "center"> Ludens es un sitio web de juegos educativos para niños.</p>
 <p align = "center"> <img src = "https://i85.servimg.com/u/f85/19/88/52/56/logolu10.png" /> </p>
 
